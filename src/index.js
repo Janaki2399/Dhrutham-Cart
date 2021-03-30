@@ -2,11 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import { DataProvider } from "./data-context";
+import setupMockServer from "./api/mock.server";
+import { LoaderToastProvider } from "./loader-toast-context";
 import reportWebVitals from './reportWebVitals';
+setupMockServer();
+
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <LoaderToastProvider>
+      <DataProvider>
+        <App />
+      </DataProvider>
+    </LoaderToastProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+import './App.css';
+import { useEffect } from "react";
+import { useDataContext } from "./data-context";
+import { Products } from "./components/Products/Products";
+import { WishList } from "./components/Wishlist/WishList";
+import { Cart } from "./components/Cart/Cart";
+import { Toast } from "./components/Toast";
+import { Navbar } from "./components/Navbar";
+import { useLoaderToast } from "./loader-toast-context";
+
+export default function App() {
+  const { fetchAndAddToList, state } = useDataContext();
+  const { toast } = useLoaderToast();
+
+  useEffect(() => {
+    fetchAndAddToList({
+      url: "/api/cartLists",
+      dispatchType: "ADD_TO_CART",
+      list: "cartLists"
+    });
+  }, []);
+
+  useEffect(() => {
+    fetchAndAddToList({
+      url: "/api/wishLists",
+      dispatchType: "ADD_TO_WISHLIST",
+      list: "wishLists"
+    });
+  }, []);
+  useEffect(() => {
+    fetchAndAddToList({
+      url: "/api/products",
+      dispatchType: "ADD_TO_PRODUCTS",
+      list: "products"
+    });
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div class="center-div">
+        <Navbar />
+        <div>
+          {state.showComponent === "products" && <Products />}
+          {state.showComponent === "wishlist" && <WishList />}
+          {state.showComponent === "cart" && <Cart />}
+        </div>
+        {toast && <Toast message={toast} />}
+      </div>
     </div>
   );
 }
-
-export default App;
