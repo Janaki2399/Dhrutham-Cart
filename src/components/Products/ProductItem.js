@@ -7,7 +7,7 @@ export function ProductItem({ productItem }) {
   return (
     <div
       className="card card-shadow card-vertical"
-      style={{ maxWidth: "15rem" }}
+      style={{ maxWidth: "13rem" }}
     >
       <ProductImage item={productItem} />
       <CardItemContent item={productItem} />

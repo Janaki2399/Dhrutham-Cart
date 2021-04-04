@@ -4,10 +4,10 @@ export function Filter() {
   const { state, dispatch } = useDataContext();
 
   return (
-    <div style={{ margin: "auto", maxWidth: "30rem" }}>
-      <div style={{ margin: "auto", textAlign: "right" }}>
+    <div id="sidebar" >
+      <div className="text-end">
         <button
-          class="btn btn-text"
+          className="btn btn-text"
           style={{ color: "#1E40AF" }}
           onClick={() => {
             dispatch({ type: "CLEAR_FILTER" });
@@ -16,8 +16,9 @@ export function Filter() {
           CLEAR
         </button>
       </div>
-      <fieldset>
-        <legend>Sort By</legend>
+      <div className="flex-column">
+        <div className="font-bold-1">Sort By</div>
+        <div className="margin-top">
         <input
           type="radio"
           name="sortBy"
@@ -29,7 +30,10 @@ export function Filter() {
             dispatch({ type: "SORT_BY", payload: "PRICE_HIGH_TO_LOW" });
           }}
         />
-        <label>Price - High To low</label>
+        <label className="font-size-6 ">Price - High To low</label>
+        </div>
+       
+        <div>
         <input
           type="radio"
           name="sortBy"
@@ -41,10 +45,13 @@ export function Filter() {
             dispatch({ type: "SORT_BY", payload: "PRICE_LOW_TO_HIGH" });
           }}
         />
-        <label>Price - Low To High</label>
-      </fieldset>
-      <fieldset style={{ marginTop: "1rem" }}>
-        <legend>Filter</legend>
+        <label className="font-size-6">Price - Low To High</label>
+      </div>
+        </div>
+        
+      <div className="flex-column" style={{ marginTop: "1rem" }}>
+      <div className="font-bold-1">Filter</div>
+        <div className="flex-horizontal margin-top">
         <input
           type="checkbox"
           checked={state.sortFilterStates.includeOutOfStock}
@@ -52,16 +59,19 @@ export function Filter() {
             dispatch({ type: "INCLUDE_OUT_OF_STOCK" });
           }}
         />
-        <label>Include out of stock</label>
-        <input
+        <label className="font-size-6">Include out of stock</label>
+        </div>
+       <div> 
+         <input
           type="checkbox"
           checked={state.sortFilterStates.fastDelivery}
           onChange={() => {
             dispatch({ type: "FAST_DELIVERY" });
           }}
         />
-        <label>Fast delivery</label>
-      </fieldset>
+        <label className="font-size-6">Fast delivery</label></div>
+       
+      </div>
     </div>
   );
 }

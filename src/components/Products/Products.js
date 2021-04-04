@@ -7,7 +7,8 @@ export function Products() {
     state: {
       productList,
       sortFilterStates: { includeOutOfStock, fastDelivery, sortBy }
-    }
+    },
+    dispatch
   } = useDataContext();
 
   function getSortedData(productList, sortBy) {
@@ -34,13 +35,18 @@ export function Products() {
   });
 
   return (
-    <div>
+    <div class="grid">
       <Filter />
-      <div className="grid-col-3" style={{ margin: "2rem" }}>
+      <div id="products-div"className="grid-col-3" style={{ margin: "2rem" }}>
         {filteredData.map((item) => {
           return <ProductItem key={item.id} productItem={item} />;
         })}
       </div>
+      {/* <div class="filter-mobile show-sidebar" onClick={()=>{
+        dispatch({type:"SHOW_COMPONENT",payload:"filter"})
+      }}>
+        FILTER
+      </div> */}
     </div>
   );
 }

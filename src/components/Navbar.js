@@ -2,9 +2,9 @@ import { useDataContext } from "../data-context";
 export function Navbar() {
   const { state, dispatch } = useDataContext();
   return (
-    <div class="nav">
+    <div class="nav-main fixed-nav">
       <div class="font-size-3">Logo</div>
-      <div class="nav-list">
+      <div className="nav-list">
         <button
           style={{ border: "0", outline: "0", backgroundColor: "white" }}
           class="nav-item"

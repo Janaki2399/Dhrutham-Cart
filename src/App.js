@@ -6,6 +6,7 @@ import { Products } from "./components/Products/Products";
 import { WishList } from "./components/Wishlist/WishList";
 import { Cart } from "./components/Cart/Cart";
 import { Toast } from "./components/Toast";
+import { Filter } from "./components/Filter";
 import { Navbar } from "./components/Navbar";
 import { useLoaderToast } from "./loader-toast-context";
 
@@ -44,6 +45,7 @@ export default function App() {
           {state.showComponent === "products" && <Products />}
           {state.showComponent === "wishlist" && <WishList />}
           {state.showComponent === "cart" && <Cart />}
+          {state.showComponent === "filter" && <Filter />}
         </div>
         {toast && <Toast message={toast} />}
       </div>

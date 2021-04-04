@@ -1,4 +1,91 @@
-@import url("https://swaram-ui.netlify.app/components.css");
+@import url("https://dhrutham-ui.netlify.app/CSS/dhrutham.css");
 .App {
   font-family: sans-serif;
+}
+.nav-main{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  /* padding-left:3rem; */
+  border-bottom: 1px solid #D1D5DB;
+}
+
+.nav-list{
+  display: flex;
+  /* justify-content: flex-end; */
+  /* align-items: center; */
+}
+
+.nav-item{
+  /* margin-right: var(--margin-right); */
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color:inherit
+}
+
+#sidebar{
+  grid-template: sidebar;
+  display: block;
+  position: fixed;
+  left:0;
+  top:4rem;
+  width:15rem;
+  padding-left:1rem;
+}
+
+#products-div{
+  grid-template: products-div;
+  padding-left:15rem;
+  padding-top:4rem;
+}
+
+.fixed-nav{
+  position: fixed;
+  top:0;
+  right:0;
+ width:100%;
+  z-index:1;
+  background-color:white;
+}
+
+.filter-mobile{
+  position: fixed;
+  bottom:0;
+  display: none;
+  width:100%;
+  text-align:center;
+}
+/* .grid{
+  display: grid;
+  grid-template-areas:"sidebar products-div";
+  grid-template-columns: 20% 80%;
+} */
+
+@media (max-width: 635px) {
+  
+#sidebar{
+  
+ display: none;
+
+}
+#products-div{
+  padding-left:0;
+  padding-top:4rem;
+}
+.filter-mobile{
+  position: fixed;
+  bottom:0;
+  display: block;
+  width:100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color:white;
+  z-index:1;
+  height:2rem;
+}
+}
+.show-sidebar{
+  display: block;
 }
