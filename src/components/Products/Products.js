@@ -1,7 +1,8 @@
 import { useDataContext } from "../../data-context";
 import { ProductItem } from "./ProductItem";
 import { Filter } from "../Filter";
-
+import {useState} from "react";
+import {Link} from "react-router-dom";
 export function Products() {
   const {
     state: {
@@ -10,6 +11,8 @@ export function Products() {
     },
     dispatch
   } = useDataContext();
+
+  const [filterMobile,setFilterMobile]=useState(false);
 
   function getSortedData(productList, sortBy) {
     if (sortBy === "PRICE_HIGH_TO_LOW") {
@@ -35,18 +38,27 @@ export function Products() {
   });
 
   return (
-    <div class="grid">
-      <Filter />
-      <div id="products-div"className="grid-col-3" style={{ margin: "2rem" }}>
+    <div className="grid">
+     <Filter filterMobile={filterMobile}/>
+      {!filterMobile && (<div id="products-div"className="grid-col-3" style={{ margin: "2rem" }}>
         {filteredData.map((item) => {
-          return <ProductItem key={item.id} productItem={item} />;
+          return  <ProductItem key={item.id} productItem={item} />;
         })}
-      </div>
-      {/* <div class="filter-mobile show-sidebar" onClick={()=>{
-        dispatch({type:"SHOW_COMPONENT",payload:"filter"})
-      }}>
-        FILTER
-      </div> */}
+      </div>)}
+     {!filterMobile &&<div className="filter-mobile cursor-pointer border-top gray-border"
+      onClick={()=>{setFilterMobile((prev)=>!prev)}}  >
+        Filter
+      </div>}
+     
+      {filterMobile && <div className="close-apply-filter cursor-pointer"
+        style={{display:"flex"}}>
+        <div className="border-right gray-border full-height align-center" style={{width:"50%"}}
+        onClick={()=>{setFilterMobile((prev)=>!prev);
+          dispatch({ type: "CLEAR_FILTER" });
+        }}
+        >Close</div>
+        <div className="full-height align-center"style={{width:"50%"}}onClick={()=>{setFilterMobile((prev)=>!prev)}}>Apply</div>
+      </div>}
     </div>
   );
 }

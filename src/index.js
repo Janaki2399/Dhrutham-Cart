@@ -2,20 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import {BrowserRouter as Router} from "react-router-dom";
 import { DataProvider } from "./data-context";
 import setupMockServer from "./api/mock.server";
 import { LoaderToastProvider } from "./loader-toast-context";
 import reportWebVitals from './reportWebVitals';
+import { AuthProvider } from './auth-context';
 setupMockServer();
 
 
 ReactDOM.render(
   <React.StrictMode>
-    <LoaderToastProvider>
-      <DataProvider>
-        <App />
-      </DataProvider>
-    </LoaderToastProvider>
+    <Router>
+      <AuthProvider>
+        <LoaderToastProvider>
+          <DataProvider>
+            <App />
+          </DataProvider>
+        </LoaderToastProvider>
+      </AuthProvider>
+    </Router>
+    
   </React.StrictMode>,
   document.getElementById('root')
 );

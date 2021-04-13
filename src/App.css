@@ -24,14 +24,15 @@
   color:inherit
 }
 
-#sidebar{
+.sidebar{
   grid-template: sidebar;
   display: block;
   position: fixed;
   left:0;
-  top:4rem;
-  width:15rem;
+  top:5rem;
+  width:13.5rem;
   padding-left:1rem;
+  padding-right:1rem;
 }
 
 #products-div{
@@ -49,30 +50,59 @@
   background-color:white;
 }
 
+.filterMobile{
+  background-color:white;
+  position: fixed;
+  top:3.5rem;
+  right:0;
+  left:0;
+  bottom:3rem;
+  width: 100%;
+  z-index:1;
+
+}
+
+
 .filter-mobile{
   position: fixed;
   bottom:0;
   display: none;
   width:100%;
   text-align:center;
+  background-color:plum
+}
+
+.close-apply-filter{
+  position: fixed;
+  bottom:0;
+  display: block;
+  width:100%;
+  text-align:center;
+  border-top:1px solid #D1D5DB;
 }
 /* .grid{
+  width:100%;
   display: grid;
   grid-template-areas:"sidebar products-div";
   grid-template-columns: 20% 80%;
 } */
-
+/* .center-align-ver-hor{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+} */
 @media (max-width: 635px) {
   
-#sidebar{
-  
+.sidebar{
  display: none;
-
 }
+
 #products-div{
   padding-left:0;
   padding-top:4rem;
 }
+
 .filter-mobile{
   position: fixed;
   bottom:0;
@@ -83,9 +113,64 @@
   justify-content: center;
   background-color:white;
   z-index:1;
-  height:2rem;
+  height:2.5rem;
 }
 }
 .show-sidebar{
   display: block;
+}
+
+.anchor-link{
+  text-decoration:none;
+  color:black;
+}
+
+@media (min-width: 635px) {
+  .close-apply-filter{
+    position: fixed;
+    bottom:0;
+    display: block;
+    width:100%;
+    text-align:center;
+    height:2rem;
+    border-top:1px solid black;
+  }
+}
+
+.align-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height:2.5rem;
+}
+
+.center-align-ver-hor{
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+.text-input{
+  height: 2rem;
+  width:95%;
+  padding:2px 5px;
+  border:1px solid var(--gray-color);
+  border-radius:3px;
+  font-size:14px;
+  margin-top:3px;
+  margin-bottom:1rem;
+}
+
+.text-input:focus{
+  outline-width:thin;
+  outline-color:#2563EB
+}
+
+.secondary-text-color{
+  color:#2563EB
+}
+
+.secondary-bg-color{
+  background-color:#2563EB;
 }

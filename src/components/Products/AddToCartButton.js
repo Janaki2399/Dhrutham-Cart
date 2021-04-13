@@ -1,8 +1,11 @@
 import { useDataContext } from "../../data-context";
+import {Link, useNavigate,Navigate} from "react-router-dom";  
+import { useAuth } from "../../auth-context";
 
 export function AddToCartButton({ item }) {
   const { addToListAndServer, dispatch } = useDataContext();
-
+  const {isUserLoggedIn}=useAuth();
+  const navigate=useNavigate();
   return (
     <div>
       <button
@@ -14,23 +17,28 @@ export function AddToCartButton({ item }) {
             : " btn btn-primary-contained btn-disabled"
         }
         onClick={() => {
-          if (!item.isAddedToCart) {
-            addToListAndServer({
-              url: "/api/cartLists/",
-              list: "cartList",
-              postItem: {
-                cartList: { ...item, quantity: 1 }
-              },
-              dispatchType: "APPEND_ITEM_TO_CART",
-              toastItem: "cart"
-            });
-          } else {
-            dispatch({ type: "SHOW_COMPONENT", payload: "cart" });
-          }
+          if(isUserLoggedIn){
+            !item.isAddedToCart ?
+              addToListAndServer({
+                url: "/api/cartLists/",
+                list: "cartList",
+                postItem: {
+                  cartList: { ...item, quantity: 1 }
+                },
+                dispatchType: "APPEND_ITEM_TO_CART",
+                toastItem: "cart"
+              }) :navigate("/cart");
+            }else{
+            
+              navigate("/login");
+            }
+
+          
+          
         }}
       >
-        {!item.isAddedToCart ? "Add to cart" : "Go To Cart"}
-      </button>
+       {!item.isAddedToCart ? "Add to cart":"Go to cart"  }
+       </button>
     </div>
   );
 }

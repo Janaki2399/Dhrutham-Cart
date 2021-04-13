@@ -14,8 +14,7 @@ export function DataProvider({ children }) {
       includeOutOfStock: true,
       fastDelivery: false,
       sortBy: null
-    },
-    showComponent: "products"
+    }
   });
 
   async function fetchAndAddToList({ url, dispatchType, list }) {

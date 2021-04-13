@@ -8,23 +8,23 @@ export function CartItem({ cartItem }) {
       className="card card-shadow card-horizontal card-content-padding"
       style={{ width: "90%" }}
     >
-      <div style={{ width: "30%" }}>
-        <img class="card-img" src={cartItem.image} alt="card-img" />
+      <div style={{ width: "25%" }}>
+        <img className="card-img" src={cartItem.image} alt="card-img" />
       </div>
       <div
-        class="card-content-padding text-start card-vertical"
+        className="card-content-padding text-start card-vertical"
         style={{ width: "60%" }}
       >
         <div>
-          <div class="card-title">{cartItem.name}</div>
+          <div className="card-title">{cartItem.name}</div>
           <QuantityButtons cartItem={cartItem} />
         </div>
-        <div class="flex-horizontal">
+        <div className="flex-horizontal">
           <RemoveButton cartItem={cartItem} />
           <AddToWishListButton cartItem={cartItem} />
         </div>
       </div>
-      <div class="card-content-padding font-size-4 ">
+      <div className="card-content-padding font-size-4 ">
         Rs {cartItem.price * cartItem.quantity}
       </div>
     </div>

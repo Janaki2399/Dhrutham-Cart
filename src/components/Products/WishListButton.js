@@ -1,12 +1,17 @@
 import { useDataContext } from "../../data-context";
+import { useAuth } from "../../auth-context";
+import { Navigate, useNavigate } from "react-router";
 
 export function WishListButton({ productItem }) {
   const { removeFromListAndServer, addToListAndServer } = useDataContext();
+  const {isUserLoggedIn}=useAuth();
+  const navigate=useNavigate();
   return (
     <div className="card-icon-topRight">
       <button
         class="icon-btn"
         onClick={() => {
+        if(isUserLoggedIn){
           !productItem.isWishListed
             ? addToListAndServer({
                 url: "/api/wishLists/",
@@ -23,7 +28,9 @@ export function WishListButton({ productItem }) {
                 dispatchType: "REMOVE_FROM_WISHLIST",
                 toastMessage: "removed from wishlist"
               });
-        }}
+        }else{
+          navigate("/login");
+        }}}
       >
         <span
           className={

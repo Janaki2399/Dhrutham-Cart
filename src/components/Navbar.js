@@ -1,59 +1,49 @@
 import { useDataContext } from "../data-context";
+import { Link } from "react-router-dom";
+import { useAuth } from "../auth-context";
+
 export function Navbar() {
   const { state, dispatch } = useDataContext();
+  const { isUserLoggedIn } = useAuth();
   return (
     <div class="nav-main fixed-nav">
       <div class="font-size-3">Logo</div>
       <div className="nav-list">
-        <button
-          style={{ border: "0", outline: "0", backgroundColor: "white" }}
-          class="nav-item"
-          onClick={() => {
-            dispatch({ type: "SHOW_COMPONENT", payload: "products" });
-          }}
-        >
+        <Link to="/" className="nav-item font-size-6">
           <span>Products</span>
-        </button>
+        </Link>
 
-        <button
-          onClick={() => {
-            dispatch({ type: "SHOW_COMPONENT", payload: "wishlist" });
-          }}
-          class="nav-item"
-          style={{ border: "0", outline: "0", backgroundColor: "white" }}
-        >
+        <Link to="/login" className="anchor-link">
+          Login
+        </Link>
+
+        <Link to="/wishlist" className="nav-item font-size-6">
           <div class="icon-btn-with-padding">
             <span class=" material-icons-outlined icon-color-gray ">
               favorite_border
             </span>
-            {state.wishList.length > 0 && (
+            {isUserLoggedIn && state.wishList.length > 0 && (
               <div class="badge badge-circle badge-anchorTopRight bg-primary">
                 {state.wishList.length}
               </div>
             )}
           </div>
           <span>Wishlist</span>
-        </button>
+        </Link>
 
-        <button
-          onClick={() => {
-            dispatch({ type: "SHOW_COMPONENT", payload: "cart" });
-          }}
-          class="nav-item"
-          style={{ border: "0", outline: "0", backgroundColor: "white" }}
-        >
+        <Link to="/cart" className="nav-item font-size-6">
           <div class="icon-btn-with-padding">
             <span class=" material-icons-outlined icon-color-gray ">
               shopping_cart
             </span>
-            {state.cartList.length > 0 && (
+            {isUserLoggedIn && state.cartList.length > 0 && (
               <div class="badge badge-circle badge-anchorTopRight bg-primary">
                 {state.cartList.length}
               </div>
             )}
           </div>
           <span>Cart</span>
-        </button>
+        </Link>
       </div>
     </div>
   );

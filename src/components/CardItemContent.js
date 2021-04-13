@@ -1,6 +1,6 @@
 export function CardItemContent({ item }) {
   return (
-    <div className="card-content-padding">
+    <div className="card-content-padding anchor-link">
       <div className="card-title font-size-5">{item.name}</div>
       <div className="card-text font-size-5">
         Rs {item.price}{" "}

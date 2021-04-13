@@ -1,10 +1,10 @@
 import { useDataContext } from "../data-context";
 
-export function Filter() {
+export function Filter({filterMobile}) {
   const { state, dispatch } = useDataContext();
 
   return (
-    <div id="sidebar" >
+    <div className={!filterMobile?"sidebar full-height":"filterMobile"} >
       <div className="text-end">
         <button
           className="btn btn-text"

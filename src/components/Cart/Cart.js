@@ -13,7 +13,7 @@ export function Cart() {
   }
   return (
     <div>
-      <div style={{ margin: "2rem", textAlign: "center" }}>
+      <div style={{ margin: "4rem", textAlign: "center" }}>
         {getTotalPrice() > 0 && (
           <div className="font-size-3 font-bold-1">
             <span>Total Price :</span> Rs {getTotalPrice()}
