@@ -24,9 +24,19 @@ export function ProductDetails(){
       )()
     }, []);
   
-    // async function addToCart(){
-    //   await axios.get()
-    // }
+    async function addToCart(){
+      const {status}=await axios.post("https://restPractice.janaki23.repl.co/cart",{"product":{"_id":productId},"quantity":1});
+      if(status===200){
+        setProductItem((product)=>({...product,isAddedToCart:true}));
+      }
+    }
+    async function addToWishlist(){
+      const {status}=await axios.post("https://restPractice.janaki23.repl.co/wishlist",{"product":{"_id":productId}});
+      if(status===200){
+        setProductItem((product)=>({...product,isWishListed:true}));
+      }
+    }
+
 
     return(
         <div className="center-align-ver-hor flex-column center-page-ver-hor">
@@ -37,7 +47,7 @@ export function ProductDetails(){
         <div className="relative-position">
             <img class="card-img" src={product.image} alt="card-img"/>
             <WishListButton productItem={product} />
-            <AddToCartButton item={product}/>
+            <AddToCartButton item={product} addToCart={addToCart}/>
         </div>
         <div
         class="card-content-padding text-start card-vertical"

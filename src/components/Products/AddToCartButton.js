@@ -2,7 +2,7 @@ import { useDataContext } from "../../data-context";
 import {Link, useNavigate,Navigate} from "react-router-dom";  
 import { useAuth } from "../../auth-context";
 
-export function AddToCartButton({ item }) {
+export function AddToCartButton({ item,addToCart }) {
   const { addToListAndServer, dispatch } = useDataContext();
   const {isUserLoggedIn}=useAuth();
   const navigate=useNavigate();
@@ -19,16 +19,7 @@ export function AddToCartButton({ item }) {
         onClick={() => {
           if(isUserLoggedIn){
             !item.isAddedToCart ?
-              addToListAndServer({
-                url: "https://restPractice.janaki23.repl.co/cart",
-                list: "cartItem",
-                postItem: {
-                  "product":{"_id":item._id},
-                  "quantity":1
-                },
-                dispatchType: "CHANGE_CART_STATE",
-                toastItem: "cart"
-              }) :navigate("/cart");
+              addToCart() :navigate("/cart");
             }else{
             
               navigate("/login");
