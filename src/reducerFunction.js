@@ -72,7 +72,7 @@ export function reducerFunction(state, action) {
       return {
         ...state,
         cartList: state.cartList.map((item) =>
-          item.id === action.payload.id
+          item._id === action.payload._id
             ? { ...item, quantity: item.quantity + 1 }
             : item
         )
@@ -82,7 +82,7 @@ export function reducerFunction(state, action) {
       return {
         ...state,
         cartList: state.cartList.map((item) =>
-          item.id === action.payload.id
+          item._id === action.payload._id
             ? { ...item, quantity: item.quantity - 1 }
             : item
         )

@@ -9,15 +9,12 @@ export function QuantityButtons({ cartItem }) {
         <button
           class="icon-btn"
           style={{ border: "1px solid gray" }}
-          disabled={cartItem.quantity === 1}
+          disabled={cartItem.quantity <= 1}
           onClick={() => {
             updateListAndServer({
-              url: "./api/cartLists",
+              url: `https://restPractice.janaki23.repl.co/cart/${cartItem._id}`,
               postObject: {
-                cartList: {
-                  ...cartItem,
-                  quantity: cartItem.quantity - 1
-                }
+                "quantity":cartItem.quantity-1,
               },
               dispatchType: "DECREASE_CART_ITEM_QUANTITY",
               item: cartItem
@@ -42,12 +39,9 @@ export function QuantityButtons({ cartItem }) {
           style={{ border: "1px solid gray" }}
           onClick={() => {
             updateListAndServer({
-              url: "./api/cartLists",
+              url: `https://restPractice.janaki23.repl.co/cart/${cartItem._id}`,
               postObject: {
-                cartList: {
-                  ...cartItem,
-                  quantity: cartItem.quantity + 1
-                }
+                  "quantity":cartItem.quantity+1,
               },
               dispatchType: "INCREASE_CART_ITEM_QUANTITY",
               item: cartItem

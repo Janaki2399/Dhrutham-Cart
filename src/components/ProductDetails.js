@@ -23,15 +23,19 @@ export function ProductDetails(){
         }
       )()
     }, []);
-    console.log(product);
+  
+    // async function addToCart(){
+    //   await axios.get()
+    // }
+
     return(
-        <div className="center-align flex-column" style={{height:"35rem",justifyContent:"center"}} >
+        <div className="center-align-ver-hor flex-column center-page-ver-hor">
         <div
         className="card card-shadow card-horizontal card-content-padding"
         style={{ width: "90%" }}
         >
-        <div style={{width:"25rem",position:"relative"}}>
-            <img class="card-img" src={product.image} alt="card-img"  />
+        <div className="relative-position">
+            <img class="card-img" src={product.image} alt="card-img"/>
             <WishListButton productItem={product} />
             <AddToCartButton item={product}/>
         </div>

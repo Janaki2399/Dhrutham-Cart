@@ -71,7 +71,7 @@ export function DataProvider({ children }) {
 
   async function updateListAndServer({ url, postObject, dispatchType, item }) {
     try {
-      const { status } = await axios.put(`${url}/${item.id}`, postObject);
+      const { status } = await axios.post(url, postObject);
       if (status === 200) {
         dispatch({
           type: dispatchType,
