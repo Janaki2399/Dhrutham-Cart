@@ -9,9 +9,9 @@ export function WishListItem({ wishListItem }) {
       style={{ maxWidth: "15rem" }}
     >
       <div>
-        <img className="card-img" src={wishListItem.image} alt="card-img" />
+        <img className="card-img" src={wishListItem.product.image} alt="card-img" />
       </div>
-      <CardItemContent item={wishListItem} />
+      <CardItemContent item={wishListItem} isWishlist/>
       <CardDismiss item={wishListItem} />
       <MoveToCartButton item={wishListItem} />
     </div>

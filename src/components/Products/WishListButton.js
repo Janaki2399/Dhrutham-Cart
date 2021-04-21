@@ -12,14 +12,14 @@ export function WishListButton({ productItem }) {
         class="icon-btn"
         onClick={() => {
         if(isUserLoggedIn){
-          !productItem.isWishListed
+          !productItem.isWishListeds
             ? addToListAndServer({
-                url: "/api/wishLists/",
-                list: "wishList",
+                url: "https://restPractice.janaki23.repl.co/wishlist",
+                list: "wishlistItem",
                 postItem: {
-                  wishList: productItem
+                  "product":{"_id":productItem._id}
                 },
-                dispatchType: "APPEND_ITEM_TO_WISHLIST",
+                dispatchType: "CHANGE_WISHLIST_STATE",
                 toastItem: "wishlist"
               })
             : removeFromListAndServer({

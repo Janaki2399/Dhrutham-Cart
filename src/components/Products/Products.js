@@ -1,7 +1,7 @@
 import { useDataContext } from "../../data-context";
 import { ProductItem } from "./ProductItem";
 import { Filter } from "../Filter";
-import {useState} from "react";
+import {useState,useEffect} from "react";
 import {Link} from "react-router-dom";
 export function Products() {
   const {
@@ -9,9 +9,16 @@ export function Products() {
       productList,
       sortFilterStates: { includeOutOfStock, fastDelivery, sortBy }
     },
-    dispatch
+    dispatch,fetchAndAddToList
   } = useDataContext();
 
+  useEffect(() => {
+    fetchAndAddToList({
+      url: "https://restPractice.janaki23.repl.co/products",
+      dispatchType: "ADD_TO_PRODUCTS",
+      list: "products"
+    });
+  }, []);
   const [filterMobile,setFilterMobile]=useState(false);
 
   function getSortedData(productList, sortBy) {

@@ -5,22 +5,21 @@ export function AddToWishListButton({ cartItem }) {
 
   function RemoveAndAddItemToListAndServer() {
     removeFromListAndServer({
-      url: "/api/cartLists",
+      url: `https://restPractice.janaki23.repl.co/cart/${cartItem._id}`,
       item: cartItem,
       dispatchType: "REMOVE_FROM_CART",
-      toastMessage: "Removed from Cart"
+      toastMessage: "removed from cart"
     });
-    const { quantity, ...itemWithoutQuantity } = cartItem;
-
+ 
     addToListAndServer({
-      url: "/api/wishLists/",
-      list: "wishList",
+      url: "https://restPractice.janaki23.repl.co/wishlist",
+      list: "wishlistItem",
       postItem: {
-        wishList: itemWithoutQuantity
+        "product":{"_id":cartItem.product._id}
       },
-      dispatchType: "APPEND_ITEM_TO_WISHLIST",
-      toastItem: " wishlist"
-    });
+      dispatchType: "",
+      toastItem: "wishlist"
+    })
   }
 
   return (

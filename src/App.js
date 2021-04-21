@@ -20,28 +20,28 @@ export default function App() {
 
   const { toast } = useLoaderToast();
 
-  useEffect(() => {
-    fetchAndAddToList({
-      url: "/api/cartLists",
-      dispatchType: "ADD_TO_CART",
-      list: "cartLists"
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetchAndAddToList({
+  //     url: "/api/cartLists",
+  //     dispatchType: "ADD_TO_CART",
+  //     list: "cartLists"
+  //   });
+  // }, []);
 
-  useEffect(() => {
-    fetchAndAddToList({
-      url: "/api/wishLists",
-      dispatchType: "ADD_TO_WISHLIST",
-      list: "wishLists"
-    });
-  }, []);
-  useEffect(() => {
-    fetchAndAddToList({
-      url: "/api/products",
-      dispatchType: "ADD_TO_PRODUCTS",
-      list: "products"
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetchAndAddToList({
+  //     url: "/api/wishLists",
+  //     dispatchType: "ADD_TO_WISHLIST",
+  //     list: "wishLists"
+  //   });
+  // }, []);
+  // useEffect(() => {
+  //   fetchAndAddToList({
+  //     url: "/api/products",
+  //     dispatchType: "ADD_TO_PRODUCTS",
+  //     list: "products"
+  //   });
+  // }, []);
 
   return (
     <div className="App">

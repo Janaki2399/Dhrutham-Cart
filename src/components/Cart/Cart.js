@@ -1,13 +1,20 @@
 import { useDataContext } from "../../data-context";
 import { CartItem } from "./CartItem";
+import {useEffect} from "react";
 
 export function Cart() {
-  const { state } = useDataContext();
-
+  const { state,fetchAndAddToList } = useDataContext();
+  useEffect(() => {
+    fetchAndAddToList({
+      url: "https://restPractice.janaki23.repl.co/cart",
+      dispatchType: "ADD_TO_CART",
+      list: "cart"
+    });
+  }, []);
   function getTotalPrice() {
     return state.cartList.reduce(
       (accumulator, cartItem) =>
-        accumulator + cartItem.price * cartItem.quantity,
+        accumulator + cartItem.product.price * cartItem.quantity,
       0
     );
   }

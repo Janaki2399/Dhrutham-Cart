@@ -8,8 +8,6 @@ import setupMockServer from "./api/mock.server";
 import { LoaderToastProvider } from "./loader-toast-context";
 import reportWebVitals from './reportWebVitals';
 import { AuthProvider } from './auth-context';
-setupMockServer();
-
 
 ReactDOM.render(
   <React.StrictMode>

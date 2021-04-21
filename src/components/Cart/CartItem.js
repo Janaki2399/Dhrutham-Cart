@@ -9,14 +9,14 @@ export function CartItem({ cartItem }) {
       style={{ width: "90%" }}
     >
       <div style={{ width: "25%" }}>
-        <img className="card-img" src={cartItem.image} alt="card-img" />
+        <img className="card-img" src={cartItem.product.image} alt="card-img" />
       </div>
       <div
         className="card-content-padding text-start card-vertical"
         style={{ width: "60%" }}
       >
         <div>
-          <div className="card-title">{cartItem.name}</div>
+          <div className="card-title">{cartItem.product.name}</div>
           <QuantityButtons cartItem={cartItem} />
         </div>
         <div className="flex-horizontal">
@@ -25,7 +25,7 @@ export function CartItem({ cartItem }) {
         </div>
       </div>
       <div className="card-content-padding font-size-4 ">
-        Rs {cartItem.price * cartItem.quantity}
+        Rs {cartItem.product.price * cartItem.quantity}
       </div>
     </div>
   );

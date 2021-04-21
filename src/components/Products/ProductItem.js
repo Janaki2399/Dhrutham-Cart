@@ -9,7 +9,7 @@ export function ProductItem({ productItem }) {
   return (
     <div className="card card-shadow card-vertical "
     >
-       <Link to={`/products/${productItem.id}`} className="anchor-link" >
+       <Link to={`/products/${productItem._id}`} className="anchor-link" >
           <div>
           <ProductImage item={productItem} />
           <CardItemContent item={productItem} />

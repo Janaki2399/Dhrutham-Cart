@@ -20,12 +20,13 @@ export function AddToCartButton({ item }) {
           if(isUserLoggedIn){
             !item.isAddedToCart ?
               addToListAndServer({
-                url: "/api/cartLists/",
-                list: "cartList",
+                url: "https://restPractice.janaki23.repl.co/cart",
+                list: "cartItem",
                 postItem: {
-                  cartList: { ...item, quantity: 1 }
+                  "product":{"_id":item._id},
+                  "quantity":1
                 },
-                dispatchType: "APPEND_ITEM_TO_CART",
+                dispatchType: "CHANGE_CART_STATE",
                 toastItem: "cart"
               }) :navigate("/cart");
             }else{

@@ -35,8 +35,8 @@ export function DataProvider({ children }) {
     toastMessage
   }) {
     try {
-      const { status } = await axios.delete(`${url}/${item.id}`);
-      if (status === 204) {
+      const { status } = await axios.delete(url);
+      if (status === 200) {
         dispatch({ type: dispatchType, payload: item });
         showToast(toastMessage);
         hideToast();
@@ -57,9 +57,9 @@ export function DataProvider({ children }) {
     try {
       showToast(`Adding to ${toastItem}`);
       const { data, status } = await axios.post(`${url}`, postItem);
-
-      if (status === 201) {
-        dispatch({ type: dispatchType, payload: data[list] });
+      
+      if (status === 200) {
+        dispatch({ type: dispatchType, payload: data[list].product });
         showToast(`Added to ${toastItem}`);
         hideToast();
       }

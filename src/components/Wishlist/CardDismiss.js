@@ -9,7 +9,7 @@ export function CardDismiss({ item }) {
         class="icon-btn"
         onClick={() => {
           removeFromListAndServer({
-            url: "/api/wishLists",
+            url: `https://restPractice.janaki23.repl.co/wishlist/${item._id}`,
             item: item,
             dispatchType: "REMOVE_FROM_WISHLIST",
             toastMessage: "removed from wishlist"

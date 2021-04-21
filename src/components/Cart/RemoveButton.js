@@ -10,7 +10,7 @@ export function RemoveButton({ cartItem }) {
                          margin-right"
         onClick={() => {
           removeFromListAndServer({
-            url: "/api/cartLists",
+            url: `https://restPractice.janaki23.repl.co/cart/${cartItem._id}`,
             item: cartItem,
             dispatchType: "REMOVE_FROM_CART",
             toastMessage: "removed from cart"

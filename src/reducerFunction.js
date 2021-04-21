@@ -1,16 +1,16 @@
 export function reducerFunction(state, action) {
   switch (action.type) {
     case "ADD_TO_PRODUCTS":
-      const productListWithUpdatedWishListState = updateProductListWithWishListState(
-        state.wishList,
-        action.payload
-      );
+      // const productListWithUpdatedWishListState = updateProductListWithWishListState(
+      //   state.wishList,
+      //   action.payload
+      // );
 
-      const productListWithUpdatedCartState = updateProductListWithCartState(
-        state.cartList,
-        productListWithUpdatedWishListState
-      );
-      return { ...state, productList: productListWithUpdatedCartState };
+      // const productListWithUpdatedCartState = updateProductListWithCartState(
+      //   state.cartList,
+      //   productListWithUpdatedWishListState
+      // );
+      return { ...state, productList: action.payload };
 
     case "ADD_TO_WISHLIST":
       return { ...state, wishList: action.payload };
@@ -19,12 +19,7 @@ export function reducerFunction(state, action) {
       return {
         ...state,
         wishList: state.wishList.filter(
-          (item) => item.id !== action.payload.id
-        ),
-        productList: state.productList.map((item) =>
-          item.id === action.payload.id
-            ? { ...item, isWishListed: false }
-            : item
+          (item) => item._id !== action.payload._id
         )
       };
 
@@ -37,6 +32,21 @@ export function reducerFunction(state, action) {
         )
       };
 
+    case "CHANGE_WISHLIST_STATE":
+      return {
+        ...state,
+        productList: state.productList.map((item) =>
+        item._id === action.payload ? { ...item, isWishListed: !item.isWishListed } : item
+      )
+      }
+    
+    case "CHANGE_CART_STATE":
+        return {
+          ...state,
+          productList: state.productList.map((item) =>
+          item._id === action.payload ? { ...item, isAddedToCart: !item.isAddedToCart } : item
+        )
+        }
     case "UPDATE_WISHLIST_STATE_OF_PRODUCT_ITEM":
       return {
         ...state,
@@ -54,12 +64,7 @@ export function reducerFunction(state, action) {
       return {
         ...state,
         cartList: state.cartList.filter(
-          (item) => item.id !== action.payload.id
-        ),
-        productList: state.productList.map((item) =>
-          item.id === action.payload.id
-            ? { ...item, isAddedToCart: false }
-            : item
+          (item) => item._id !== action.payload._id
         )
       };
 
