@@ -9,7 +9,7 @@ export function Login(){
 
     function loginHandler(){
         setUserLogIn((prev)=>!prev)
-        navigate(state.from);
+        navigate(state.from?.state.from);
     }
 
     return (

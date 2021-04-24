@@ -1,12 +1,12 @@
 import { useDataContext } from "../../data-context";
 
-export function AddToWishListButton({ cartItem }) {
+export function AddToWishListButton({ cartItemId,productId }) {
   const { removeFromListAndServer, addToListAndServer } = useDataContext();
 
   function RemoveAndAddItemToListAndServer() {
     removeFromListAndServer({
-      url: `https://restPractice.janaki23.repl.co/cart/${cartItem._id}`,
-      item: cartItem,
+      url: `https://restPractice.janaki23.repl.co/cart/${cartItemId}`,
+      itemId: cartItemId,
       dispatchType: "REMOVE_FROM_CART",
       toastMessage: "removed from cart"
     });
@@ -15,16 +15,16 @@ export function AddToWishListButton({ cartItem }) {
       url: "https://restPractice.janaki23.repl.co/wishlist",
       list: "wishlistItem",
       postItem: {
-        "product":{"_id":cartItem.product._id}
+        "product":{"_id":productId}
       },
-      dispatchType: "",
+      dispatchType: "INCREMENT_WISHLIST_COUNT",
       toastItem: "wishlist"
     })
   }
 
   return (
     <button
-      class="btn btn-text font-size-6 
+      className="btn btn-text font-size-6 
                      text-gray"
       onClick={RemoveAndAddItemToListAndServer}
     >

@@ -20,7 +20,7 @@ export function Cart() {
   }
   return (
     <div>
-      <div style={{ margin: "4rem", textAlign: "center" }}>
+      <div className="text-center" style={{ margin: "4rem"}}>
         {getTotalPrice() > 0 && (
           <div className="font-size-3 font-bold-1">
             <span>Total Price :</span> Rs {getTotalPrice()}
@@ -28,8 +28,8 @@ export function Cart() {
         )}
       </div>
       <div style={{ margin: "2rem" }}>
-        {state.cartList.map((item) => {
-          return <CartItem key={item.id} cartItem={item} />;
+        {state.cartList.map(({_id,product,quantity}) => {
+          return <CartItem key={_id} cartItemId={_id} product={product} quantity={quantity} />;
         })}
       </div>
     </div>

@@ -10,6 +10,8 @@ export function DataProvider({ children }) {
     productList: [],
     wishList: [],
     cartList: [],
+    wishlistLength:0,//To track changes in the badge
+    cartLength:0,
     sortFilterStates: {
       includeOutOfStock: true,
       fastDelivery: false,
@@ -22,7 +24,7 @@ export function DataProvider({ children }) {
       const { data, status } = await axios.get(url);
 
       if (status === 200) {
-        dispatch({ type: dispatchType, payload: data[list] });
+        dispatch({ type: dispatchType, payload: data });
       }
     } catch (error) {
       alert(error);
@@ -30,14 +32,14 @@ export function DataProvider({ children }) {
   }
   async function removeFromListAndServer({
     url,
-    item,
+    itemId,
     dispatchType,
     toastMessage
   }) {
     try {
       const { status } = await axios.delete(url);
       if (status === 200) {
-        dispatch({ type: dispatchType, payload: item });
+        dispatch({ type: dispatchType, payload: itemId });
         showToast(toastMessage);
         hideToast();
       }
@@ -69,13 +71,13 @@ export function DataProvider({ children }) {
     }
   }
 
-  async function updateListAndServer({ url, postObject, dispatchType, item }) {
+  async function updateListAndServer({ url, postObject, dispatchType, itemId }) {
     try {
       const { status } = await axios.post(url, postObject);
       if (status === 200) {
         dispatch({
           type: dispatchType,
-          payload: item
+          payload: itemId
         });
       }
     } catch (error) {

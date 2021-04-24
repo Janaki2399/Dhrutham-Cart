@@ -2,34 +2,29 @@ import { useDataContext } from "../../data-context";
 import {Link, useNavigate,Navigate} from "react-router-dom";  
 import { useAuth } from "../../auth-context";
 
-export function AddToCartButton({ item,addToCart }) {
+export function AddToCartButton({ isAddedToCart,inStock,addToCart }) {
   const { addToListAndServer, dispatch } = useDataContext();
   const {isUserLoggedIn}=useAuth();
   const navigate=useNavigate();
   return (
     <div>
       <button
-        disabled={!item.inStock}
-        style={{ width: "100%", marginTop: "0.3rem" }}
+        disabled={!inStock}
         className={
-          item.inStock
-            ? "btn btn-primary-contained"
-            : " btn btn-primary-contained btn-disabled"
+          inStock
+            ? "btn btn-primary-contained full-width"
+            : " btn btn-primary-contained btn-disabled full-width"
         }
         onClick={() => {
           if(isUserLoggedIn){
-            !item.isAddedToCart ?
+            !isAddedToCart ?
               addToCart() :navigate("/cart");
             }else{
-            
               navigate("/login");
             }
-
-          
-          
         }}
       >
-       {!item.isAddedToCart ? "Add to cart":"Go to cart"  }
+       {!isAddedToCart ? "Add to cart":"Go to cart"  }
        </button>
     </div>
   );

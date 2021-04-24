@@ -1,29 +1,28 @@
 import { useDataContext } from "../../data-context";
 
-export function QuantityButtons({ cartItem }) {
+export function QuantityButtons({ cartItemId,quantity }) {
   const { updateListAndServer } = useDataContext();
 
   return (
     <div>
       <div class="flex-horizontal margin-top">
         <button
-          class="icon-btn"
-          style={{ border: "1px solid gray" }}
-          disabled={cartItem.quantity <= 1}
+          class="icon-btn gray-border"
+          disabled={quantity <= 1}
           onClick={() => {
             updateListAndServer({
-              url: `https://restPractice.janaki23.repl.co/cart/${cartItem._id}`,
+              url: `https://restPractice.janaki23.repl.co/cart/${cartItemId}`,
               postObject: {
-                "quantity":cartItem.quantity-1,
+                quantity: quantity - 1,
               },
               dispatchType: "DECREASE_CART_ITEM_QUANTITY",
-              item: cartItem
+              itemId: cartItemId,
             });
           }}
         >
           <span
             class={
-              cartItem.quantity !== 1
+              quantity !== 1
                 ? "material-icons-outlined icon-size-18"
                 : "material-icons-outlined icon-size-18 icon-color-gray"
             }
@@ -32,19 +31,18 @@ export function QuantityButtons({ cartItem }) {
           </span>
         </button>
 
-        <div class="qty-div">{cartItem.quantity}</div>
+        <div class="qty-div">{quantity}</div>
 
         <button
-          class="icon-btn"
-          style={{ border: "1px solid gray" }}
+          class="icon-btn gray-border"
           onClick={() => {
             updateListAndServer({
-              url: `https://restPractice.janaki23.repl.co/cart/${cartItem._id}`,
+              url: `https://restPractice.janaki23.repl.co/cart/${cartItemId}`,
               postObject: {
-                  "quantity":cartItem.quantity+1,
+                quantity: quantity + 1,
               },
               dispatchType: "INCREASE_CART_ITEM_QUANTITY",
-              item: cartItem
+              itemId: cartItemId,
             });
           }}
         >

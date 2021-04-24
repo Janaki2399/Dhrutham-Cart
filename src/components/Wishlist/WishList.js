@@ -12,8 +12,8 @@ export function WishList() {
     }, []);
   return (
     <div className="grid-col-3" style={{ margin: "4rem" }}>
-      {state.wishList.map((item) => {
-        return <WishListItem key={item.id} wishListItem={item} />;
+      {state.wishList.map(({_id,product}) => {
+        return <WishListItem key={_id} wishListId={_id} product={product} />;
       })}
     </div>
   );

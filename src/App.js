@@ -1,19 +1,18 @@
-
-import './App.css';
+import "./App.css";
 import { useEffect } from "react";
 import { useDataContext } from "./data-context";
-import {Routes,Route} from "react-router-dom"; 
-import {PrivateRoute} from "./PrivateRoute";
+import { Routes, Route } from "react-router-dom";
+import { PrivateRoute } from "./PrivateRoute";
 import { Products } from "./components/Products/Products";
-import {ProductDetails} from "./components/ProductDetails";
+import { ProductDetails } from "./components/ProductDetails";
 import { WishList } from "./components/Wishlist/WishList";
 import { Cart } from "./components/Cart/Cart";
 import { Toast } from "./components/Toast";
 import { Filter } from "./components/Filter";
 import { Navbar } from "./components/Navbar";
 import { useLoaderToast } from "./loader-toast-context";
-import {Login} from "./components/Login/Login";
-import { useAuth } from './auth-context';
+import { Login } from "./components/Login/Login";
+import { useAuth } from "./auth-context";
 
 export default function App() {
   const { fetchAndAddToList, state } = useDataContext();
@@ -22,17 +21,17 @@ export default function App() {
 
   // useEffect(() => {
   //   fetchAndAddToList({
-  //     url: "/api/cartLists",
+  //     url: "https://restPractice.janaki23.repl.co/cart",
   //     dispatchType: "ADD_TO_CART",
-  //     list: "cartLists"
+  //     list: "cart"
   //   });
   // }, []);
 
   // useEffect(() => {
   //   fetchAndAddToList({
-  //     url: "/api/wishLists",
+  //     url: "https://restPractice.janaki23.repl.co/wishlist",
   //     dispatchType: "ADD_TO_WISHLIST",
-  //     list: "wishLists"
+  //     list: "wishlist"
   //   });
   // }, []);
   // useEffect(() => {
@@ -42,20 +41,21 @@ export default function App() {
   //     list: "products"
   //   });
   // }, []);
-
+  // useEffect(()=>{
+  //   console.log("app is loaded");
+  // },[])
   return (
     <div className="App">
-   
-        <Navbar />
-          <Routes>
-          <Route path='/login' element={<Login />}/>
-          <Route path='/' element={<Products/>}/>
-          <PrivateRoute path={'/wishlist'} element={<WishList/>} />
-          <PrivateRoute path={'/cart'} element={<Cart/>} />
-          <Route path='/products/:productId' element={<ProductDetails/>}/>
-          </Routes>
-        
-        {toast && <Toast message={toast} />}
+      <Navbar />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Products />} />
+        <PrivateRoute path={"/wishlist"} element={<WishList />} />
+        <PrivateRoute path={"/cart"} element={<Cart />} />
+        <Route path="/products/:productId" element={<ProductDetails />} />
+      </Routes>
+
+      {toast && <Toast message={toast} />}
     </div>
   );
 }

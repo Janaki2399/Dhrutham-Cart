@@ -1,16 +1,16 @@
 import { useDataContext } from "../../data-context";
 
-export function CardDismiss({ item }) {
+export function CardDismiss({ wishListId }) {
   const { removeFromListAndServer } = useDataContext();
 
   return (
-    <div className="card-icon-topRight">
+    <div className="card-icon-topRight ">
       <button
-        class="icon-btn"
+        class="icon-btn cursor-pointer"
         onClick={() => {
           removeFromListAndServer({
-            url: `https://restPractice.janaki23.repl.co/wishlist/${item._id}`,
-            item: item,
+            url: `https://restPractice.janaki23.repl.co/wishlist/${wishListId}`,
+            itemId: wishListId,
             dispatchType: "REMOVE_FROM_WISHLIST",
             toastMessage: "removed from wishlist"
           });

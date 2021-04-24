@@ -1,8 +1,8 @@
-export function ProductImage({ item }) {
+export function ProductImage({ image,inStock }) {
   return (
-    <div style={{ position: "relative" }}>
-      <img className="card-img" src={item.image} alt="product-card" loading="lazy"/>
-      {!item.inStock && <div className="text-overlay">OUT OF STOCK</div>}
+    <div className="relative-position">
+      <img className="card-img" src={image} alt="product-card" loading="lazy"/>
+      {!inStock && <div className="text-overlay">OUT OF STOCK</div>}
     </div>
   );
 }

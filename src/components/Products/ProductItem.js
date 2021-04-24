@@ -21,17 +21,28 @@ export function ProductItem({ productItem }) {
     })
   }
 
+  function addToWishlist(){
+    addToListAndServer({
+      url: "https://restPractice.janaki23.repl.co/wishlist",
+      list: "wishlistItem",
+      postItem: {
+        "product":{"_id":productItem._id}
+      },
+      dispatchType: "CHANGE_WISHLIST_STATE",
+      toastItem: "wishlist"
+    })
+  }
   return (
     <div className="card card-shadow card-vertical "
     >
        <Link to={`/products/${productItem._id}`} className="anchor-link" >
           <div>
-          <ProductImage item={productItem} />
+          <ProductImage image={productItem.image} inStock={productItem.inStock} />
           <CardItemContent item={productItem} />
           </div>
       </Link>
-      <AddToCartButton item={productItem} addToCart={addToCart}/>
-      {productItem.inStock && <WishListButton productItem={productItem} />}
+      <AddToCartButton isAddedToCart={productItem.isAddedToCart} inStock={productItem.inStock} addToCart={addToCart}/>
+      {productItem.inStock && <WishListButton isWishListed={productItem.isWishListed} addToWishlist={addToWishlist}/>}
     
     </div>
   );

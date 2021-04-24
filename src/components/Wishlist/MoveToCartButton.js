@@ -1,12 +1,12 @@
 import { useDataContext } from "../../data-context";
 
-export function MoveToCartButton({ item }) {
+export function MoveToCartButton({ wishListId,productId}) {
   const { removeFromListAndServer, addToListAndServer } = useDataContext();
 
   function removeAndAddItemToListAndServer() {
     removeFromListAndServer({
-      url: `https://restPractice.janaki23.repl.co/wishlist/${item._id}`,
-      item: item,
+      url: `https://restPractice.janaki23.repl.co/wishlist/${wishListId}`,
+      itemId: wishListId,
       dispatchType: "REMOVE_FROM_WISHLIST",
       toastMessage: "removed from wishlist"
     });
@@ -14,18 +14,18 @@ export function MoveToCartButton({ item }) {
       url: "https://restPractice.janaki23.repl.co/cart",
       list: "cartItem",
       postItem: {
-        "product":{"_id":item.product._id},
+        "product":{"_id":productId},
         "quantity":1
       },
-      dispatchType: "",
+      dispatchType: "INCREMENT_CART_COUNT",
       toastItem: "cart"
     })
   }
   return (
     <div>
       <button
-        style={{ width: "100%", marginTop: "0.3rem" }}
-        class="btn btn-primary-contained"
+        style={{  marginTop: "0.3rem" }}
+        className="btn btn-primary-contained full-width"
         onClick={() => {
           removeAndAddItemToListAndServer();
         }}

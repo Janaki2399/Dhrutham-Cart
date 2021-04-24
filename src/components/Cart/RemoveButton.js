@@ -1,6 +1,6 @@
 import { useDataContext } from "../../data-context";
 
-export function RemoveButton({ cartItem }) {
+export function RemoveButton({ cartItemId }) {
   const { removeFromListAndServer } = useDataContext();
 
   return (
@@ -10,8 +10,8 @@ export function RemoveButton({ cartItem }) {
                          margin-right"
         onClick={() => {
           removeFromListAndServer({
-            url: `https://restPractice.janaki23.repl.co/cart/${cartItem._id}`,
-            item: cartItem,
+            url: `https://restPractice.janaki23.repl.co/cart/${cartItemId}`,
+            itemId: cartItemId,
             dispatchType: "REMOVE_FROM_CART",
             toastMessage: "removed from cart"
           });

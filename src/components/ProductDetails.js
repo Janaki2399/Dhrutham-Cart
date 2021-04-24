@@ -1,64 +1,75 @@
-import { useParams } from "react-router"
+import { useParams } from "react-router";
 import { useDataContext } from "../data-context";
-import {WishListButton} from "./Products/WishListButton"
+import { WishListButton } from "./Products/WishListButton";
 import { AddToCartButton } from "./Products/AddToCartButton";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-export function ProductDetails(){
-    const {productId}=useParams();
-    const {state,dispatch}=useDataContext();
-    const [product,setProductItem]=useState({});
+export function ProductDetails() {
+  const { productId } = useParams();
+  const {dispatch}=useDataContext();
+  const [product, setProductItem] = useState({});
 
-    // function findSelectedProduct(productId,productData){
-    //     return productData.find((item)=>item.id===productId)
-    // }
+  // function findSelectedProduct(productId,productData){
+  //     return productData.find((item)=>item.id===productId)
+  // }
 
-    // const product=findSelectedProduct(productId,state.productList);
+  // const product=findSelectedProduct(productId,state.productList);
 
-    useEffect(() => {
-      ( async function(){ 
-        const {data}=await axios.get(`https://restPractice.janaki23.repl.co/products/${productId}`);
-        setProductItem(data.product);
-        }
-      )()
-    }, []);
-  
-    async function addToCart(){
-      const {status}=await axios.post("https://restPractice.janaki23.repl.co/cart",{"product":{"_id":productId},"quantity":1});
-      if(status===200){
-        setProductItem((product)=>({...product,isAddedToCart:true}));
-      }
+  useEffect(() => {
+    (async function () {
+      const { data } = await axios.get(
+        `https://restPractice.janaki23.repl.co/products/${productId}`
+      );
+      setProductItem(data.product);
+    })();
+  }, []);
+
+  async function addToCart() {
+    const {
+      status,
+    } = await axios.post("https://restPractice.janaki23.repl.co/cart", {
+      product: { _id: productId },
+      quantity: 1,
+    });
+    if (status === 200) {
+      setProductItem((product) => ({ ...product, isAddedToCart: true }));
+      dispatch({type:"INCREMENT_CART_COUNT"})
     }
-    async function addToWishlist(){
-      const {status}=await axios.post("https://restPractice.janaki23.repl.co/wishlist",{"product":{"_id":productId}});
-      if(status===200){
-        setProductItem((product)=>({...product,isWishListed:true}));
-      }
+  }
+  async function addToWishlist() {
+    const {
+      status,
+    } = await axios.post("https://restPractice.janaki23.repl.co/wishlist", {
+      product: { _id: productId },
+    });
+    if (status === 200) {
+      setProductItem((product) => ({ ...product, isWishListed: true }));
+      dispatch({type:"INCREMENT_WISHLIST_COUNT"})
     }
+  }
 
-
-    return(
-        <div className="center-align-ver-hor flex-column center-page-ver-hor">
-        <div
+  return (
+    <div className="center-align-ver-hor flex-column center-page-ver-hor">
+      <div
         className="card card-shadow card-horizontal card-content-padding"
         style={{ width: "90%" }}
-        >
+      >
         <div className="relative-position">
-            <img class="card-img" src={product.image} alt="card-img"/>
-            <WishListButton productItem={product} />
-            <AddToCartButton item={product} addToCart={addToCart}/>
+          <img class="card-img" src={product.image} alt="card-img" />
+          <WishListButton isWishListed={product.isWishListed}  addToWishlist={addToWishlist} />
+          <AddToCartButton isAddedToCart={product.isAddedToCart} inStock={product.inStock} addToCart={addToCart} />
         </div>
         <div
-        class="card-content-padding text-start card-vertical"
-        style={{ width: "60%" }}
+          class="card-content-padding text-start card-vertical"
+          style={{ width: "60%" }}
         >
-        <div>
-          <div className="card-title">{product.name}</div>
-          <div className="font-size-3">Rs {product.price}</div>
+          <div>
+            <div className="card-title">{product.name}</div>
+            <div className="font-size-3">Rs {product.price}</div>
+          </div>
         </div>
       </div>
     </div>
-    </div>
-    )
+  );
 }
