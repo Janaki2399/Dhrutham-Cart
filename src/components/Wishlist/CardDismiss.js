@@ -1,6 +1,6 @@
 import { useDataContext } from "../../data-context";
 
-export function CardDismiss({ wishListId }) {
+export function CardDismiss({ productId ,wishListId}) {
   const { removeFromListAndServer } = useDataContext();
 
   return (
@@ -9,9 +9,10 @@ export function CardDismiss({ wishListId }) {
         class="icon-btn cursor-pointer"
         onClick={() => {
           removeFromListAndServer({
-            url: `https://restPractice.janaki23.repl.co/wishlist/${wishListId}`,
+            url: `https://restPractice.janaki23.repl.co/wishlist/${productId}`,
             itemId: wishListId,
             dispatchType: "REMOVE_FROM_WISHLIST",
+            list:"wishlist",
             toastMessage: "removed from wishlist"
           });
         }}

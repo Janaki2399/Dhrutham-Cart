@@ -13,6 +13,7 @@ export function RemoveButton({ cartItemId }) {
             url: `https://restPractice.janaki23.repl.co/cart/${cartItemId}`,
             itemId: cartItemId,
             dispatchType: "REMOVE_FROM_CART",
+            list:"cart",
             toastMessage: "removed from cart"
           });
         }}

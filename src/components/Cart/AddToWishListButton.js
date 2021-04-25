@@ -8,6 +8,7 @@ export function AddToWishListButton({ cartItemId,productId }) {
       url: `https://restPractice.janaki23.repl.co/cart/${cartItemId}`,
       itemId: cartItemId,
       dispatchType: "REMOVE_FROM_CART",
+      list:"cart",
       toastMessage: "removed from cart"
     });
  
@@ -17,7 +18,7 @@ export function AddToWishListButton({ cartItemId,productId }) {
       postItem: {
         "product":{"_id":productId}
       },
-      dispatchType: "INCREMENT_WISHLIST_COUNT",
+      dispatchType: "",
       toastItem: "wishlist"
     })
   }

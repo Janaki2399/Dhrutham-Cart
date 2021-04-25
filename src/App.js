@@ -44,6 +44,20 @@ export default function App() {
   // useEffect(()=>{
   //   console.log("app is loaded");
   // },[])
+  useEffect(() => {
+    fetchAndAddToList({
+      url: "https://restPractice.janaki23.repl.co/cart/summary",
+      dispatchType: "SET_CART_COUNT",
+      list: "cartLength"
+    });
+  }, []);
+  useEffect(() => {
+    fetchAndAddToList({
+      url: "https://restPractice.janaki23.repl.co/wishlist/summary",
+      dispatchType: "SET_WISHLIST_COUNT",
+      list: "wishlistLength"
+    });
+  }, []);
   return (
     <div className="App">
       <Navbar />

@@ -19,12 +19,24 @@ export function DataProvider({ children }) {
     }
   });
 
+  // async function fetchSummary({url,count}){
+  //   try{
+  //     const {data,status}=await axios.get(url);
+  //     if(status===200){
+  //       dispatch({type:dispatchType,payload:data[count]})
+  //     }
+  //   }
+  //   catch(error){
+  //     alert(error);
+  //   }
+  // }
+
   async function fetchAndAddToList({ url, dispatchType, list }) {
     try {
       const { data, status } = await axios.get(url);
 
       if (status === 200) {
-        dispatch({ type: dispatchType, payload: data });
+        dispatch({ type: dispatchType, payload: data[list] });
       }
     } catch (error) {
       alert(error);
@@ -34,12 +46,19 @@ export function DataProvider({ children }) {
     url,
     itemId,
     dispatchType,
+    list,
     toastMessage
   }) {
     try {
       const { status } = await axios.delete(url);
       if (status === 200) {
         dispatch({ type: dispatchType, payload: itemId });
+        if(list==="wishlist"){
+          dispatch({type:"DECREMENT_WISHLIST_COUNT"})
+        }
+        else if(list==="cart"){
+          dispatch({type:"DECREMENT_CART_COUNT"})
+        }
         showToast(toastMessage);
         hideToast();
       }
@@ -62,6 +81,12 @@ export function DataProvider({ children }) {
       
       if (status === 200) {
         dispatch({ type: dispatchType, payload: data[list].product });
+        if(list==="wishlistItem"){
+          dispatch({ type: "INCREMENT_WISHLIST_COUNT"})
+        }
+        else if(list==="cartItem"){
+          dispatch({ type: "INCREMENT_CART_COUNT"})
+        }
         showToast(`Added to ${toastItem}`);
         hideToast();
       }

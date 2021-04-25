@@ -10,6 +10,9 @@ export function WishList() {
         list: "wishlist"
       });
     }, []);
+
+   
+  
   return (
     <div className="grid-col-3" style={{ margin: "4rem" }}>
       {state.wishList.map(({_id,product}) => {

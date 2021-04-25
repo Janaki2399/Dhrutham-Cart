@@ -48,7 +48,18 @@ export function ProductDetails() {
       dispatch({type:"INCREMENT_WISHLIST_COUNT"})
     }
   }
-
+   
+  async function removeFromWishlist(){
+    const {
+      status,
+    } = await axios.delete(`https://restPractice.janaki23.repl.co/wishlist/${productId}`, {
+      product: { _id: productId },
+    });
+    if (status === 200) {
+      setProductItem((product) => ({ ...product, isWishListed: false }));
+      dispatch({type:"DECREMENT_WISHLIST_COUNT"})
+    }
+  }
   return (
     <div className="center-align-ver-hor flex-column center-page-ver-hor">
       <div
@@ -57,7 +68,7 @@ export function ProductDetails() {
       >
         <div className="relative-position">
           <img class="card-img" src={product.image} alt="card-img" />
-          <WishListButton isWishListed={product.isWishListed}  addToWishlist={addToWishlist} />
+          <WishListButton isWishListed={product.isWishListed}  addToWishlist={addToWishlist} removeFromWishlist={removeFromWishlist}/>
           <AddToCartButton isAddedToCart={product.isAddedToCart} inStock={product.inStock} addToCart={addToCart} />
         </div>
         <div

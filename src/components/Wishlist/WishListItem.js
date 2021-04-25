@@ -12,7 +12,7 @@ export function WishListItem({ wishListId,product }) {
         <img className="card-img" src={product.image} alt="card-img" />
       </div>
       <CardItemContent item={product} isWishlist/>
-      <CardDismiss wishListId={wishListId} />
+      <CardDismiss productId={product._id} wishListId={wishListId}/>
       <MoveToCartButton wishListId={wishListId} productId={product._id} />
     </div>
   );
