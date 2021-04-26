@@ -1,4 +1,4 @@
-import { useDataContext } from "../../data-context";
+import { useDataContext } from "../../contexts/data-context";
 
 export function QuantityButtons({ cartItemId,quantity }) {
   const { updateListAndServer } = useDataContext();

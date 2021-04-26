@@ -1,6 +1,6 @@
-import { useDataContext } from "../../data-context";
+import { useDataContext } from "../../contexts/data-context";
 import {Link, useNavigate,Navigate} from "react-router-dom";  
-import { useAuth } from "../../auth-context";
+import { useAuth } from "../../contexts/auth-context";
 
 export function AddToCartButton({ isAddedToCart,inStock,addToCart }) {
   const { addToListAndServer, dispatch } = useDataContext();

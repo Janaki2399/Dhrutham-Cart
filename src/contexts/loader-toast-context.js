@@ -1,6 +1,6 @@
 import { createContext, useContext, useState } from "react";
 
-const loaderToastContext = createContext();
+const LoaderToastContext = createContext();
 
 export function LoaderToastProvider({ children }) {
   const [toast, setToast] = useState(null);
@@ -16,7 +16,7 @@ export function LoaderToastProvider({ children }) {
   }
 
   return (
-    <loaderToastContext.Provider
+    <LoaderToastContext.Provider
       value={{
         toast: toast,
         showToast: showToast,
@@ -24,10 +24,10 @@ export function LoaderToastProvider({ children }) {
       }}
     >
       {children}
-    </loaderToastContext.Provider>
+    </LoaderToastContext.Provider>
   );
 }
 
 export function useLoaderToast() {
-  return useContext(loaderToastContext);
+  return useContext(LoaderToastContext);
 }

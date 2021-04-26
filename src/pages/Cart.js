@@ -1,5 +1,5 @@
-import { useDataContext } from "../../data-context";
-import { CartItem } from "./CartItem";
+import { useDataContext } from "../contexts/data-context";
+import { CartItem } from "../components/Cart/CartItem";
 import {useEffect} from "react";
 
 export function Cart() {
@@ -11,6 +11,7 @@ export function Cart() {
       list: "cart"
     });
   }, []);
+
   function getTotalPrice() {
     return state.cartList.reduce(
       (accumulator, cartItem) =>

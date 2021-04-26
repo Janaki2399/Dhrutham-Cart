@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import {BrowserRouter as Router} from "react-router-dom";
-import { DataProvider } from "./data-context";
-import setupMockServer from "./api/mock.server";
-import { LoaderToastProvider } from "./loader-toast-context";
-import reportWebVitals from './reportWebVitals';
-import { AuthProvider } from './auth-context';
+import { DataProvider } from "./contexts/data-context";
+import { LoaderToastProvider } from "./contexts/loader-toast-context";
+import { AuthProvider } from './contexts/auth-context';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -25,7 +23,3 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();

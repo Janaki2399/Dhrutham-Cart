@@ -1,4 +1,4 @@
-import { useAuth } from "../../auth-context"
+import { useAuth } from "../contexts/auth-context"
 import {useLocation, useNavigate} from "react-router-dom";
 
 export function Login(){

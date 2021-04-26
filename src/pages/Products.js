@@ -1,6 +1,6 @@
-import { useDataContext } from "../../data-context";
-import { ProductItem } from "./ProductItem";
-import { Filter } from "../Filter";
+import { useDataContext } from "../contexts/data-context";
+import { ProductItem } from "../components/Products/ProductItem";
+import { Filter } from "../components/Filter";
 import {useState,useEffect} from "react";
 import {Link} from "react-router-dom";
 export function Products() {
@@ -20,6 +20,12 @@ export function Products() {
     });
   }, []);
   const [filterMobile,setFilterMobile]=useState(false);
+
+  useEffect(()=>{
+    if(window.innerWidth>=600){
+      setFilterMobile(false);
+    }
+  })
 
   function getSortedData(productList, sortBy) {
     if (sortBy === "PRICE_HIGH_TO_LOW") {
@@ -49,7 +55,7 @@ export function Products() {
      <Filter filterMobile={filterMobile}/>
       {!filterMobile && (<div id="products-div"className="grid-col-3" style={{ margin: "2rem" }}>
         {filteredData.map((item) => {
-          return  <ProductItem key={item.id} productItem={item} />;
+          return  <ProductItem key={item._id} productItem={item} />;
         })}
       </div>)}
      {!filterMobile &&<div className="filter-mobile cursor-pointer border-top gray-border"

@@ -1,4 +1,4 @@
-import { useDataContext } from "../../data-context";
+import { useDataContext } from "../../contexts/data-context";
 
 export function CardDismiss({ productId ,wishListId}) {
   const { removeFromListAndServer } = useDataContext();
@@ -6,7 +6,7 @@ export function CardDismiss({ productId ,wishListId}) {
   return (
     <div className="card-icon-topRight ">
       <button
-        class="icon-btn cursor-pointer"
+        className="icon-btn cursor-pointer"
         onClick={() => {
           removeFromListAndServer({
             url: `https://restPractice.janaki23.repl.co/wishlist/${productId}`,

@@ -1,4 +1,4 @@
-import { useDataContext } from "../../data-context";
+import { useDataContext } from "../../contexts/data-context";
 
 export function AddToWishListButton({ cartItemId,productId }) {
   const { removeFromListAndServer, addToListAndServer } = useDataContext();

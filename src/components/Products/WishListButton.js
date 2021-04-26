@@ -1,5 +1,5 @@
-import { useDataContext } from "../../data-context";
-import { useAuth } from "../../auth-context";
+import { useDataContext } from "../../contexts/data-context";
+import { useAuth } from "../../contexts/auth-context";
 import { Navigate, useNavigate } from "react-router";
 
 export function WishListButton({ isWishListed,addToWishlist,removeFromWishlist }) {

@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
-import { useDataContext } from "../data-context";
-import { WishListButton } from "./Products/WishListButton";
-import { AddToCartButton } from "./Products/AddToCartButton";
+import { useDataContext } from "../contexts/data-context";
+import { WishListButton } from "../components/Products/WishListButton";
+import { AddToCartButton } from "../components/Products/AddToCartButton";
 import { useState, useEffect } from "react";
 import axios from "axios";
 

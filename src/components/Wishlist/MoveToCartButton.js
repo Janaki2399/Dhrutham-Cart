@@ -1,11 +1,11 @@
-import { useDataContext } from "../../data-context";
+import { useDataContext } from "../../contexts/data-context";
 
 export function MoveToCartButton({ wishListId,productId}) {
   const { removeFromListAndServer, addToListAndServer } = useDataContext();
 
   function removeAndAddItemToListAndServer() {
     removeFromListAndServer({
-      url: `https://restPractice.janaki23.repl.co/wishlist/${wishListId}`,
+      url: `https://restPractice.janaki23.repl.co/wishlist/${productId}`,
       itemId: wishListId,
       dispatchType: "REMOVE_FROM_WISHLIST",
       list:"wishlist",
@@ -19,7 +19,7 @@ export function MoveToCartButton({ wishListId,productId}) {
         "quantity":1
       },
       dispatchType: "",
-      list:"cart",
+      list:"cartItem",
       toastItem: "cart"
     })
   }

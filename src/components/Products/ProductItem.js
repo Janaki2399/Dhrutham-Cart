@@ -4,7 +4,7 @@ import { AddToCartButton } from "./AddToCartButton";
 import { ProductImage } from "./ProductImage";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useDataContext } from "../../data-context";
+import { useDataContext } from "../../contexts/data-context";
 export function ProductItem({ productItem }) {
   const navigate = useNavigate();
   const { addToListAndServer ,removeFromListAndServer} = useDataContext();

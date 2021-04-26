@@ -1,6 +1,6 @@
-import { useDataContext } from "../data-context";
+import { useDataContext } from "../contexts/data-context";
 import { Link } from "react-router-dom";
-import { useAuth } from "../auth-context";
+import { useAuth } from "../contexts/auth-context";
 
 export function Navbar() {
   const { state, dispatch } = useDataContext();

@@ -1,8 +1,8 @@
 import { createContext, useContext, useReducer } from "react";
-import { reducerFunction } from "./reducerFunction";
+import { reducerFunction } from "../reducerFunction";
 import axios from "axios";
 import { useLoaderToast } from "./loader-toast-context";
-export const dataContext = createContext();
+export const DataContext = createContext();
 
 export function DataProvider({ children }) {
   const { showToast, hideToast } = useLoaderToast();
@@ -10,26 +10,14 @@ export function DataProvider({ children }) {
     productList: [],
     wishList: [],
     cartList: [],
-    wishlistLength:0,//To track changes in the badge
-    cartLength:0,
+    wishlistLength: 0, //To track changes in the badge
+    cartLength: 0,
     sortFilterStates: {
       includeOutOfStock: true,
       fastDelivery: false,
-      sortBy: null
-    }
+      sortBy: null,
+    },
   });
-
-  // async function fetchSummary({url,count}){
-  //   try{
-  //     const {data,status}=await axios.get(url);
-  //     if(status===200){
-  //       dispatch({type:dispatchType,payload:data[count]})
-  //     }
-  //   }
-  //   catch(error){
-  //     alert(error);
-  //   }
-  // }
 
   async function fetchAndAddToList({ url, dispatchType, list }) {
     try {
@@ -47,17 +35,16 @@ export function DataProvider({ children }) {
     itemId,
     dispatchType,
     list,
-    toastMessage
+    toastMessage,
   }) {
     try {
       const { status } = await axios.delete(url);
       if (status === 200) {
         dispatch({ type: dispatchType, payload: itemId });
-        if(list==="wishlist"){
-          dispatch({type:"DECREMENT_WISHLIST_COUNT"})
-        }
-        else if(list==="cart"){
-          dispatch({type:"DECREMENT_CART_COUNT"})
+        if (list === "wishlist") {
+          dispatch({ type: "DECREMENT_WISHLIST_COUNT" });
+        } else if (list === "cart") {
+          dispatch({ type: "DECREMENT_CART_COUNT" });
         }
         showToast(toastMessage);
         hideToast();
@@ -73,36 +60,42 @@ export function DataProvider({ children }) {
     list,
     postItem,
     dispatchType,
-    toastItem
+    toastItem,
   }) {
     try {
       showToast(`Adding to ${toastItem}`);
       const { data, status } = await axios.post(`${url}`, postItem);
-      
+
       if (status === 200) {
         dispatch({ type: dispatchType, payload: data[list].product });
-        if(list==="wishlistItem"){
-          dispatch({ type: "INCREMENT_WISHLIST_COUNT"})
-        }
-        else if(list==="cartItem"){
-          dispatch({ type: "INCREMENT_CART_COUNT"})
+        if (list === "wishlistItem") {
+          dispatch({ type: "INCREMENT_WISHLIST_COUNT" });
+        } else if (list === "cartItem") {
+          dispatch({ type: "INCREMENT_CART_COUNT" });
         }
         showToast(`Added to ${toastItem}`);
         hideToast();
       }
     } catch (error) {
       hideToast();
-      alert(error);
+      if (error.response.status !== 409) {
+        alert(error);
+      }
     }
   }
 
-  async function updateListAndServer({ url, postObject, dispatchType, itemId }) {
+  async function updateListAndServer({
+    url,
+    postObject,
+    dispatchType,
+    itemId,
+  }) {
     try {
       const { status } = await axios.post(url, postObject);
       if (status === 200) {
         dispatch({
           type: dispatchType,
-          payload: itemId
+          payload: itemId,
         });
       }
     } catch (error) {
@@ -110,21 +103,21 @@ export function DataProvider({ children }) {
     }
   }
   return (
-    <dataContext.Provider
+    <DataContext.Provider
       value={{
         dispatch,
         state,
         fetchAndAddToList,
         removeFromListAndServer,
         addToListAndServer,
-        updateListAndServer
+        updateListAndServer,
       }}
     >
       {children}
-    </dataContext.Provider>
+    </DataContext.Provider>
   );
 }
 
 export function useDataContext() {
-  return useContext(dataContext);
+  return useContext(DataContext);
 }
