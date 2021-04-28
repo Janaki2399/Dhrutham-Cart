@@ -6,7 +6,7 @@ export function WishList() {
   const { state,fetchAndAddToList } = useDataContext();
   useEffect(() => {
       fetchAndAddToList({
-        url: "https://restPractice.janaki23.repl.co/wishlist",
+        url: "https://dhrutham-cart-backend.herokuapp.com/wishlist",
         dispatchType: "ADD_TO_WISHLIST",
         list: "wishlist"
       });

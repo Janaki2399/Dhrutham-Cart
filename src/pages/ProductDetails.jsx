@@ -19,7 +19,7 @@ export function ProductDetails() {
   useEffect(() => {
     (async function () {
       const { data } = await axios.get(
-        `https://restPractice.janaki23.repl.co/products/${productId}`
+        `https://dhrutham-cart-backend.herokuapp.com/products/${productId}`
       );
       setProductItem(data.product);
     })();

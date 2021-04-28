@@ -6,7 +6,7 @@ export function Cart() {
   const { state,fetchAndAddToList } = useDataContext();
   useEffect(() => {
     fetchAndAddToList({
-      url: "https://restPractice.janaki23.repl.co/cart",
+      url: "https://dhrutham-cart-backend.herokuapp.com/cart",
       dispatchType: "ADD_TO_CART",
       list: "cart"
     });

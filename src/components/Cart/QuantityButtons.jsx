@@ -11,7 +11,7 @@ export function QuantityButtons({ cartItemId,quantity }) {
           disabled={quantity <= 1}
           onClick={() => {
             updateListAndServer({
-              url: `https://restPractice.janaki23.repl.co/cart/${cartItemId}`,
+              url: `https://dhrutham-cart-backend.herokuapp.com/cart${cartItemId}`,
               postObject: {
                 quantity: quantity - 1,
               },
@@ -37,7 +37,7 @@ export function QuantityButtons({ cartItemId,quantity }) {
           class="icon-btn gray-border"
           onClick={() => {
             updateListAndServer({
-              url: `https://restPractice.janaki23.repl.co/cart/${cartItemId}`,
+              url: `https://dhrutham-cart-backend.herokuapp.com/cart/${cartItemId}`,
               postObject: {
                 quantity: quantity + 1,
               },

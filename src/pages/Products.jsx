@@ -16,7 +16,7 @@ export function Products() {
 
   useEffect(() => {
     fetchAndAddToList({
-      url: `https://restPractice.janaki23.repl.co/categories/${categoryId}`,
+      url: `https://dhrutham-cart-backend.herokuapp.com/categories/${categoryId}`,
       dispatchType: "ADD_TO_PRODUCTS",
       list: "products"
     });

@@ -8,7 +8,7 @@ const [categories,setCategories]=useState([]);
         ()=>{
             (async function(){ 
                 try {
-                    const { data, status } = await axios.get(`https://restPractice.janaki23.repl.co/categories`);
+                    const { data, status } = await axios.get(`https://dhrutham-cart-backend.herokuapp.com/categories`);
               
                     if (status === 200) {
                      setCategories(data.categories);

@@ -5,7 +5,7 @@ export function AddToWishListButton({ cartItemId,productId }) {
 
   function RemoveAndAddItemToListAndServer() {
     removeFromListAndServer({
-      url: `https://restPractice.janaki23.repl.co/cart/${cartItemId}`,
+      url: `https://dhrutham-cart-backend.herokuapp.com/cart/${cartItemId}`,
       itemId: cartItemId,
       dispatchType: "REMOVE_FROM_CART",
       list:"cart",
@@ -13,7 +13,7 @@ export function AddToWishListButton({ cartItemId,productId }) {
     });
  
     addToListAndServer({
-      url: "https://restPractice.janaki23.repl.co/wishlist",
+      url: "https://dhrutham-cart-backend.herokuapp.com/wishlist",
       list: "wishlistItem",
       postItem: {
         "product":{"_id":productId}

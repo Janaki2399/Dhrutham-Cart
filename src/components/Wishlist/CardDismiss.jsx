@@ -9,7 +9,7 @@ export function CardDismiss({ productId ,wishListId}) {
         className="icon-btn cursor-pointer"
         onClick={() => {
           removeFromListAndServer({
-            url: `https://restPractice.janaki23.repl.co/wishlist/${productId}`,
+            url: `https://dhrutham-cart-backend.herokuapp.com/wishlist/${productId}`,
             itemId: wishListId,
             dispatchType: "REMOVE_FROM_WISHLIST",
             list:"wishlist",

@@ -5,14 +5,14 @@ export function MoveToCartButton({ wishListId,productId}) {
 
   function removeAndAddItemToListAndServer() {
     removeFromListAndServer({
-      url: `https://restPractice.janaki23.repl.co/wishlist/${productId}`,
+      url: `https://dhrutham-cart-backend.herokuapp.com/wishlist/${productId}`,
       itemId: wishListId,
       dispatchType: "REMOVE_FROM_WISHLIST",
       list:"wishlist",
       toastMessage: "removed from wishlist"
     });
     addToListAndServer({
-      url: "https://restPractice.janaki23.repl.co/cart",
+      url: "https://dhrutham-cart-backend.herokuapp.com/wishlist",
       list: "cartItem",
       postItem: {
         "product":{"_id":productId},

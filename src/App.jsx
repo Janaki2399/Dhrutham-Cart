@@ -22,14 +22,14 @@ export default function App() {
 
   useEffect(() => {
     fetchAndAddToList({
-      url: "https://restPractice.janaki23.repl.co/cart/summary",
+      url: "https://dhrutham-cart-backend.herokuapp.com/cart/summary",
       dispatchType: "SET_CART_COUNT",
       list: "cartLength",
     });
   }, []);
   useEffect(() => {
     fetchAndAddToList({
-      url: "https://restPractice.janaki23.repl.co/wishlist/summary",
+      url: "https://dhrutham-cart-backend.herokuapp.com/wishlist/summary",
       dispatchType: "SET_WISHLIST_COUNT",
       list: "wishlistLength",
     });
@@ -42,7 +42,6 @@ export default function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/categories/:categoryId" element={<Products />} />
         <Route path="/" element={<Categories />}/>
-        {/* <Route path="/" element={<Products />}/> */}
         <PrivateRoute path={"/wishlist"} element={<WishList />} />
         <PrivateRoute path={"/cart"} element={<Cart />} />
         <Route path="/products/:productId" element={<ProductDetails />} />

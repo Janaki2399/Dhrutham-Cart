@@ -10,7 +10,7 @@ export function ProductItem({ productItem }) {
   const { addToListAndServer ,removeFromListAndServer} = useDataContext();
   function addToCart() {
     addToListAndServer({
-      url: "https://restPractice.janaki23.repl.co/cart",
+      url: "https://dhrutham-cart-backend.herokuapp.com/cart",
       list: "cartItem",
       postItem: {
         product: { _id: productItem._id },
@@ -23,7 +23,7 @@ export function ProductItem({ productItem }) {
 
   function addToWishlist() {
     addToListAndServer({
-      url: "https://restPractice.janaki23.repl.co/wishlist",
+      url: "https://dhrutham-cart-backend.herokuapp.com/wishlist",
       list: "wishlistItem",
       postItem: {
         product: { _id: productItem._id },
@@ -35,7 +35,7 @@ export function ProductItem({ productItem }) {
 
   function removeFromWishlist(){
     removeFromListAndServer({
-      url: `https://restPractice.janaki23.repl.co/wishlist/${productItem._id}`,
+      url: `https://dhrutham-cart-backend.herokuapp.com/categories/${productItem._id}`,
       itemId: productItem._id,
       dispatchType: "CHANGE_WISHLIST_STATE",
       list:"wishlist",
