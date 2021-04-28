@@ -4,15 +4,15 @@ export function CardItemContent({ item }) {
       <div className="card-title font-size-5">{item.name}</div>
       <div className="card-text font-size-5">
         Rs {item.price}{" "}
-        <span
-          className="font-size-6 primary-text"
+        {item.offer!==0 &&<span
+          className="font-size-6 text-color-primary"
           style={{ fontWeight: "550" }}
         >
-          {item.offer}
-        </span>
+          {item.offer}% off
+        </span>}
       </div>
       <div>
-        {item.fastDelivery
+        {item.isFastDelivery
           ? "Delivery : Fast Delivery"
           : "Delivery : 3 days minimum"}
       </div>

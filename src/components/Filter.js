@@ -7,13 +7,12 @@ export function Filter({filterMobile}) {
     <div className={!filterMobile?"sidebar full-height":"filterMobile"} >
       <div className="text-end">
         <button
-          className="btn btn-text"
-          style={{ color: "#1E40AF" }}
+          className="btn btn-text text-color-primary"
           onClick={() => {
             dispatch({ type: "CLEAR_FILTER" });
           }}
         >
-          CLEAR
+          CLEAR ALL
         </button>
       </div>
       <div className="flex-column">

@@ -7,12 +7,11 @@ export function Navbar() {
   const { isUserLoggedIn } = useAuth();
   return (
     <div class="nav-main fixed-nav">
-      <div class="font-size-3">Logo</div>
+      <Link to="/" className="anchor-link">
+      <div class="font-size-3 text-color-primary">Dhrutham</div>
+      </Link>
       <div className="nav-list">
-        <Link to="/" className="nav-item font-size-6">
-          <span>Products</span>
-        </Link>
-
+        
         <Link to="/login" className="anchor-link">
           Login
         </Link>

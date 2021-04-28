@@ -200,23 +200,23 @@ export function reducerFunction(state, action) {
       return state;
   }
 }
-function checkIfItemExistsInList(list, productItem) {
-  return list.find((item) => item.id === productItem.id) !== undefined;
-}
-function updateProductListWithWishListState(wishList, productList) {
-  return productList.map((productItem) => {
-    if (checkIfItemExistsInList(wishList, productItem)) {
-      return { ...productItem, isWishListed: true };
-    }
-    return { ...productItem, isWishListed: false };
-  });
-}
+// function checkIfItemExistsInList(list, productItem) {
+//   return list.find((item) => item.id === productItem.id) !== undefined;
+// }
+// function updateProductListWithWishListState(wishList, productList) {
+//   return productList.map((productItem) => {
+//     if (checkIfItemExistsInList(wishList, productItem)) {
+//       return { ...productItem, isWishListed: true };
+//     }
+//     return { ...productItem, isWishListed: false };
+//   });
+// }
 
-function updateProductListWithCartState(cartList, productList) {
-  return productList.map((productItem) => {
-    if (checkIfItemExistsInList(cartList, productItem)) {
-      return { ...productItem, isAddedToCart: true };
-    }
-    return { ...productItem, isAddedToCart: false };
-  });
-}
+// function updateProductListWithCartState(cartList, productList) {
+//   return productList.map((productItem) => {
+//     if (checkIfItemExistsInList(cartList, productItem)) {
+//       return { ...productItem, isAddedToCart: true };
+//     }
+//     return { ...productItem, isAddedToCart: false };
+//   });
+// }

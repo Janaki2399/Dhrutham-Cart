@@ -6,7 +6,7 @@ export function RemoveButton({ cartItemId }) {
   return (
     <div>
       <button
-        class="btn btn-text font-size-6 text-gray 
+        className="btn btn-text font-size-6 text-gray 
                          margin-right"
         onClick={() => {
           removeFromListAndServer({

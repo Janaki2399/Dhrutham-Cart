@@ -2,8 +2,10 @@ import { useDataContext } from "../contexts/data-context";
 import { ProductItem } from "../components/Products/ProductItem";
 import { Filter } from "../components/Filter";
 import {useState,useEffect} from "react";
+import {useParams} from "react-router" ;
 import {Link} from "react-router-dom";
 export function Products() {
+  const { categoryId } = useParams();
   const {
     state: {
       productList,
@@ -14,18 +16,12 @@ export function Products() {
 
   useEffect(() => {
     fetchAndAddToList({
-      url: "https://restPractice.janaki23.repl.co/products",
+      url: `https://restPractice.janaki23.repl.co/categories/${categoryId}`,
       dispatchType: "ADD_TO_PRODUCTS",
       list: "products"
     });
   }, []);
   const [filterMobile,setFilterMobile]=useState(false);
-
-  useEffect(()=>{
-    if(window.innerWidth>=600){
-      setFilterMobile(false);
-    }
-  })
 
   function getSortedData(productList, sortBy) {
     if (sortBy === "PRICE_HIGH_TO_LOW") {
@@ -38,8 +34,8 @@ export function Products() {
   function getFilteredData(productList, filterType) {
     return productList
       .filter(({ inStock }) => (filterType.includeOutOfStock ? true : inStock))
-      .filter(({ fastDelivery }) =>
-        filterType.fastDelivery ? fastDelivery : true
+      .filter(({ isFastDelivery }) =>
+        filterType.fastDelivery ? isFastDelivery : true
       );
   }
 
