@@ -11,7 +11,7 @@ export function QuantityButtons({ cartItemId,quantity }) {
           disabled={quantity <= 1}
           onClick={() => {
             updateListAndServer({
-              url: `https://dhrutham-cart-backend.herokuapp.com/cart${cartItemId}`,
+              url: `https://dhrutham-cart-backend.herokuapp.com/cart/${cartItemId}`,
               postObject: {
                 quantity: quantity - 1,
               },

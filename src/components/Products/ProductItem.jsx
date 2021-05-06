@@ -35,7 +35,7 @@ export function ProductItem({ productItem }) {
 
   function removeFromWishlist(){
     removeFromListAndServer({
-      url: `https://dhrutham-cart-backend.herokuapp.com/categories/${productItem._id}`,
+      url: `https://dhrutham-cart-backend.herokuapp.com/wishlist/${productItem._id}`,
       itemId: productItem._id,
       dispatchType: "CHANGE_WISHLIST_STATE",
       list:"wishlist",

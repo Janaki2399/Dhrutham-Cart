@@ -13,15 +13,15 @@ export function Navbar() {
   }
 
   return (
-    <div class="nav-main fixed-nav">
+    <div class="nav fixed-nav">
       <Link to="/" className="anchor-link">
       <div class="font-size-3 text-color-primary">Dhrutham</div>
       </Link>
       <div className="nav-list">
         
-        {!isUserLoggedIn ?<Link to="/login" className="anchor-link">
+        {!isUserLoggedIn ?<Link to="/login" className=" nav-item anchor-link">
           Login
-        </Link>: <div className="cursor-pointer" onClick={logout}>Logout</div> }
+        </Link>: <div className="nav-item cursor-pointer" onClick={logout}>Logout</div> }
 
         <Link to="/wishlist" className="nav-item font-size-6">
           <div class="icon-btn-with-padding">
