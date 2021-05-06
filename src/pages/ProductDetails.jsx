@@ -10,12 +10,6 @@ export function ProductDetails() {
   const {dispatch}=useDataContext();
   const [product, setProductItem] = useState({});
 
-  // function findSelectedProduct(productId,productData){
-  //     return productData.find((item)=>item.id===productId)
-  // }
-
-  // const product=findSelectedProduct(productId,state.productList);
-
   useEffect(() => {
     (async function () {
       const { data } = await axios.get(

@@ -1,10 +1,17 @@
 import { useDataContext } from "../contexts/data-context";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/auth-context";
 
 export function Navbar() {
   const { state, dispatch } = useDataContext();
-  const { isUserLoggedIn } = useAuth();
+  const { isUserLoggedIn,setUserLogIn } = useAuth();
+  const navigate=useNavigate();
+
+  const logout =()=>{
+    setUserLogIn(false);
+    navigate("/");
+  }
+
   return (
     <div class="nav-main fixed-nav">
       <Link to="/" className="anchor-link">
@@ -12,9 +19,9 @@ export function Navbar() {
       </Link>
       <div className="nav-list">
         
-        <Link to="/login" className="anchor-link">
+        {!isUserLoggedIn ?<Link to="/login" className="anchor-link">
           Login
-        </Link>
+        </Link>: <div className="cursor-pointer" onClick={logout}>Logout</div> }
 
         <Link to="/wishlist" className="nav-item font-size-6">
           <div class="icon-btn-with-padding">
