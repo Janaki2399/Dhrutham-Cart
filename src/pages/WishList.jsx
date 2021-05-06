@@ -1,8 +1,8 @@
 import { useDataContext } from "../contexts/data-context";
 import { WishListItem } from "../components/Wishlist/WishListItem";
 import {useEffect,useState} from "react";
-import axios from "axios";
-export function WishList() {
+
+export const WishList = () => {
   const { state,fetchAndAddToList } = useDataContext();
   useEffect(() => {
       fetchAndAddToList({

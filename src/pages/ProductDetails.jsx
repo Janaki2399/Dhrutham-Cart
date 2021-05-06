@@ -5,9 +5,9 @@ import { AddToCartButton } from "../components/Products/AddToCartButton";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-export function ProductDetails() {
+export const ProductDetails = () => {
   const { productId } = useParams();
-  const {dispatch}=useDataContext();
+  const { dispatch } = useDataContext();
   const [product, setProductItem] = useState({});
 
   useEffect(() => {
@@ -19,41 +19,44 @@ export function ProductDetails() {
     })();
   }, []);
 
-  async function addToCart() {
-    const {
-      status,
-    } = await axios.post("https://restPractice.janaki23.repl.co/cart", {
-      product: { _id: productId },
-      quantity: 1,
-    });
+  const addToCart = async () => {
+    const { status } = await axios.post(
+      "https://restPractice.janaki23.repl.co/cart",
+      {
+        product: { _id: productId },
+        quantity: 1,
+      }
+    );
     if (status === 200) {
       setProductItem((product) => ({ ...product, isAddedToCart: true }));
-      dispatch({type:"INCREMENT_CART_COUNT"})
+      dispatch({ type: "INCREMENT_CART_COUNT" });
     }
-  }
-  async function addToWishlist() {
-    const {
-      status,
-    } = await axios.post("https://restPractice.janaki23.repl.co/wishlist", {
-      product: { _id: productId },
-    });
+  };
+  const addToWishlist = async () => {
+    const { status } = await axios.post(
+      "https://restPractice.janaki23.repl.co/wishlist",
+      {
+        product: { _id: productId },
+      }
+    );
     if (status === 200) {
       setProductItem((product) => ({ ...product, isWishListed: true }));
-      dispatch({type:"INCREMENT_WISHLIST_COUNT"})
+      dispatch({ type: "INCREMENT_WISHLIST_COUNT" });
     }
-  }
-   
-  async function removeFromWishlist(){
-    const {
-      status,
-    } = await axios.delete(`https://restPractice.janaki23.repl.co/wishlist/${productId}`, {
-      product: { _id: productId },
-    });
+  };
+
+  const removeFromWishlist = async () => {
+    const { status } = await axios.delete(
+      `https://restPractice.janaki23.repl.co/wishlist/${productId}`,
+      {
+        product: { _id: productId },
+      }
+    );
     if (status === 200) {
       setProductItem((product) => ({ ...product, isWishListed: false }));
-      dispatch({type:"DECREMENT_WISHLIST_COUNT"})
+      dispatch({ type: "DECREMENT_WISHLIST_COUNT" });
     }
-  }
+  };
   return (
     <div className="center-align-ver-hor flex-column center-page-ver-hor">
       <div
@@ -62,8 +65,16 @@ export function ProductDetails() {
       >
         <div className="relative-position">
           <img class="card-img" src={product.image} alt="card-img" />
-          <WishListButton isWishListed={product.isWishListed}  addToWishlist={addToWishlist} removeFromWishlist={removeFromWishlist}/>
-          <AddToCartButton isAddedToCart={product.isAddedToCart} inStock={product.inStock} addToCart={addToCart} />
+          <WishListButton
+            isWishListed={product.isWishListed}
+            addToWishlist={addToWishlist}
+            removeFromWishlist={removeFromWishlist}
+          />
+          <AddToCartButton
+            isAddedToCart={product.isAddedToCart}
+            inStock={product.inStock}
+            addToCart={addToCart}
+          />
         </div>
         <div
           class="card-content-padding text-start card-vertical"
@@ -77,4 +88,4 @@ export function ProductDetails() {
       </div>
     </div>
   );
-}
+};

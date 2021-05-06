@@ -3,8 +3,8 @@ import { ProductItem } from "../components/Products/ProductItem";
 import { Filter } from "../components/Filter";
 import {useState,useEffect} from "react";
 import {useParams} from "react-router" ;
-import {Link} from "react-router-dom";
-export function Products() {
+
+export const Products = () => {
   const { categoryId } = useParams();
   const {
     state: {

@@ -3,11 +3,11 @@ import { createContext, useContext, useState } from "react";
 const LoaderToastContext = createContext();
 
 export function LoaderToastProvider({ children }) {
-  const [toast, setToast] = useState(null);
+  const [toast, setToast] = useState("");
 
-  function hideToast() {
+  const hideToast = () => {
     const timerId = setTimeout(() => {
-      setToast(null);
+      setToast("");
       clearInterval(timerId);
     }, 2000);
   }
@@ -28,6 +28,6 @@ export function LoaderToastProvider({ children }) {
   );
 }
 
-export function useLoaderToast() {
+export const useLoaderToast = () => {
   return useContext(LoaderToastContext);
 }

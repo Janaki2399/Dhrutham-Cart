@@ -2,7 +2,7 @@ import { useDataContext } from "../contexts/data-context";
 import { CartItem } from "../components/Cart/CartItem";
 import {useEffect} from "react";
 
-export function Cart() {
+export const Cart = () => {
   const { state,fetchAndAddToList } = useDataContext();
   useEffect(() => {
     fetchAndAddToList({

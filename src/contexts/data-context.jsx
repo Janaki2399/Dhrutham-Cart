@@ -4,7 +4,7 @@ import axios from "axios";
 import { useLoaderToast } from "./loader-toast-context";
 export const DataContext = createContext();
 
-export function DataProvider({ children }) {
+export const DataProvider = ({ children }) => {
   const { showToast, hideToast } = useLoaderToast();
   const [state, dispatch] = useReducer(reducerFunction, {
     productList: [],
@@ -19,7 +19,7 @@ export function DataProvider({ children }) {
     },
   });
 
-  async function fetchAndAddToList({ url, dispatchType, list }) {
+  const fetchAndAddToList = async ({ url, dispatchType, list }) => {
     try {
       const { data, status } = await axios.get(url);
 
@@ -29,14 +29,14 @@ export function DataProvider({ children }) {
     } catch (error) {
       alert(error);
     }
-  }
-  async function removeFromListAndServer({
+  };
+  const removeFromListAndServer = async ({
     url,
     itemId,
     dispatchType,
     list,
     toastMessage,
-  }) {
+  }) => {
     try {
       const { status } = await axios.delete(url);
       if (status === 200) {
@@ -55,13 +55,13 @@ export function DataProvider({ children }) {
     }
   }
 
-  async function addToListAndServer({
+   const addToListAndServer = async ({
     url,
     list,
     postItem,
     dispatchType,
     toastItem,
-  }) {
+  }) => {
     try {
       showToast(`Adding to ${toastItem}`);
       const { data, status } = await axios.post(`${url}`, postItem);
@@ -84,12 +84,12 @@ export function DataProvider({ children }) {
     }
   }
 
-  async function updateListAndServer({
+  const updateListAndServer = async ({
     url,
     postObject,
     dispatchType,
     itemId,
-  }) {
+  }) => {
     try {
       const { status } = await axios.post(url, postObject);
       if (status === 200) {
@@ -116,8 +116,8 @@ export function DataProvider({ children }) {
       {children}
     </DataContext.Provider>
   );
-}
+};
 
-export function useDataContext() {
+export const useDataContext = () => {
   return useContext(DataContext);
 }

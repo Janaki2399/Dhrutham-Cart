@@ -9,11 +9,9 @@ import { ProductDetails } from "./pages/ProductDetails";
 import { WishList } from "./pages/WishList";
 import { Cart } from "./pages/Cart";
 import { Toast } from "./components/Toast";
-import { Filter } from "./components/Filter";
 import { Navbar } from "./components/Navbar";
 import { useLoaderToast } from "./contexts/loader-toast-context";
 import { Login } from "./pages/Login";
-import { useAuth } from "./contexts/auth-context";
 
 export default function App() {
   const { fetchAndAddToList, state } = useDataContext();
@@ -41,13 +39,13 @@ export default function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/categories/:categoryId" element={<Products />} />
-        <Route path="/" element={<Categories />}/>
+        <Route path="/" element={<Categories />} />
         <PrivateRoute path={"/wishlist"} element={<WishList />} />
         <PrivateRoute path={"/cart"} element={<Cart />} />
         <Route path="/products/:productId" element={<ProductDetails />} />
       </Routes>
 
-      {toast && <Toast message={toast} />}
+      {toast !== "" && <Toast message={toast} />}
     </div>
   );
 }
