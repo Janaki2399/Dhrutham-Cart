@@ -1,24 +1,13 @@
-import { useDataContext } from "../../contexts/data-context";
-
-export function QuantityButtons({ cartItemId,quantity }) {
-  const { updateListAndServer } = useDataContext();
-
+import { useCart } from "../../hooks/useCart";
+export function QuantityButtons({ cartItemId, quantity }) {
+  const { increaseQuantity, decreaseQuantity } = useCart();
   return (
     <div>
       <div class="flex-horizontal margin-top">
         <button
           class="icon-btn gray-border"
           disabled={quantity <= 1}
-          onClick={() => {
-            updateListAndServer({
-              url: `https://dhrutham-cart-backend.herokuapp.com/cart/${cartItemId}`,
-              postObject: {
-                quantity: quantity - 1,
-              },
-              dispatchType: "DECREASE_CART_ITEM_QUANTITY",
-              itemId: cartItemId,
-            });
-          }}
+          onClick={() => decreaseQuantity(cartItemId, quantity)}
         >
           <span
             class={
@@ -35,16 +24,7 @@ export function QuantityButtons({ cartItemId,quantity }) {
 
         <button
           class="icon-btn gray-border"
-          onClick={() => {
-            updateListAndServer({
-              url: `https://dhrutham-cart-backend.herokuapp.com/cart/${cartItemId}`,
-              postObject: {
-                quantity: quantity + 1,
-              },
-              dispatchType: "INCREASE_CART_ITEM_QUANTITY",
-              itemId: cartItemId,
-            });
-          }}
+          onClick={() => increaseQuantity(cartItemId, quantity)}
         >
           <span
             class="material-icons-outlined 

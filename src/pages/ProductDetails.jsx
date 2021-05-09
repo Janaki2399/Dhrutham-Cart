@@ -1,62 +1,23 @@
 import { useParams } from "react-router";
-import { useDataContext } from "../contexts/data-context";
 import { WishListButton } from "../components/Products/WishListButton";
 import { AddToCartButton } from "../components/Products/AddToCartButton";
 import { useState, useEffect } from "react";
-import axios from "axios";
+import { useProductDetails } from "../hooks/useProductDetails";
 
-export const ProductDetails = () => {
+export function ProductDetails() {
   const { productId } = useParams();
-  const { dispatch } = useDataContext();
-  const [product, setProductItem] = useState({});
+  const {
+    getProduct,
+    addToCart,
+    addToWishlist,
+    removeFromWishlist,
+    product,
+  } = useProductDetails();
 
   useEffect(() => {
-    (async function () {
-      const { data } = await axios.get(
-        `https://dhrutham-cart-backend.herokuapp.com/products/${productId}`
-      );
-      setProductItem(data.product);
-    })();
+    getProduct(productId);
   }, []);
 
-  const addToCart = async () => {
-    const { status } = await axios.post(
-      "https://restPractice.janaki23.repl.co/cart",
-      {
-        product: { _id: productId },
-        quantity: 1,
-      }
-    );
-    if (status === 200) {
-      setProductItem((product) => ({ ...product, isAddedToCart: true }));
-      dispatch({ type: "INCREMENT_CART_COUNT" });
-    }
-  };
-  const addToWishlist = async () => {
-    const { status } = await axios.post(
-      "https://restPractice.janaki23.repl.co/wishlist",
-      {
-        product: { _id: productId },
-      }
-    );
-    if (status === 200) {
-      setProductItem((product) => ({ ...product, isWishListed: true }));
-      dispatch({ type: "INCREMENT_WISHLIST_COUNT" });
-    }
-  };
-
-  const removeFromWishlist = async () => {
-    const { status } = await axios.delete(
-      `https://restPractice.janaki23.repl.co/wishlist/${productId}`,
-      {
-        product: { _id: productId },
-      }
-    );
-    if (status === 200) {
-      setProductItem((product) => ({ ...product, isWishListed: false }));
-      dispatch({ type: "DECREMENT_WISHLIST_COUNT" });
-    }
-  };
   return (
     <div className="center-align-ver-hor flex-column center-page-ver-hor">
       <div
@@ -67,12 +28,14 @@ export const ProductDetails = () => {
           <img class="card-img" src={product.image} alt="card-img" />
           <WishListButton
             isWishListed={product.isWishListed}
+            productId={productId}
             addToWishlist={addToWishlist}
             removeFromWishlist={removeFromWishlist}
           />
           <AddToCartButton
             isAddedToCart={product.isAddedToCart}
             inStock={product.inStock}
+            productId={productId}
             addToCart={addToCart}
           />
         </div>

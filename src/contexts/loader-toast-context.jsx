@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 const LoaderToastContext = createContext();
 
-export function LoaderToastProvider({ children }) {
+export const LoaderToastProvider = ({ children }) => {
   const [toast, setToast] = useState("");
 
   const hideToast = () => {

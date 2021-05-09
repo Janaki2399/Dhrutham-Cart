@@ -2,46 +2,12 @@ import { CardItemContent } from "../CardItemContent";
 import { WishListButton } from "./WishListButton";
 import { AddToCartButton } from "./AddToCartButton";
 import { ProductImage } from "./ProductImage";
-import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
-import { useDataContext } from "../../contexts/data-context";
+import { useProduct } from "../../hooks/useProduct";
+
 export function ProductItem({ productItem }) {
-  const navigate = useNavigate();
-  const { addToListAndServer ,removeFromListAndServer} = useDataContext();
-  function addToCart() {
-    addToListAndServer({
-      url: "https://dhrutham-cart-backend.herokuapp.com/cart",
-      list: "cartItem",
-      postItem: {
-        product: { _id: productItem._id },
-        quantity: 1,
-      },
-      dispatchType: "CHANGE_CART_STATE",
-       toastItem: "cart",
-    });
-  }
+  const { addToWishlist, removeFromWishlist, addToCart } = useProduct();
 
-  function addToWishlist() {
-    addToListAndServer({
-      url: "https://dhrutham-cart-backend.herokuapp.com/wishlist",
-      list: "wishlistItem",
-      postItem: {
-        product: { _id: productItem._id },
-      },
-      dispatchType: "CHANGE_WISHLIST_STATE",
-      toastItem: "wishlist",
-    });
-  }
-
-  function removeFromWishlist(){
-    removeFromListAndServer({
-      url: `https://dhrutham-cart-backend.herokuapp.com/wishlist/${productItem._id}`,
-      itemId: productItem._id,
-      dispatchType: "CHANGE_WISHLIST_STATE",
-      list:"wishlist",
-      toastMessage: "removed from wishlist"
-      });
-  }
   return (
     <div className="card card-shadow card-vertical ">
       <Link to={`/products/${productItem._id}`} className="anchor-link">
@@ -56,11 +22,13 @@ export function ProductItem({ productItem }) {
       <AddToCartButton
         isAddedToCart={productItem.isAddedToCart}
         inStock={productItem.inStock}
+        productId={productItem._id}
         addToCart={addToCart}
       />
       {productItem.inStock && (
         <WishListButton
           isWishListed={productItem.isWishListed}
+          productId={productItem._id}
           addToWishlist={addToWishlist}
           removeFromWishlist={removeFromWishlist}
         />

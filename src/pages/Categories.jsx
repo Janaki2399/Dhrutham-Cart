@@ -2,24 +2,23 @@ import { useEffect, useState } from "react";
 import { CategoryItem } from "../components/Categories/CategoryItem";
 import axios from "axios";
 
-export const Categories = () => {
-const [categories,setCategories]=useState([]);
-    useEffect(
-        ()=>{
-            (async function(){ 
-                try {
-                    const { data, status } = await axios.get(`https://dhrutham-cart-backend.herokuapp.com/categories`);
-              
-                    if (status === 200) {
-                     setCategories(data.categories);
-                    }
-                  } catch (error) {
-                    alert(error);
-                  }
-                }
-            )();
-        },[]
-    )
+export function Categories() {
+  const [categories, setCategories] = useState([]);
+  useEffect(() => {
+    (async function () {
+      try {
+        const { data, status } = await axios.get(
+          `https://dhrutham-cart-backend.herokuapp.com/categories`
+        );
+
+        if (status === 200) {
+          setCategories(data.categories);
+        }
+      } catch (error) {
+        alert(error);
+      }
+    })();
+  }, []);
 
   return (
     <div>
@@ -35,12 +34,10 @@ const [categories,setCategories]=useState([]);
         Curated collection for carnatic music
       </div>
       <div className="grid-col-3" style={{ margin: "3rem" }}>
-          {
-              categories.map(({_id,name,image})=>{
-                 return <CategoryItem key={_id} _id={_id} name={name} image={image}/>
-              })
-          }
-       </div> 
+        {categories.map(({ _id, name, image }) => {
+          return <CategoryItem key={_id} _id={_id} name={name} image={image} />;
+        })}
+      </div>
     </div>
   );
-};
+}

@@ -1,4 +1,4 @@
-import { useDataContext } from "../contexts/data-context";
+import { useDataContext } from "../../contexts/data-context";
 
 export function Filter({filterMobile}) {
   const { state, dispatch } = useDataContext();

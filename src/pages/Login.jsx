@@ -2,7 +2,7 @@ import { useAuth } from "../contexts/auth-context";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-export const Login = () => {
+export function Login() {
   const { validateLogin } = useAuth();
   const { state } = useLocation();
   const [email, setEmail] = useState();

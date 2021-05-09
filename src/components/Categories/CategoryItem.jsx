@@ -1,5 +1,5 @@
 import {Link} from "react-router-dom";
-export const CategoryItem=({_id,name,image})=>{
+export function CategoryItem({_id,name,image}){
     return (
         <Link to={`/categories/${_id}`} className="anchor-link">
             <div className="card card-vertical card-shadow ">

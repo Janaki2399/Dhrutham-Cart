@@ -14,25 +14,12 @@ export function reducerFunction(state, action) {
       }
 
     case "ADD_TO_PRODUCTS":
-      // const productListWithUpdatedWishListState = updateProductListWithWishListState(
-      //   state.wishList,
-      //   action.payload
-      // );
-
-      // const productListWithUpdatedCartState = updateProductListWithCartState(
-      //   state.cartList,
-      //   productListWithUpdatedWishListState
-      // );
       return { ...state, 
         productList: action.payload }
-      //   wishlistLength:action.payload.wishlistLength,
-      // cartLength:action.payload.cartLength};
-
+     
     case "ADD_TO_WISHLIST":
       return { ...state, wishList: action.payload}
-        // wishlistLength:action.payload.wishlistLength,
-        // cartLength:action.payload.cartLength };
-
+       
     case "REMOVE_FROM_WISHLIST":
       return {
         ...state,
@@ -82,12 +69,9 @@ export function reducerFunction(state, action) {
         )
       };
     
-
     case "ADD_TO_CART":
       return { ...state, cartList: action.payload}
-        // wishlistLength:action.payload.wishlistLength,
-        // cartLength:action.payload.cartLength };
-
+    
     case "REMOVE_FROM_CART":
       return {
         ...state,
@@ -200,23 +184,4 @@ export function reducerFunction(state, action) {
       return state;
   }
 }
-// function checkIfItemExistsInList(list, productItem) {
-//   return list.find((item) => item.id === productItem.id) !== undefined;
-// }
-// function updateProductListWithWishListState(wishList, productList) {
-//   return productList.map((productItem) => {
-//     if (checkIfItemExistsInList(wishList, productItem)) {
-//       return { ...productItem, isWishListed: true };
-//     }
-//     return { ...productItem, isWishListed: false };
-//   });
-// }
 
-// function updateProductListWithCartState(cartList, productList) {
-//   return productList.map((productItem) => {
-//     if (checkIfItemExistsInList(cartList, productItem)) {
-//       return { ...productItem, isAddedToCart: true };
-//     }
-//     return { ...productItem, isAddedToCart: false };
-//   });
-// }

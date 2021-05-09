@@ -1,33 +1,12 @@
-import { useDataContext } from "../../contexts/data-context";
+import { useCart } from "../../hooks/useCart";
 
-export function AddToWishListButton({ cartItemId,productId }) {
-  const { removeFromListAndServer, addToListAndServer } = useDataContext();
-
-  function RemoveAndAddItemToListAndServer() {
-    removeFromListAndServer({
-      url: `https://dhrutham-cart-backend.herokuapp.com/cart/${cartItemId}`,
-      itemId: cartItemId,
-      dispatchType: "REMOVE_FROM_CART",
-      list:"cart",
-      toastMessage: "removed from cart"
-    });
- 
-    addToListAndServer({
-      url: "https://dhrutham-cart-backend.herokuapp.com/wishlist",
-      list: "wishlistItem",
-      postItem: {
-        "product":{"_id":productId}
-      },
-      dispatchType: "",
-      toastItem: "wishlist"
-    })
-  }
-
+export function AddToWishListButton({ cartItemId, productId }) {
+  const { removeAndAddItemToListAndServer } = useCart();
   return (
     <button
       className="btn btn-text font-size-6 
                      text-gray"
-      onClick={RemoveAndAddItemToListAndServer}
+      onClick={() => removeAndAddItemToListAndServer(cartItemId, productId)}
     >
       ADD TO WISHLIST
     </button>
