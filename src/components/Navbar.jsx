@@ -28,9 +28,9 @@ export function Navbar() {
             <span class=" material-icons-outlined icon-color-gray ">
               favorite_border
             </span>
-            {isUserLoggedIn && state.wishlistLength > 0 && (
+            {isUserLoggedIn && state.wishList.length > 0 && (
               <div class="badge badge-circle badge-anchorTopRight bg-primary">
-                {state.wishlistLength}
+                {state.wishList.length}
               </div>
             )}
           </div>
@@ -42,9 +42,9 @@ export function Navbar() {
             <span class=" material-icons-outlined icon-color-gray ">
               shopping_cart
             </span>
-            {isUserLoggedIn && state.cartLength > 0 && (
+            {isUserLoggedIn && state.cartList.length > 0 && (
               <div class="badge badge-circle badge-anchorTopRight bg-primary">
-                {state.cartLength}
+                {state.cartList.length}
               </div>
             )}
           </div>

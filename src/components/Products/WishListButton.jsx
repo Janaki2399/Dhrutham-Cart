@@ -1,6 +1,7 @@
 import { useAuth } from "../../contexts/auth-context";
 import { Navigate, useNavigate } from "react-router";
 import { useProduct } from "../../hooks/useProduct";
+import { useDataContext } from "../../contexts/data-context";
 
 export function WishListButton({
   isWishListed,
@@ -10,14 +11,18 @@ export function WishListButton({
 }) {
   const { isUserLoggedIn } = useAuth();
   const navigate = useNavigate();
+  const {state,dispatch}=useDataContext();
 
+  const isItemInWishlist=()=>{
+    return state.wishList.find((item)=>item.product._id===productId)!==undefined;
+  }
   return (
     <div className="card-icon-topRight">
       <button
-        class="icon-btn"
+        className="icon-btn"
         onClick={() => {
           if (isUserLoggedIn) {
-            !isWishListed
+            !isItemInWishlist()
               ? addToWishlist(productId)
               : removeFromWishlist(productId);
           } else {
@@ -27,7 +32,7 @@ export function WishListButton({
       >
         <span
           className={
-            isWishListed
+            isItemInWishlist()
               ? "material-icons-outlined icon-color-primary icon-size-36"
               : "material-icons-outlined icon-color-gray icon-size-36"
           }

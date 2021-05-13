@@ -20,7 +20,7 @@ export function CartItem({ cartItemId, product, quantity }) {
           <QuantityButtons cartItemId={cartItemId} quantity={quantity} />
         </div>
         <div className="flex-horizontal">
-          <RemoveButton cartItemId={cartItemId} productId={product._id} />
+          <RemoveButton productId={product._id} />
           <AddToWishListButton
             cartItemId={cartItemId}
             productId={product._id}

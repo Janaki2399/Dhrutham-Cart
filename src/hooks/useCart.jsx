@@ -6,10 +6,10 @@ export function useCart() {
     updateListAndServer,
   } = useDataContext();
 
-  const removeFromCart = (cartItemId) => {
+  const removeFromCart = (productId) => {
     removeFromListAndServer({
-      url: `https://dhrutham-cart-backend.herokuapp.com/cart/${cartItemId}`,
-      itemId: cartItemId,
+      url: `https://dhrutham-cart-backend.herokuapp.com/cart/${productId}`,
+      itemId: productId,
       dispatchType: "REMOVE_FROM_CART",
       list: "cart",
       toastMessage: "removed from cart",
@@ -22,13 +22,13 @@ export function useCart() {
       postItem: {
         product: { _id: productId },
       },
-      dispatchType: "",
+      dispatchType: "APPEND_ITEM_TO_WISHLIST",
       toastItem: "wishlist",
     });
   }
 
   const removeAndAddItemToListAndServer = (cartItemId, productId) => {
-    removeFromCart(cartItemId);
+    removeFromCart(productId);
     addToWishlist(productId);
   }
 

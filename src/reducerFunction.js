@@ -24,17 +24,15 @@ export function reducerFunction(state, action) {
       return {
         ...state,
         wishList: state.wishList.filter(
-          (item) => item._id !== action.payload
+          (item) => item.product._id !== action.payload
         ),
       };
 
     case "APPEND_ITEM_TO_WISHLIST":
       return {
         ...state,
-        wishList: state.wishList.concat(action.payload),
-        productList: state.productList.map((item) =>
-          item.id === action.payload.id ? { ...item, isWishListed: true } : item
-        )
+        wishList: state.wishList.concat(action.payload)
+        
       };
 
     case "CHANGE_WISHLIST_STATE":
@@ -76,7 +74,7 @@ export function reducerFunction(state, action) {
       return {
         ...state,
         cartList: state.cartList.filter(
-          (item) => item._id !== action.payload
+          (item) => item.product._id !== action.payload
         ),
       };
 
@@ -103,12 +101,7 @@ export function reducerFunction(state, action) {
     case "APPEND_ITEM_TO_CART":
       return {
         ...state,
-        cartList: state.cartList.concat(action.payload),
-        productList: state.productList.map((item) =>
-          item.id === action.payload.id
-            ? { ...item, isAddedToCart: true }
-            : item
-        )
+        cartList: state.cartList.concat(action.payload)
       };
 
     case "UPDATE_CART_STATE_OF_PRODUCT_ITEM":

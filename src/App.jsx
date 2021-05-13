@@ -18,21 +18,34 @@ export default function App() {
 
   const { toast } = useLoaderToast();
 
+  // useEffect(() => {
+  //   fetchAndAddToList({
+  //     url: "https://dhrutham-cart-backend.herokuapp.com/cart/summary",
+  //     dispatchType: "SET_CART_COUNT",
+  //     list: "cartLength",
+  //   });
+  // }, []);
+  // useEffect(() => {
+  //   fetchAndAddToList({
+  //     url: "https://dhrutham-cart-backend.herokuapp.com/wishlist/summary",
+  //     dispatchType: "SET_WISHLIST_COUNT",
+  //     list: "wishlistLength",
+  //   });
+  // }, []);
   useEffect(() => {
     fetchAndAddToList({
-      url: "https://dhrutham-cart-backend.herokuapp.com/cart/summary",
-      dispatchType: "SET_CART_COUNT",
-      list: "cartLength",
+      url: "https://dhrutham-cart-backend.herokuapp.com/wishlist",
+      dispatchType: "ADD_TO_WISHLIST",
+      list: "wishlist"
     });
   }, []);
   useEffect(() => {
     fetchAndAddToList({
-      url: "https://dhrutham-cart-backend.herokuapp.com/wishlist/summary",
-      dispatchType: "SET_WISHLIST_COUNT",
-      list: "wishlistLength",
+      url: "https://dhrutham-cart-backend.herokuapp.com/cart",
+      dispatchType: "ADD_TO_CART",
+      list: "cart",
     });
   }, []);
-
   return (
     <div className="App">
       <Navbar />

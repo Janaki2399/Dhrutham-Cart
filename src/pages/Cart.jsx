@@ -5,13 +5,13 @@ import { getTotalPrice } from "../util";
 
 export function Cart() {
   const { state, fetchAndAddToList } = useDataContext();
-  useEffect(() => {
-    fetchAndAddToList({
-      url: "https://dhrutham-cart-backend.herokuapp.com/cart",
-      dispatchType: "ADD_TO_CART",
-      list: "cart",
-    });
-  }, []);
+  // useEffect(() => {
+  //   fetchAndAddToList({
+  //     url: "https://dhrutham-cart-backend.herokuapp.com/cart",
+  //     dispatchType: "ADD_TO_CART",
+  //     list: "cart",
+  //   });
+  // }, []);
 
   return (
     <div>

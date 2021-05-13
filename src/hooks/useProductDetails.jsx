@@ -12,41 +12,40 @@ export function useProductDetails(){
       setProductItem(data.product);
   }
   const addToCart = async (productId) => {
-    const { status } = await axios.post(
-      "https://restPractice.janaki23.repl.co/cart",
+    const { data,status } = await axios.post(
+      "https://dhrutham-cart-backend.herokuapp.com/cart",
       {
         product: { _id: productId },
         quantity: 1,
       }
     );
     if (status === 200) {
-      setProductItem((product) => ({ ...product, isAddedToCart: true }));
-      dispatch({ type: "INCREMENT_CART_COUNT" });
+      // setProductItem((product) => ({ ...product, isAddedToCart: true }));
+      dispatch({type: "APPEND_ITEM_TO_CART",payload:data.cartItem  });
     }
   };
   const addToWishlist = async (productId) => {
-    const { status } = await axios.post(
-      "https://restPractice.janaki23.repl.co/wishlist",
+    const {data, status } = await axios.post(
+      "https://dhrutham-cart-backend.herokuapp.com/wishlist",
       {
         product: { _id: productId },
       }
     );
     if (status === 200) {
-      setProductItem((product) => ({ ...product, isWishListed: true }));
-      dispatch({ type: "INCREMENT_WISHLIST_COUNT" });
+      dispatch({ type: "APPEND_ITEM_TO_WISHLIST",payload:data.wishlistItem });
     }
   };
 
  const removeFromWishlist = async (productId) => {
     const { status } = await axios.delete(
-      `https://restPractice.janaki23.repl.co/wishlist/${productId}`,
+      `https://dhrutham-cart-backend.herokuapp.com/wishlist/${productId}`,
       {
         product: { _id: productId },
       }
     );
     if (status === 200) {
-      setProductItem((product) => ({ ...product, isWishListed: false }));
-      dispatch({ type: "DECREMENT_WISHLIST_COUNT" });
+      // setProductItem((product) => ({ ...product, isWishListed: false }));
+      dispatch({ type: "REMOVE_FROM_WISHLIST",payload:productId });
     }
   };
 

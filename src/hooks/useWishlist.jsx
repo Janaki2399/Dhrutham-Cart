@@ -9,7 +9,7 @@ export function useWishlist() {
   const removeFromWishlist = (wishListId, productId) => {
     removeFromListAndServer({
       url: `https://dhrutham-cart-backend.herokuapp.com/wishlist/${productId}`,
-      itemId: wishListId,
+      itemId: productId,
       dispatchType: "REMOVE_FROM_WISHLIST",
       list: "wishlist",
       toastMessage: "removed from wishlist",
@@ -24,8 +24,7 @@ export function useWishlist() {
         product: { _id: productId },
         quantity: 1,
       },
-      dispatchType: "",
-      list: "cartItem",
+      dispatchType: "APPEND_ITEM_TO_CART",
       toastItem: "cart",
     });
   }

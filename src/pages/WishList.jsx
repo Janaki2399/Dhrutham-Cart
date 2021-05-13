@@ -4,13 +4,14 @@ import {useEffect,useState} from "react";
 
 export function WishList(){
   const { state,fetchAndAddToList } = useDataContext();
-  useEffect(() => {
-      fetchAndAddToList({
-        url: "https://dhrutham-cart-backend.herokuapp.com/wishlist",
-        dispatchType: "ADD_TO_WISHLIST",
-        list: "wishlist"
-      });
-    }, []);
+  console.log(state.wishList);
+  // useEffect(() => {
+  //     fetchAndAddToList({
+  //       url: "https://dhrutham-cart-backend.herokuapp.com/wishlist",
+  //       dispatchType: "ADD_TO_WISHLIST",
+  //       list: "wishlist"
+  //     });
+  //   }, []);
 
   return (
     <div className="grid-col-3" style={{ margin: "4rem" }}>

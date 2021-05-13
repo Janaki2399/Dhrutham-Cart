@@ -10,8 +10,6 @@ export const DataProvider = ({ children }) => {
     productList: [],
     wishList: [],
     cartList: [],
-    wishlistLength: 0, //To track changes in the badge
-    cartLength: 0,
     sortFilterStates: {
       includeOutOfStock: true,
       fastDelivery: false,
@@ -41,11 +39,6 @@ export const DataProvider = ({ children }) => {
       const { status } = await axios.delete(url);
       if (status === 200) {
         dispatch({ type: dispatchType, payload: itemId });
-        if (list === "wishlist") {
-          dispatch({ type: "DECREMENT_WISHLIST_COUNT" });
-        } else if (list === "cart") {
-          dispatch({ type: "DECREMENT_CART_COUNT" });
-        }
         showToast(toastMessage);
         hideToast();
       }
@@ -65,14 +58,9 @@ export const DataProvider = ({ children }) => {
     try {
       showToast(`Adding to ${toastItem}`);
       const { data, status } = await axios.post(`${url}`, postItem);
-
+      console.log(data);
       if (status === 200) {
-        dispatch({ type: dispatchType, payload: data[list].product });
-        if (list === "wishlistItem") {
-          dispatch({ type: "INCREMENT_WISHLIST_COUNT" });
-        } else if (list === "cartItem") {
-          dispatch({ type: "INCREMENT_CART_COUNT" });
-        }
+        dispatch({ type: dispatchType, payload: data[list] });
         showToast(`Added to ${toastItem}`);
         hideToast();
       }
@@ -81,6 +69,7 @@ export const DataProvider = ({ children }) => {
       if (error.response.status !== 409) {
         alert(error);
       }
+      // alert(error);
     }
   }
 

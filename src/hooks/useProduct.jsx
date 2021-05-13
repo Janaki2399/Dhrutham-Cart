@@ -9,7 +9,7 @@ export function useProduct() {
         product: { _id: productId },
         quantity: 1,
       },
-      dispatchType: "CHANGE_CART_STATE",
+      dispatchType: "APPEND_ITEM_TO_CART",
       toastItem: "cart",
     });
   };
@@ -21,7 +21,7 @@ export function useProduct() {
       postItem: {
         product: productId,
       },
-      dispatchType: "CHANGE_WISHLIST_STATE",
+      dispatchType: "APPEND_ITEM_TO_WISHLIST",
       toastItem: "wishlist",
     });
   };
@@ -30,7 +30,7 @@ export function useProduct() {
     removeFromListAndServer({
       url: `https://dhrutham-cart-backend.herokuapp.com/wishlist/${productId}`,
       itemId: productId,
-      dispatchType: "CHANGE_WISHLIST_STATE",
+      dispatchType: "REMOVE_FROM_WISHLIST",
       list: "wishlist",
       toastMessage: "removed from wishlist",
     });
