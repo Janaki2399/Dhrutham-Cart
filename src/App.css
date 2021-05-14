@@ -104,3 +104,24 @@
   left:50%;
   transform:translate(-50%,-50%);
 }
+
+.error-text{
+  color:#DC2626;
+}
+.error-border-color{
+ 
+  border: 1px solid #DC2626;
+}
+.text-input {
+    height: 25px;
+    width: 95%;
+    /* padding: 2px 5px; */
+   
+    border-radius: 3px;
+    font-size: 14px;
+    /* margin-top: 3px; */
+    /* margin-bottom: 1rem; */
+}
+.genric-border-color{
+  border: 1px solid var(--gray-color);
+}

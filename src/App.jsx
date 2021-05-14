@@ -12,6 +12,7 @@ import { Toast } from "./components/Toast";
 import { Navbar } from "./components/Navbar";
 import { useLoaderToast } from "./contexts/loader-toast-context";
 import { Login } from "./pages/Login";
+import {SignUp} from "./pages/SignUp";
 
 export default function App() {
   const { fetchAndAddToList, state } = useDataContext();
@@ -51,6 +52,7 @@ export default function App() {
       <Navbar />
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<SignUp />} />
         <Route path="/categories/:categoryId" element={<Products />} />
         <Route path="/" element={<Categories />} />
         <PrivateRoute path={"/wishlist"} element={<WishList />} />

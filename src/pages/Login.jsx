@@ -1,9 +1,10 @@
 import { useAuth } from "../contexts/auth-context";
-import { useLocation, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 
 export function Login() {
   const { validateLogin } = useAuth();
+  const navigate=useNavigate();
   const { state } = useLocation();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -36,15 +37,18 @@ export function Login() {
       </div>
       <div>
         <button
-          className="btn btn-primary-contained full-width"
+          className="btn btn-primary-contained full-width font-size-5"
           onClick={() => validateLogin(email, password, state)}
         >
-          Login
+          LOGIN
         </button>
       </div>
       <div className="margin-top text-center font-size-6">
         Don't have an account?
-        <span className="text-color-primary font-bold-1 cursor-pointer">
+        <span className="text-color-primary font-bold-1 cursor-pointer"
+        onClick={()=>navigate("/signup")}
+        
+        >
           Sign up
         </span>
       </div>
