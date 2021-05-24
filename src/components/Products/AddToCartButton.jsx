@@ -2,13 +2,18 @@ import { Link, useNavigate, Navigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../../contexts/auth-context";
 import { useDataContext } from "../../contexts/data-context";
 
-export function AddToCartButton({ isAddedToCart, inStock, productId ,addToCart}) {
+export function AddToCartButton({
+  isAddedToCart,
+  inStock,
+  productId,
+  addToCart,
+}) {
   const { isUserLoggedIn } = useAuth();
-  const {state,dispatch}=useDataContext();
+  const { state, dispatch } = useDataContext();
   const navigate = useNavigate();
-  const isItemInCart=()=>{
-    return state.cartList.find((item)=>item.product._id===productId)!==undefined;
-  }
+  const isItemInCart = () => {
+    return state.cartList.find((item) => item._id === productId) !== undefined;
+  };
   return (
     <div>
       <button

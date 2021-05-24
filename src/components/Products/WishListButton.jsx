@@ -11,11 +11,11 @@ export function WishListButton({
 }) {
   const { isUserLoggedIn } = useAuth();
   const navigate = useNavigate();
-  const {state,dispatch}=useDataContext();
+  const { state, dispatch } = useDataContext();
 
-  const isItemInWishlist=()=>{
-    return state.wishList.find((item)=>item.product._id===productId)!==undefined;
-  }
+  const isItemInWishlist = () => {
+    return state.wishList.find((item) => item._id === productId) !== undefined;
+  };
   return (
     <div className="card-icon-topRight">
       <button

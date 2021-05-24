@@ -1,25 +1,23 @@
 export function reducerFunction(state, action) {
   switch (action.type) {
-
     case "SET_CART_COUNT":
       return {
         ...state,
-        cartLength:action.payload
-      }
-    
+        cartLength: action.payload,
+      };
+
     case "SET_WISHLIST_COUNT":
       return {
         ...state,
-        wishlistLength:action.payload
-      }
+        wishlistLength: action.payload,
+      };
 
     case "ADD_TO_PRODUCTS":
-      return { ...state, 
-        productList: action.payload }
-     
+      return { ...state, productList: action.payload };
+
     case "ADD_TO_WISHLIST":
-      return { ...state, wishList: action.payload}
-       
+      return { ...state, wishList: action.payload };
+
     case "REMOVE_FROM_WISHLIST":
       return {
         ...state,
@@ -31,32 +29,32 @@ export function reducerFunction(state, action) {
     case "APPEND_ITEM_TO_WISHLIST":
       return {
         ...state,
-        wishList: state.wishList.concat(action.payload)
-        
+        wishList: state.wishList.concat(action.payload),
       };
 
     case "CHANGE_WISHLIST_STATE":
       return {
         ...state,
         productList: state.productList.map((item) =>
-        item._id === action.payload ? { ...item, isWishListed: !item.isWishListed } : item
-      ),
-      // wishlistLength:state.wishlistLength+1
-      }
+          item._id === action.payload
+            ? { ...item, isWishListed: !item.isWishListed }
+            : item
+        ),
+        // wishlistLength:state.wishlistLength+1
+      };
 
     case "INCREMENT_WISHLIST_COUNT":
       return {
         ...state,
-        wishlistLength:state.wishlistLength+1
-      }
-    
+        wishlistLength: state.wishlistLength + 1,
+      };
+
     case "DECREMENT_WISHLIST_COUNT":
       return {
         ...state,
-        wishlistLength:state.wishlistLength-1
-      }
-    
-  
+        wishlistLength: state.wishlistLength - 1,
+      };
+
     case "UPDATE_WISHLIST_STATE_OF_PRODUCT_ITEM":
       return {
         ...state,
@@ -64,12 +62,12 @@ export function reducerFunction(state, action) {
           item.id === action.payload.id
             ? { ...item, isWishListed: action.wishListState }
             : item
-        )
+        ),
       };
-    
+
     case "ADD_TO_CART":
-      return { ...state, cartList: action.payload}
-    
+      return { ...state, cartList: action.payload };
+
     case "REMOVE_FROM_CART":
       return {
         ...state,
@@ -85,7 +83,7 @@ export function reducerFunction(state, action) {
           item._id === action.payload
             ? { ...item, quantity: item.quantity + 1 }
             : item
-        )
+        ),
       };
 
     case "DECREASE_CART_ITEM_QUANTITY":
@@ -95,13 +93,13 @@ export function reducerFunction(state, action) {
           item._id === action.payload
             ? { ...item, quantity: item.quantity - 1 }
             : item
-        )
+        ),
       };
 
     case "APPEND_ITEM_TO_CART":
       return {
         ...state,
-        cartList: state.cartList.concat(action.payload)
+        cartList: state.cartList.concat(action.payload),
       };
 
     case "UPDATE_CART_STATE_OF_PRODUCT_ITEM":
@@ -111,34 +109,35 @@ export function reducerFunction(state, action) {
           item.id === action.payload.id
             ? { ...item, isAddedToCart: action.cartState }
             : item
-        )
+        ),
       };
-    
+
     case "CHANGE_CART_STATE":
       return {
         ...state,
         productList: state.productList.map((item) =>
-        item._id === action.payload ? { ...item, isAddedToCart: !item.isAddedToCart } : item,
-      ),
-      }
-    
+          item._id === action.payload
+            ? { ...item, isAddedToCart: !item.isAddedToCart }
+            : item
+        ),
+      };
+
     case "INCREMENT_CART_COUNT":
       return {
-      ...state,
-      cartLength:state.cartLength+1
-      }
-    
+        ...state,
+        cartLength: state.cartLength + 1,
+      };
+
     case "DECREMENT_CART_COUNT":
       return {
         ...state,
-        cartLength:state.cartLength-1
-      }
-
+        cartLength: state.cartLength - 1,
+      };
 
     case "SORT_BY":
       return {
         ...state,
-        sortFilterStates: { ...state.sortFilterStates, sortBy: action.payload }
+        sortFilterStates: { ...state.sortFilterStates, sortBy: action.payload },
       };
 
     case "INCLUDE_OUT_OF_STOCK":
@@ -146,16 +145,16 @@ export function reducerFunction(state, action) {
         ...state,
         sortFilterStates: {
           ...state.sortFilterStates,
-          includeOutOfStock: !state.sortFilterStates.includeOutOfStock
-        }
+          includeOutOfStock: !state.sortFilterStates.includeOutOfStock,
+        },
       };
     case "FAST_DELIVERY":
       return {
         ...state,
         sortFilterStates: {
           ...state.sortFilterStates,
-          fastDelivery: !state.sortFilterStates.fastDelivery
-        }
+          fastDelivery: !state.sortFilterStates.fastDelivery,
+        },
       };
 
     case "CLEAR_FILTER":
@@ -164,17 +163,28 @@ export function reducerFunction(state, action) {
         sortFilterStates: {
           includeOutOfStock: false,
           fastDelivery: false,
-          sortBy: null
-        }
+          sortBy: null,
+        },
       };
 
     case "SHOW_COMPONENT":
       return {
         ...state,
-        showComponent: action.payload
+        showComponent: action.payload,
+      };
+
+    case "RESET":
+      return {
+        productList: [],
+        wishList: [],
+        cartList: [],
+        sortFilterStates: {
+          includeOutOfStock: true,
+          fastDelivery: false,
+          sortBy: null,
+        },
       };
     default:
       return state;
   }
 }
-

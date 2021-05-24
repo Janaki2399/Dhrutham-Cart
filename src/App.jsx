@@ -12,11 +12,13 @@ import { Toast } from "./components/Toast";
 import { Navbar } from "./components/Navbar";
 import { useLoaderToast } from "./contexts/loader-toast-context";
 import { Login } from "./pages/Login";
-import {SignUp} from "./pages/SignUp";
+import { SignUp } from "./pages/SignUp";
+import { useAuth } from "./contexts/auth-context";
+import axios from "axios";
 
 export default function App() {
-  const { fetchAndAddToList, state } = useDataContext();
-
+  const { fetchAndAddToList, state, dispatch } = useDataContext();
+  const { token } = useAuth();
   const { toast } = useLoaderToast();
 
   // useEffect(() => {
@@ -34,19 +36,37 @@ export default function App() {
   //   });
   // }, []);
   useEffect(() => {
-    fetchAndAddToList({
-      url: "https://dhrutham-cart-backend.herokuapp.com/wishlist",
-      dispatchType: "ADD_TO_WISHLIST",
-      list: "wishlist"
-    });
-  }, []);
-  useEffect(() => {
-    fetchAndAddToList({
-      url: "https://dhrutham-cart-backend.herokuapp.com/cart",
-      dispatchType: "ADD_TO_CART",
-      list: "cart",
-    });
-  }, []);
+    if (token) {
+      (async function () {
+        try {
+          const { data, status } = await axios.get(
+            "https://dhrutham-cart-backend.herokuapp.com/wishlist",
+            {
+              headers: {
+                authorization: token,
+              },
+            }
+          );
+
+          if (status === 200) {
+            dispatch({
+              type: "ADD_TO_WISHLIST",
+              payload: data.wishlist.products,
+            });
+          }
+        } catch (error) {
+          alert(error);
+        }
+      })();
+    }
+  }, [token]);
+  // useEffect(() => {
+  //   fetchAndAddToList({
+  //     url: "https://dhrutham-cart-backend.herokuapp.com/cart",
+  //     dispatchType: "ADD_TO_CART",
+  //     list: "cart",
+  //   });
+  // }, [token]);
   return (
     <div className="App">
       <Navbar />

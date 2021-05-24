@@ -16,6 +16,39 @@ export const DataProvider = ({ children }) => {
       sortBy: null,
     },
   });
+  const getWishlist = async () => {
+    try {
+      const { data, status } = await axios.get(
+        "https://dhrutham-cart-backend.herokuapp.com/wishlist"
+      );
+
+      if (status === 200) {
+        dispatch({ type: "ADD_TO_WISHLIST", payload: data.wishlist.products });
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  // const removeFromListAndServer = async ({
+  //   url,
+  //   itemId,
+  //   dispatchType,
+  //   list,
+  //   toastMessage,
+  // }) => {
+  //   try {
+  //     const { status } = await axios.delete(url);
+  //     if (status === 200) {
+  //       dispatch({ type: dispatchType, payload: itemId });
+  //       showToast(toastMessage);
+  //       hideToast();
+  //     }
+  //   } catch (error) {
+  //     alert(error);
+  //     hideToast();
+  //   }
+  // };
 
   const fetchAndAddToList = async ({ url, dispatchType, list }) => {
     try {
@@ -46,9 +79,9 @@ export const DataProvider = ({ children }) => {
       alert(error);
       hideToast();
     }
-  }
+  };
 
-   const addToListAndServer = async ({
+  const addToListAndServer = async ({
     url,
     list,
     postItem,
@@ -71,7 +104,7 @@ export const DataProvider = ({ children }) => {
       }
       // alert(error);
     }
-  }
+  };
 
   const updateListAndServer = async ({
     url,
@@ -90,7 +123,7 @@ export const DataProvider = ({ children }) => {
     } catch (error) {
       alert(error);
     }
-  }
+  };
   return (
     <DataContext.Provider
       value={{
@@ -109,4 +142,4 @@ export const DataProvider = ({ children }) => {
 
 export const useDataContext = () => {
   return useContext(DataContext);
-}
+};
