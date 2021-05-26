@@ -1,13 +1,14 @@
-import { useWishlist } from "../../hooks/useWishlist";
-export function CardDismiss({ productId ,wishListId}) {
+import { useWishlistContext } from "../../contexts/wishlist-context";
 
-  const {removeFromWishlist}=useWishlist();
+export function CardDismiss({ productId }) {
+  const { removeFromWishlist } = useWishlistContext();
+
   return (
     <div className="card-icon-topRight ">
       <button
         className="icon-btn cursor-pointer"
         onClick={() => {
-         removeFromWishlist(wishListId,productId)
+          removeFromWishlist(productId);
         }}
       >
         <span class="material-icons-outlined icon-color-gray">cancel</span>

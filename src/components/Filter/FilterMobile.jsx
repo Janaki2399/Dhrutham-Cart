@@ -1,7 +1,6 @@
 import { useDataContext } from "../../contexts/data-context";
 
-export function FilterMobile({ setFilterMobile }) {
-  const { dispatch } = useDataContext();
+export function FilterMobile({ setFilterMobile, sortFilterDispatch }) {
   return (
     <div
       className="close-apply-filter cursor-pointer"
@@ -12,7 +11,7 @@ export function FilterMobile({ setFilterMobile }) {
         style={{ width: "50%" }}
         onClick={() => {
           setFilterMobile((prev) => !prev);
-          dispatch({ type: "CLEAR_FILTER" });
+          sortFilterDispatch({ type: "CLEAR_FILTER" });
         }}
       >
         Close

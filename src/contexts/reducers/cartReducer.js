@@ -1,15 +1,17 @@
 export function cartReducer(state, action) {
   switch (action.type) {
     case "SET_CART":
-      return { cart: action.payload.cart };
+      return {
+        _id: action.payload._id,
+        list: action.payload.list,
+        userId: action.payload.userId,
+      };
     case "REMOVE_FROM_CART":
       return {
-        cart: {
-          ...state.cart,
-          list: state.cart.list?.filter(
-            (item) => item.product._id !== action.payload._id
-          ),
-        },
+        ...state,
+        list: state.list?.filter(
+          (item) => item.product._id !== action.payload._id
+        ),
       };
     case "UPDATE_CART_ITEM_QUANTITY":
       return {
@@ -22,7 +24,9 @@ export function cartReducer(state, action) {
       };
     case "RESET":
       return {
-        wishlist: {},
+        _id: "",
+        list: [],
+        userId: "",
       };
   }
 }

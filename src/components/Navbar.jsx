@@ -1,15 +1,19 @@
-import { useDataContext } from "../contexts/data-context";
+// import { useDataContext } from "../contexts/data-context";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../contexts/auth-context";
+import { useWishlistContext } from "../contexts/wishlist-context";
+import { useCartContext } from "../contexts/cart-context";
 
 export function Navbar() {
-  const { state, dispatch } = useDataContext();
-  const { isUserLoggedIn, setUserLogIn, token, setToken } = useAuth();
+  const { wishlistState, wishlistDispatch } = useWishlistContext();
+  const { cartState, cartDispatch } = useCartContext();
+  const { token, setToken } = useAuth();
   const navigate = useNavigate();
 
   const logout = () => {
     setToken(null);
-    dispatch({ type: "RESET" });
+    wishlistDispatch({ type: "RESET" });
+    cartDispatch({ type: "RESET" });
     navigate("/");
   };
 
@@ -34,9 +38,9 @@ export function Navbar() {
             <span class=" material-icons-outlined icon-color-gray ">
               favorite_border
             </span>
-            {token && state.wishList.products?.length > 0 && (
+            {token && wishlistState.list?.length > 0 && (
               <div class="badge badge-circle badge-anchorTopRight bg-primary">
-                {state.wishList.products?.length}
+                {wishlistState.list?.length}
               </div>
             )}
           </div>
@@ -48,9 +52,9 @@ export function Navbar() {
             <span class=" material-icons-outlined icon-color-gray ">
               shopping_cart
             </span>
-            {token && state.cartList.length > 0 && (
+            {token && cartState.list?.length > 0 && (
               <div class="badge badge-circle badge-anchorTopRight bg-primary">
-                {state.cartList.length}
+                {cartState.list?.length}
               </div>
             )}
           </div>

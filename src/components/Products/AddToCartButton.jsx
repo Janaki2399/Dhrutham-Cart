@@ -1,18 +1,17 @@
 import { Link, useNavigate, Navigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../../contexts/auth-context";
+import { useCartContext } from "../../contexts/cart-context";
 import { useDataContext } from "../../contexts/data-context";
 
-export function AddToCartButton({
-  isAddedToCart,
-  inStock,
-  productId,
-  addToCart,
-}) {
-  const { isUserLoggedIn } = useAuth();
-  const { state, dispatch } = useDataContext();
+export function AddToCartButton({ isAddedToCart, inStock, productId }) {
+  const { isUserLoggedIn, token } = useAuth();
+  const { cartState, cartDispatch, addToCart } = useCartContext();
   const navigate = useNavigate();
   const isItemInCart = () => {
-    return state.cartList.find((item) => item._id === productId) !== undefined;
+    return (
+      cartState.list?.find((item) => item.product._id === productId) !==
+      undefined
+    );
   };
   return (
     <div>
@@ -24,7 +23,7 @@ export function AddToCartButton({
             : " btn btn-primary-contained btn-disabled full-width"
         }
         onClick={() => {
-          if (isUserLoggedIn) {
+          if (token) {
             !isItemInCart() ? addToCart(productId) : navigate("/cart");
           } else {
             navigate("/login");

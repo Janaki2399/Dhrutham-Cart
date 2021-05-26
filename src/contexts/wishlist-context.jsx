@@ -1,18 +1,25 @@
 import { createContext, useContext, useReducer } from "react";
-import { reducerFunction } from "../reducerFunction";
+import { wishlistReducer } from "../contexts/reducers/wishlistReducer";
 import axios from "axios";
+import { useAuth } from "./auth-context";
+import { useLoaderToast } from "./loader-toast-context";
 export const WishlistContext = createContext();
 
 export const WishlistProvider = ({ children }) => {
   const { showToast, hideToast } = useLoaderToast();
   const { token } = useAuth();
   const [wishlistState, wishlistDispatch] = useReducer(wishlistReducer, {
-    wishlist: {},
+    _id: "",
+    list: [],
+    userId: "",
   });
 
-  const fetchFromWishlist = async (productId) => {
+  const fetchFromWishlist = async () => {
     try {
-      const { data, status } = await axios.get(
+      const {
+        data: { wishlist },
+        status,
+      } = await axios.get(
         "https://dhrutham-cart-backend.herokuapp.com/wishlist",
         {
           headers: {
@@ -20,11 +27,15 @@ export const WishlistProvider = ({ children }) => {
           },
         }
       );
-      console.log(data.wishlist);
+
       if (status === 200) {
-        dispatch({
-          type: "ADD_TO_WISHLIST",
-          payload: data.wishlist,
+        wishlistDispatch({
+          type: "SET_WISHLIST",
+          payload: {
+            _id: wishlist._id,
+            list: wishlist.list,
+            userId: wishlist.userId,
+          },
         });
       }
     } catch (error) {
@@ -35,10 +46,13 @@ export const WishlistProvider = ({ children }) => {
   const addToWishlist = async (productId) => {
     try {
       showToast("Adding to Wishlist");
-      const { data, status } = await axios.post(
+      const {
+        data: { wishlist },
+        status,
+      } = await axios.post(
         "https://dhrutham-cart-backend.herokuapp.com/wishlist",
         {
-          _id: productId,
+          product: { _id: productId },
         },
         {
           headers: {
@@ -46,9 +60,16 @@ export const WishlistProvider = ({ children }) => {
           },
         }
       );
-      //   console.log({ data });
+
       if (status === 200) {
-        dispatch({ type: "ADD_TO_WISHLIST", payload: data.wishlistItem });
+        wishlistDispatch({
+          type: "SET_WISHLIST",
+          payload: {
+            _id: wishlist._id,
+            list: wishlist.list,
+            userId: wishlist.userId,
+          },
+        });
         showToast("Added to Wishlist");
         hideToast();
       }
@@ -57,6 +78,7 @@ export const WishlistProvider = ({ children }) => {
       // if (error.response.status !== 409) {
       //   alert(error);
       // }
+      console.log(error);
       alert(error);
     }
   };
@@ -74,7 +96,10 @@ export const WishlistProvider = ({ children }) => {
       );
       //   console.log({ data });
       if (status === 200) {
-        dispatch({ type: "REMOVE_FROM_WISHLIST", payload: productId });
+        wishlistDispatch({
+          type: "REMOVE_FROM_WISHLIST",
+          payload: { _id: productId },
+        });
         showToast("Removed from Wishlist");
         hideToast();
       }
@@ -87,7 +112,15 @@ export const WishlistProvider = ({ children }) => {
     }
   };
   return (
-    <WishlistContext.Provider value={{ addToWishlist, removeFromWishlist }}>
+    <WishlistContext.Provider
+      value={{
+        wishlistState,
+        wishlistDispatch,
+        fetchFromWishlist,
+        addToWishlist,
+        removeFromWishlist,
+      }}
+    >
       {children}
     </WishlistContext.Provider>
   );

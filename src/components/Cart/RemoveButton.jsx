@@ -1,6 +1,7 @@
-import { useCart } from "../../hooks/useCart";
+import { useCartContext } from "../../contexts/cart-context";
+
 export function RemoveButton({ productId }) {
-  const { removeFromCart } = useCart();
+  const { removeFromCart } = useCartContext();
   return (
     <div>
       <button

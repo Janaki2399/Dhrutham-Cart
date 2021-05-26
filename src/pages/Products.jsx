@@ -1,41 +1,53 @@
 import { useDataContext } from "../contexts/data-context";
 import { ProductItem } from "../components/Products/ProductItem";
 import { Filter } from "../components/Filter/Filter";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useReducer } from "react";
 import { useParams } from "react-router";
 import { getSortedData, getFilteredData } from "../util";
 import { FilterMobile } from "../components/Filter/FilterMobile";
+import axios from "axios";
+import { sortFilterReducer } from "../sortFilterReducer";
 
 export function Products() {
   const { categoryId } = useParams();
-  const {
-    state: {
-      productList,
-      sortFilterStates: { includeOutOfStock, fastDelivery, sortBy },
-    },
-    dispatch,
-    fetchAndAddToList,
-  } = useDataContext();
+  const [productList, setProductList] = useState([]);
+  const [sortFilterState, sortFilterDispatch] = useReducer(sortFilterReducer, {
+    includeOutOfStock: true,
+    fastDelivery: false,
+    sortBy: null,
+  });
 
   useEffect(() => {
-    fetchAndAddToList({
-      url: `https://dhrutham-cart-backend.herokuapp.com/categories/${categoryId}`,
-      dispatchType: "ADD_TO_PRODUCTS",
-      list: "products",
-    });
+    (async function () {
+      try {
+        const { data, status } = await axios.get(
+          `https://dhrutham-cart-backend.herokuapp.com/categories/${categoryId}`
+        );
+
+        if (status == 200) {
+          setProductList(data.products);
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    })();
   }, []);
   const [filterMobile, setFilterMobile] = useState(false);
 
-  const sortedData = getSortedData(productList, sortBy);
+  const sortedData = getSortedData(productList, sortFilterState.sortBy);
 
   const filteredData = getFilteredData(sortedData, {
-    includeOutOfStock,
-    fastDelivery,
+    includeOutOfStock: sortFilterState.includeOutOfStock,
+    fastDelivery: sortFilterState.fastDelivery,
   });
 
   return (
     <div className="grid">
-      <Filter filterMobile={filterMobile} />
+      <Filter
+        filterMobile={filterMobile}
+        sortFilterState={sortFilterState}
+        sortFilterDispatch={sortFilterDispatch}
+      />
       {!filterMobile && (
         <div>
           <div
@@ -57,7 +69,12 @@ export function Products() {
           </div>
         </div>
       )}
-      {filterMobile && <FilterMobile setFilterMobile={setFilterMobile} />}
+      {filterMobile && (
+        <FilterMobile
+          setFilterMobile={setFilterMobile}
+          sortFilterDispatch={sortFilterDispatch}
+        />
+      )}
     </div>
   );
-};
+}

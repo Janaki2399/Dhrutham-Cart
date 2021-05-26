@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
 
 export function ProductItem({ productItem }) {
-  const { addToCart } = useProduct();
+  // const { addToCart } = useProduct();
 
   return (
     <div className="card card-shadow card-vertical ">
@@ -23,7 +23,7 @@ export function ProductItem({ productItem }) {
         isAddedToCart={productItem.isAddedToCart}
         inStock={productItem.inStock}
         productId={productItem._id}
-        addToCart={addToCart}
+        // addToCart={addToCart}
       />
       {productItem.inStock && (
         <WishListButton

@@ -15,11 +15,15 @@ import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
 import { useAuth } from "./contexts/auth-context";
 import axios from "axios";
+import { useWishlistContext } from "./contexts/wishlist-context";
+import { useCartContext } from "./contexts/cart-context";
 
 export default function App() {
-  const { fetchAndAddToList, state, dispatch } = useDataContext();
+  const { fetchFromWishlist, wishlistState } = useWishlistContext();
+  const { fetchFromCart } = useCartContext();
   const { token } = useAuth();
   const { toast } = useLoaderToast();
+  // console.log({ wishlistState });
 
   // useEffect(() => {
   //   fetchAndAddToList({
@@ -37,27 +41,8 @@ export default function App() {
   // }, []);
   useEffect(() => {
     if (token) {
-      (async function () {
-        try {
-          const { data, status } = await axios.get(
-            "https://dhrutham-cart-backend.herokuapp.com/wishlist",
-            {
-              headers: {
-                authorization: token,
-              },
-            }
-          );
-          console.log(data.wishlist);
-          if (status === 200) {
-            dispatch({
-              type: "ADD_TO_WISHLIST",
-              payload: data.wishlist,
-            });
-          }
-        } catch (error) {
-          alert(error);
-        }
-      })();
+      fetchFromWishlist();
+      fetchFromCart();
     }
   }, [token]);
   // useEffect(() => {

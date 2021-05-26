@@ -22,7 +22,7 @@ export const AuthProvider = ({ children }) => {
     delete axios.defaults.headers.common["Authorization"];
   }
   const login = async (email, password, state) => {
-    console.log("ddsdsd");
+    // console.log("ddsdsd");
     try {
       const { data, status } = await axios.post(
         "https://dhrutham-cart-backend.herokuapp.com/user/login",
@@ -31,7 +31,7 @@ export const AuthProvider = ({ children }) => {
           password: password,
         }
       );
-      console.log(data);
+      // console.log(data);
       if (status === 200) {
         setToken(data.token);
         navigate(state?.from ? state.from : "/");

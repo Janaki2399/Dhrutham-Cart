@@ -2,20 +2,25 @@ import { useParams } from "react-router";
 import { WishListButton } from "../components/Products/WishListButton";
 import { AddToCartButton } from "../components/Products/AddToCartButton";
 import { useState, useEffect } from "react";
-import { useProductDetails } from "../hooks/useProductDetails";
-
+import axios from "axios";
 export function ProductDetails() {
   const { productId } = useParams();
-  const {
-    getProduct,
-    addToCart,
-    addToWishlist,
-    removeFromWishlist,
-    product,
-  } = useProductDetails();
 
+  const [product, setProductItem] = useState({});
   useEffect(() => {
-    getProduct(productId);
+    (async function () {
+      try {
+        const { data, status } = await axios.get(
+          `https://dhrutham-cart-backend.herokuapp.com/products/${productId}`
+        );
+
+        if (status == 200) {
+          setProductItem(data.product);
+        }
+      } catch (error) {
+        alert(error.message);
+      }
+    })();
   }, []);
 
   return (
@@ -26,18 +31,8 @@ export function ProductDetails() {
       >
         <div className="relative-position">
           <img class="card-img" src={product.image} alt="card-img" />
-          <WishListButton
-            isWishListed={product.isWishListed}
-            productId={productId}
-            addToWishlist={addToWishlist}
-            removeFromWishlist={removeFromWishlist}
-          />
-          <AddToCartButton
-            isAddedToCart={product.isAddedToCart}
-            inStock={product.inStock}
-            productId={productId}
-            addToCart={addToCart}
-          />
+          <WishListButton productId={productId} />
+          <AddToCartButton inStock={product.inStock} productId={productId} />
         </div>
         <div
           class="card-content-padding text-start card-vertical"
@@ -51,4 +46,4 @@ export function ProductDetails() {
       </div>
     </div>
   );
-};
+}
