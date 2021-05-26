@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export function WishList() {
   const { state, fetchAndAddToList } = useDataContext();
-  console.log(state.wishList);
+  console.log({ state });
   // useEffect(() => {
   //     fetchAndAddToList({
   //       url: "https://dhrutham-cart-backend.herokuapp.com/wishlist",
@@ -15,7 +15,7 @@ export function WishList() {
 
   return (
     <div className="grid-col-3" style={{ margin: "4rem" }}>
-      {state.wishList.map(({ _id, ...product }) => {
+      {state.wishList.products?.map(({ _id, ...product }) => {
         return (
           <WishListItem key={_id} wishListId={_id} product={{ ...product }} />
         );

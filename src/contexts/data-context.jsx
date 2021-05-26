@@ -8,7 +8,7 @@ export const DataProvider = ({ children }) => {
   const { showToast, hideToast } = useLoaderToast();
   const [state, dispatch] = useReducer(reducerFunction, {
     productList: [],
-    wishList: [],
+    wishList: {},
     cartList: [],
     sortFilterStates: {
       includeOutOfStock: true,
@@ -23,7 +23,7 @@ export const DataProvider = ({ children }) => {
       );
 
       if (status === 200) {
-        dispatch({ type: "ADD_TO_WISHLIST", payload: data.wishlist.products });
+        dispatch({ type: "ADD_TO_WISHLIST", payload: data.wishlist });
       }
     } catch (error) {
       alert(error);

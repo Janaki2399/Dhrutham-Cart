@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { useProduct } from "../../hooks/useProduct";
 
 export function ProductItem({ productItem }) {
-  const { addToWishlist, removeFromWishlist, addToCart } = useProduct();
+  const { addToCart } = useProduct();
 
   return (
     <div className="card card-shadow card-vertical ">
@@ -29,8 +29,8 @@ export function ProductItem({ productItem }) {
         <WishListButton
           isWishListed={productItem.isWishListed}
           productId={productItem._id}
-          addToWishlist={addToWishlist}
-          removeFromWishlist={removeFromWishlist}
+          // addToWishlist={addToWishlist}
+          // removeFromWishlist={removeFromWishlist}
         />
       )}
     </div>

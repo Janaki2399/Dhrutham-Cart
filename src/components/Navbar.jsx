@@ -34,9 +34,9 @@ export function Navbar() {
             <span class=" material-icons-outlined icon-color-gray ">
               favorite_border
             </span>
-            {token && state.wishList.length > 0 && (
+            {token && state.wishList.products?.length > 0 && (
               <div class="badge badge-circle badge-anchorTopRight bg-primary">
-                {state.wishList.length}
+                {state.wishList.products?.length}
               </div>
             )}
           </div>

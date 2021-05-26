@@ -47,11 +47,11 @@ export default function App() {
               },
             }
           );
-
+          console.log(data.wishlist);
           if (status === 200) {
             dispatch({
               type: "ADD_TO_WISHLIST",
-              payload: data.wishlist.products,
+              payload: data.wishlist,
             });
           }
         } catch (error) {

@@ -21,9 +21,12 @@ export function reducerFunction(state, action) {
     case "REMOVE_FROM_WISHLIST":
       return {
         ...state,
-        wishList: state.wishList.filter(
-          (item) => item.product._id !== action.payload
-        ),
+        wishList: {
+          ...state.wishList,
+          products: state.wishList.products?.filter(
+            (item) => item._id !== action.payload
+          ),
+        },
       };
 
     case "APPEND_ITEM_TO_WISHLIST":
@@ -176,7 +179,7 @@ export function reducerFunction(state, action) {
     case "RESET":
       return {
         productList: [],
-        wishList: [],
+        wishList: {},
         cartList: [],
         sortFilterStates: {
           includeOutOfStock: true,
