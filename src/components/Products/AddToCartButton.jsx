@@ -1,11 +1,10 @@
-import { Link, useNavigate, Navigate, useSearchParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/auth-context";
 import { useCartContext } from "../../contexts/cart-context";
-import { useDataContext } from "../../contexts/data-context";
 
-export function AddToCartButton({ isAddedToCart, inStock, productId }) {
-  const { isUserLoggedIn, token } = useAuth();
-  const { cartState, cartDispatch, addToCart } = useCartContext();
+export function AddToCartButton({ inStock, productId }) {
+  const { token } = useAuth();
+  const { cartState, addToCart } = useCartContext();
   const navigate = useNavigate();
   const isItemInCart = () => {
     return (

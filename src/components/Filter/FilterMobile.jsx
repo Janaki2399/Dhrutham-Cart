@@ -1,5 +1,3 @@
-import { useDataContext } from "../../contexts/data-context";
-
 export function FilterMobile({ setFilterMobile, sortFilterDispatch }) {
   return (
     <div

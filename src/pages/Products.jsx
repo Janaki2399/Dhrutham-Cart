@@ -1,4 +1,3 @@
-import { useDataContext } from "../contexts/data-context";
 import { ProductItem } from "../components/Products/ProductItem";
 import { Filter } from "../components/Filter/Filter";
 import { useState, useEffect, useReducer } from "react";
@@ -24,7 +23,7 @@ export function Products() {
           `https://dhrutham-cart-backend.herokuapp.com/categories/${categoryId}`
         );
 
-        if (status == 200) {
+        if (status === 200) {
           setProductList(data.products);
         }
       } catch (error) {

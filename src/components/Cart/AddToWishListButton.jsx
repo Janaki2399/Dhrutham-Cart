@@ -1,7 +1,7 @@
 import { useCartContext } from "../../contexts/cart-context";
 import { useWishlistContext } from "../../contexts/wishlist-context";
 
-export function AddToWishListButton({ cartItemId, productId }) {
+export function AddToWishListButton({ productId }) {
   const { removeFromCart } = useCartContext();
   const { addToWishlist } = useWishlistContext();
   return (

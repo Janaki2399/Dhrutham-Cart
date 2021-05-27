@@ -2,7 +2,7 @@ import { QuantityButtons } from "./QuantityButtons";
 import { RemoveButton } from "./RemoveButton";
 import { AddToWishListButton } from "./AddToWishListButton";
 
-export function CartItem({ cartItemId, product, quantity }) {
+export function CartItem({ product, quantity }) {
   return (
     <div
       className="card card-shadow card-horizontal card-content-padding"
@@ -21,10 +21,7 @@ export function CartItem({ cartItemId, product, quantity }) {
         </div>
         <div className="flex-horizontal">
           <RemoveButton productId={product._id} />
-          <AddToWishListButton
-            cartItemId={cartItemId}
-            productId={product._id}
-          />
+          <AddToWishListButton productId={product._id} />
         </div>
       </div>
       <div className="card-content-padding font-size-4 ">

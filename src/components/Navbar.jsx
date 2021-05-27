@@ -12,6 +12,7 @@ export function Navbar() {
 
   const logout = () => {
     setToken(null);
+    localStorage?.removeItem("login");
     wishlistDispatch({ type: "RESET" });
     cartDispatch({ type: "RESET" });
     navigate("/");

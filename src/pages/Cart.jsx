@@ -16,14 +16,7 @@ export function Cart() {
       </div>
       <div style={{ margin: "2rem" }}>
         {cartState.list.map(({ _id, product, quantity }) => {
-          return (
-            <CartItem
-              key={_id}
-              cartItemId={_id}
-              product={product}
-              quantity={quantity}
-            />
-          );
+          return <CartItem key={_id} product={product} quantity={quantity} />;
         })}
       </div>
     </div>
