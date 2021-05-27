@@ -5,9 +5,11 @@ import { useWishlistContext } from "../contexts/wishlist-context";
 import { useCartContext } from "../contexts/cart-context";
 
 export function Navbar() {
-  const { wishlistState, wishlistDispatch } = useWishlistContext();
-  const { cartState, cartDispatch } = useCartContext();
+  const { wishlistState } = useWishlistContext();
+  const { cartState } = useCartContext();
   const { token, setToken } = useAuth();
+  const { wishlistDispatch } = useWishlistContext();
+  const { cartDispatch } = useCartContext();
   const navigate = useNavigate();
 
   const logout = () => {

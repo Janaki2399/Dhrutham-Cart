@@ -10,7 +10,7 @@ export const LoaderToastProvider = ({ children }) => {
       setToast("");
       clearInterval(timerId);
     }, 2000);
-  }
+  };
   function showToast(message) {
     setToast(message);
   }
@@ -20,14 +20,14 @@ export const LoaderToastProvider = ({ children }) => {
       value={{
         toast: toast,
         showToast: showToast,
-        hideToast: hideToast
+        hideToast: hideToast,
       }}
     >
       {children}
     </LoaderToastContext.Provider>
   );
-}
+};
 
 export const useLoaderToast = () => {
   return useContext(LoaderToastContext);
-}
+};

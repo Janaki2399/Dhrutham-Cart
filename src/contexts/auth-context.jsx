@@ -1,22 +1,17 @@
 import axios from "axios";
 import { createContext, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useWishlistContext } from "./wishlist-context";
+import { useCartContext } from "./cart-context";
 const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  // const [isUserLoggedIn, setUserLogIn] = useState(false);
   const { token: savedToken } = JSON.parse(localStorage?.getItem("login")) || {
     token: null,
   };
   const [token, setToken] = useState(savedToken);
   const navigate = useNavigate();
-  // console.log(token);
-  // useEffect(() => {
-  //   const token = JSON.parse(localStorage?.getItem("login"));
-  //   if (token) {
-  //     return setToken(token.token);
-  //   }
-  // }, []);
+
   function setupAuthHeaderForServiceCalls(token) {
     if (token) {
       return (axios.defaults.headers.common["Authorization"] = token);
@@ -62,6 +57,14 @@ export const AuthProvider = ({ children }) => {
       alert(error);
     }
   };
+
+  // const logout = () => {
+  //   setToken(null);
+  //   localStorage?.removeItem("login");
+  //   wishlistDispatch({ type: "RESET" });
+  //   cartDispatch({ type: "RESET" });
+  //   navigate("/");
+  // };
   return (
     <AuthContext.Provider
       value={{
@@ -69,6 +72,7 @@ export const AuthProvider = ({ children }) => {
         login,
         token,
         signUp,
+        // logout,
       }}
     >
       {children}
