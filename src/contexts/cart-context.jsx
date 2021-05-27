@@ -75,11 +75,11 @@ export const CartProvider = ({ children }) => {
     }
   };
 
-  const removeFromCart = async (cartItemId) => {
+  const removeFromCart = async (productId) => {
     try {
       showToast("Removing from cart");
       const { data, status } = await axios.delete(
-        `https://dhrutham-cart-backend.herokuapp.com/cart/${cartItemId}`,
+        `https://dhrutham-cart-backend.herokuapp.com/cart/${productId}`,
         {
           headers: {
             authorization: token,
@@ -90,7 +90,7 @@ export const CartProvider = ({ children }) => {
       if (status === 200) {
         cartDispatch({
           type: "REMOVE_FROM_CART",
-          payload: { _id: cartItemId },
+          payload: { _id: productId },
         });
         showToast("Removed from cart");
         hideToast();
@@ -103,6 +103,29 @@ export const CartProvider = ({ children }) => {
       // alert(error);
     }
   };
+  const updateQuantity = async (productId, quantity) => {
+    try {
+      const { status } = await axios.post(
+        `https://dhrutham-cart-backend.herokuapp.com/cart/${productId}`,
+        {
+          quantity,
+        },
+        {
+          headers: {
+            authorization: token,
+          },
+        }
+      );
+      if (status === 200) {
+        cartDispatch({
+          type: "UPDATE_CART_ITEM_QUANTITY",
+          payload: { _id: productId, quantity },
+        });
+      }
+    } catch (error) {
+      alert(error);
+    }
+  };
   return (
     <CartContext.Provider
       value={{
@@ -111,6 +134,7 @@ export const CartProvider = ({ children }) => {
         fetchFromCart,
         addToCart,
         removeFromCart,
+        updateQuantity,
       }}
     >
       {children}

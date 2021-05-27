@@ -16,9 +16,9 @@ export function cartReducer(state, action) {
     case "UPDATE_CART_ITEM_QUANTITY":
       return {
         ...state,
-        cart: state.cart.map((item) =>
-          item._id === action.payload._id
-            ? { ...item, quantity: item.quantity + action.payload.quantity }
+        list: state.list?.map((item) =>
+          item.product._id === action.payload._id
+            ? { ...item, quantity: action.payload.quantity }
             : item
         ),
       };

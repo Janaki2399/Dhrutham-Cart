@@ -1,13 +1,15 @@
-import { useCart } from "../../hooks/useCart";
-export function QuantityButtons({ cartItemId, quantity }) {
-  // const { increaseQuantity, decreaseQuantity } = useCart();
+import { useCartContext } from "../../contexts/cart-context";
+
+export function QuantityButtons({ productId, quantity }) {
+  const { updateQuantity } = useCartContext();
+
   return (
     <div>
       <div class="flex-horizontal margin-top">
         <button
           class="icon-btn gray-border"
           disabled={quantity <= 1}
-          // onClick={() => decreaseQuantity(cartItemId, quantity)}
+          onClick={() => updateQuantity(productId, quantity - 1)}
         >
           <span
             class={
@@ -24,7 +26,7 @@ export function QuantityButtons({ cartItemId, quantity }) {
 
         <button
           class="icon-btn gray-border"
-          // onClick={() => increaseQuantity(cartItemId, quantity)}
+          onClick={() => updateQuantity(productId, quantity + 1)}
         >
           <span
             class="material-icons-outlined 

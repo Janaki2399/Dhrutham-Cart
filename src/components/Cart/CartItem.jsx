@@ -17,7 +17,7 @@ export function CartItem({ cartItemId, product, quantity }) {
       >
         <div>
           <div className="card-title">{product.name}</div>
-          <QuantityButtons cartItemId={cartItemId} quantity={quantity} />
+          <QuantityButtons productId={product._id} quantity={quantity} />
         </div>
         <div className="flex-horizontal">
           <RemoveButton productId={product._id} />
