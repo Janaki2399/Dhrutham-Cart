@@ -23,7 +23,7 @@ export function Navbar() {
   return (
     <div class="nav fixed-nav">
       <Link to="/" className="anchor-link">
-        <div class="font-size-3 text-color-primary">Dhrutham</div>
+        <div class="font-size-3 text-color-primary">Dhrutham Cart</div>
       </Link>
       <div className="nav-list">
         {!token ? (
