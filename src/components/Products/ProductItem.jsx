@@ -10,7 +10,8 @@ export function ProductItem({ productItem }) {
     <div className="card card-shadow card-vertical ">
       <div
         onClick={() => navigate(`/products/${productItem._id}`)}
-        className="cursor-pointer"
+        className="cursor-pointer flex-column space-between"
+        style={{ flexGrow: 1 }}
       >
         <ProductImage image={productItem.image} inStock={productItem.inStock} />
         <CardItemContent item={productItem} />
