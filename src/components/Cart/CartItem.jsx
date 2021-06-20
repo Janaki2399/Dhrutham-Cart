@@ -5,8 +5,8 @@ import { AddToWishListButton } from "./AddToWishListButton";
 export function CartItem({ product, quantity }) {
   return (
     <div
-      className="card card-shadow card-horizontal card-content-padding"
-      style={{ width: "90%" }}
+      className="card card-shadow card-horizontal card-content-padding cart-item "
+      // style={{ width: "90%" }}
     >
       <div style={{ width: "25%" }}>
         <img className="card-img" src={product.image} alt="card-img" />

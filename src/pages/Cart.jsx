@@ -5,6 +5,11 @@ import { useCartContext } from "../contexts/cart-context";
 export function Cart() {
   const { cartState } = useCartContext();
 
+  if (cartState.list.length === 0) {
+    return (
+      <div className="center-page-align text-color-primary">CART EMPTY</div>
+    );
+  }
   return (
     <div>
       <div className="text-center" style={{ margin: "4rem" }}>

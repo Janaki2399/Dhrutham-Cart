@@ -2,20 +2,20 @@ import { CardItemContent } from "../CardItemContent";
 import { WishListButton } from "./WishListButton";
 import { AddToCartButton } from "./AddToCartButton";
 import { ProductImage } from "./ProductImage";
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 
 export function ProductItem({ productItem }) {
+  const navigate = useNavigate();
   return (
     <div className="card card-shadow card-vertical ">
-      <Link to={`/products/${productItem._id}`} className="anchor-link">
-        <div>
-          <ProductImage
-            image={productItem.image}
-            inStock={productItem.inStock}
-          />
-          <CardItemContent item={productItem} />
-        </div>
-      </Link>
+      <div
+        onClick={() => navigate(`/products/${productItem._id}`)}
+        className="cursor-pointer"
+      >
+        <ProductImage image={productItem.image} inStock={productItem.inStock} />
+        <CardItemContent item={productItem} />
+      </div>
+
       <AddToCartButton
         isAddedToCart={productItem.isAddedToCart}
         inStock={productItem.inStock}

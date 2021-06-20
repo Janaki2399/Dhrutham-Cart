@@ -1,25 +1,39 @@
 import { useEffect, useState } from "react";
 import { CategoryItem } from "../components/Categories/CategoryItem";
 import axios from "axios";
+import { APIStatus } from "../constants";
 
 export function Categories() {
   const [categories, setCategories] = useState([]);
+  const [status, setStatus] = useState(APIStatus.IDLE);
+  const [error, setError] = useState("");
+
   useEffect(() => {
     (async function () {
       try {
+        setStatus(APIStatus.LOADING);
         const { data, status } = await axios.get(
           `https://dhrutham-cart-backend.herokuapp.com/categories`
         );
 
         if (status === 200) {
+          setStatus(APIStatus.SUCCESS);
           setCategories(data.categories);
         }
       } catch (error) {
+        setStatus(APIStatus.ERROR);
         alert(error);
       }
     })();
   }, []);
 
+  if (status === APIStatus.LOADING) {
+    return (
+      <div className="center-page-align">
+        <div className="loader " />
+      </div>
+    );
+  }
   return (
     <div>
       <div style={{ marginTop: "3rem" }}>
