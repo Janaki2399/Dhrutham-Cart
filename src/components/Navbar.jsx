@@ -22,10 +22,12 @@ export function Navbar() {
 
   return (
     <div class="nav fixed-nav">
-      <Link to="/" className="anchor-link">
-        <div class="font-size-3 text-color-primary">Dhrutham Cart</div>
+      <Link to="/" className="anchor-link ">
+        <div class="font-size-3 text-color-primary margin-left">
+          Dhrutham Cart
+        </div>
       </Link>
-      <div className="nav-list">
+      <div className="nav-list margin-right">
         {!token ? (
           <Link to="/login" className=" nav-item anchor-link">
             Login
@@ -47,7 +49,7 @@ export function Navbar() {
               </div>
             )}
           </div>
-          <span>Wishlist</span>
+          {/* <span>Wishlist</span> */}
         </Link>
 
         <Link to="/cart" className="nav-item font-size-6">
@@ -61,7 +63,7 @@ export function Navbar() {
               </div>
             )}
           </div>
-          <span>Cart</span>
+          {/* <span>Cart</span> */}
         </Link>
       </div>
     </div>

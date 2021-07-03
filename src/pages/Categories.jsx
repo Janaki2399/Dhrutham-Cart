@@ -1,33 +1,33 @@
 import { useEffect, useState } from "react";
 import { CategoryItem } from "../components/Categories/CategoryItem";
 import axios from "axios";
-import { APIStatus } from "../constants";
+import { API_STATUS } from "../constants";
 
 export function Categories() {
   const [categories, setCategories] = useState([]);
-  const [status, setStatus] = useState(APIStatus.IDLE);
+  const [status, setStatus] = useState(API_STATUS.IDLE);
   const [error, setError] = useState("");
 
   useEffect(() => {
     (async function () {
       try {
-        setStatus(APIStatus.LOADING);
+        setStatus(API_STATUS.LOADING);
         const { data, status } = await axios.get(
           `https://dhrutham-cart-backend.herokuapp.com/categories`
         );
 
         if (status === 200) {
-          setStatus(APIStatus.SUCCESS);
+          setStatus(API_STATUS.SUCCESS);
           setCategories(data.categories);
         }
       } catch (error) {
-        setStatus(APIStatus.ERROR);
+        setStatus(API_STATUS.ERROR);
         alert(error);
       }
     })();
   }, []);
 
-  if (status === APIStatus.LOADING) {
+  if (status === API_STATUS.LOADING) {
     return (
       <div className="center-page-align">
         <div className="loader " />

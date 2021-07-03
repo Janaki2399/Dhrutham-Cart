@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import { PrivateRoute } from "./PrivateRoute";
+import { PrivateRoute } from "./components/PrivateRoute";
 import { Categories } from "./pages/Categories";
 import { Products } from "./pages/Products";
 import { ProductDetails } from "./pages/ProductDetails";

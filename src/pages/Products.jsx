@@ -13,6 +13,13 @@ export function Products() {
   const [sortFilterState, sortFilterDispatch] = useReducer(sortFilterReducer, {
     includeOutOfStock: true,
     fastDelivery: false,
+    ratings: {
+      aboveFour: false,
+      aboveThree: false,
+      aboveTwo: false,
+      aboveOne: false,
+    },
+    offerOnly: false,
     sortBy: null,
   });
 
@@ -30,7 +37,7 @@ export function Products() {
         alert(error.message);
       }
     })();
-  }, []);
+  }, [categoryId]);
   const [filterMobile, setFilterMobile] = useState(false);
 
   const sortedData = getSortedData(productList, sortFilterState.sortBy);
@@ -38,6 +45,11 @@ export function Products() {
   const filteredData = getFilteredData(sortedData, {
     includeOutOfStock: sortFilterState.includeOutOfStock,
     fastDelivery: sortFilterState.fastDelivery,
+    offerOnly: sortFilterState.offerOnly,
+    ratingsAboveFour: sortFilterState.ratings.aboveFour,
+    ratingsAboveThree: sortFilterState.ratings.aboveThree,
+    ratingsAboveTwo: sortFilterState.ratings.aboveTwo,
+    ratingsAboveOne: sortFilterState.ratings.aboveOne,
   });
 
   return (

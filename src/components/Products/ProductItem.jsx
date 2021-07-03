@@ -7,11 +7,12 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 export function ProductItem({ productItem }) {
   const navigate = useNavigate();
   return (
-    <div className="card card-shadow card-vertical ">
+    <div className="card card-shadow card-vertical    ">
       <div
         onClick={() => navigate(`/products/${productItem._id}`)}
         className="cursor-pointer flex-column space-between"
-        style={{ flexGrow: 1 }}
+        // style={{ height: "280px", width: "250px" }}
+        // style={{ flexGrow: 1 }}
       >
         <ProductImage image={productItem.image} inStock={productItem.inStock} />
         <CardItemContent item={productItem} />

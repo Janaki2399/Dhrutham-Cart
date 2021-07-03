@@ -13,11 +13,15 @@ export function CardItemContent({ item }) {
           </span>
         )}
       </div>
-      <div>
+      <div className="rating bg-primary font-size-6 flex flex-horizontal">
+        <div> {item.rating}</div>
+        <span class=" material-icons-outlined icon-size-18 ">star</span>
+      </div>
+      {/* <div>
         {item.isFastDelivery
           ? "Delivery : Fast Delivery"
           : "Delivery : 3 days minimum"}
-      </div>
+      </div> */}
     </div>
   );
 }

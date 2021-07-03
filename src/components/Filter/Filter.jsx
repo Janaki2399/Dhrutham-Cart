@@ -12,7 +12,7 @@ export function Filter({ filterMobile, sortFilterState, sortFilterDispatch }) {
         </button>
       </div>
       <div className="flex-column">
-        <div className="font-bold-1">Sort By</div>
+        <div className="font-bold-1 font-size-5">Sort By</div>
         <div className="margin-top">
           <input
             type="radio"
@@ -28,7 +28,7 @@ export function Filter({ filterMobile, sortFilterState, sortFilterDispatch }) {
               });
             }}
           />
-          <label className="font-size-6 ">Price - High To low</label>
+          <label className="font-size-5 ">Price - High To low</label>
         </div>
 
         <div>
@@ -46,7 +46,7 @@ export function Filter({ filterMobile, sortFilterState, sortFilterDispatch }) {
               });
             }}
           />
-          <label className="font-size-6">Price - Low To High</label>
+          <label className="font-size-5">Price - Low To High</label>
         </div>
       </div>
 
@@ -60,7 +60,7 @@ export function Filter({ filterMobile, sortFilterState, sortFilterDispatch }) {
               sortFilterDispatch({ type: "INCLUDE_OUT_OF_STOCK" });
             }}
           />
-          <label className="font-size-6">Include out of stock</label>
+          <label className="font-size-5">Include out of stock</label>
         </div>
         <div>
           <input
@@ -70,7 +70,62 @@ export function Filter({ filterMobile, sortFilterState, sortFilterDispatch }) {
               sortFilterDispatch({ type: "FAST_DELIVERY" });
             }}
           />
-          <label className="font-size-6">Fast delivery</label>
+          <label className="font-size-5">Fast delivery</label>
+        </div>
+
+        <div>
+          <input
+            type="checkbox"
+            checked={sortFilterState.offerOnly}
+            onChange={() => {
+              sortFilterDispatch({ type: "OFFER_ONLY" });
+            }}
+          />
+          <label className="font-size-5">Offer only</label>
+        </div>
+
+        <div className="font-size-5 font-bold-1 margin-top margin-bottom">
+          Ratings
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            checked={sortFilterState.ratings.aboveFour}
+            onChange={() => {
+              sortFilterDispatch({ type: "RATING_ABOVE_FOUR" });
+            }}
+          />
+          <label className="font-size-5">4 and above</label>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            checked={sortFilterState.ratings.aboveThree}
+            onChange={() => {
+              sortFilterDispatch({ type: "RATING_ABOVE_THREE" });
+            }}
+          />
+          <label className="font-size-5">3 and above</label>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            checked={sortFilterState.ratings.aboveTwo}
+            onChange={() => {
+              sortFilterDispatch({ type: "RATING_ABOVE_TWO" });
+            }}
+          />
+          <label className="font-size-5">2 and above</label>
+        </div>
+        <div>
+          <input
+            type="checkbox"
+            checked={sortFilterState.ratings.aboveOne}
+            onChange={() => {
+              sortFilterDispatch({ type: "RATING_ABOVE_ONE" });
+            }}
+          />
+          <label className="font-size-5">1 and above</label>
         </div>
       </div>
     </div>
