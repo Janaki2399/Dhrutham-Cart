@@ -14,8 +14,11 @@ export function CardItemContent({ item }) {
         )}
       </div>
       <div className="rating bg-primary font-size-6 flex flex-horizontal">
-        <div> {item.rating}</div>
-        <span class=" material-icons-outlined icon-size-18 ">star</span>
+        <div>
+          {" "}
+          {item.rating}{" "}
+          <span class=" material-icons-outlined icon-size-18 ">star</span>
+        </div>
       </div>
       {/* <div>
         {item.isFastDelivery
