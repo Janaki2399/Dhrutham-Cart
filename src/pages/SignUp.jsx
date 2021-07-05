@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../contexts/auth-context";
 import { useLocation } from "react-router";
 import { useForms } from "../hooks/useForms";
 import { useAuthAPI } from "../hooks/useAuthAPI";
@@ -47,10 +46,7 @@ export function SignUp() {
       : "text-input generic-border-color";
   };
   return (
-    <div
-      className="center-page-align"
-      style={{ width: "90%", maxWidth: "20rem" }}
-    >
+    <div className="center-page-align form-size">
       <form
         onSubmit={handleSignUp}
         className=" border-all gray-border padding-all"

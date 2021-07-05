@@ -33,14 +33,14 @@ export function Navbar() {
             Login
           </Link>
         ) : (
-          <div className="nav-item cursor-pointer" onClick={logout}>
-            Logout
-          </div>
+          <span class=" material-icons-outlined icon-color-gray nav-item">
+            logout
+          </span>
         )}
 
         <Link to="/wishlist" className="nav-item font-size-6">
           <div class="icon-btn-with-padding">
-            <span class=" material-icons-outlined icon-color-gray ">
+            <span class=" material-icons-outlined icon-color-gray nav-item">
               favorite_border
             </span>
             {token && wishlistState.list?.length > 0 && (
@@ -49,12 +49,11 @@ export function Navbar() {
               </div>
             )}
           </div>
-          {/* <span>Wishlist</span> */}
         </Link>
 
         <Link to="/cart" className="nav-item font-size-6">
           <div class="icon-btn-with-padding">
-            <span class=" material-icons-outlined icon-color-gray ">
+            <span class=" material-icons-outlined  nav-item icon-color-gray">
               shopping_cart
             </span>
             {token && cartState.list?.length > 0 && (
@@ -63,7 +62,6 @@ export function Navbar() {
               </div>
             )}
           </div>
-          {/* <span>Cart</span> */}
         </Link>
       </div>
     </div>

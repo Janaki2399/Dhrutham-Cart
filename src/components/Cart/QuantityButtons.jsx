@@ -7,9 +7,12 @@ export function QuantityButtons({ productId, quantity }) {
     <div>
       <div className="flex-horizontal margin-top">
         <button
-          className="icon-btn gray-border"
+          className="icon-btn gray-border cursor-pointer"
           disabled={quantity <= 1}
-          onClick={() => updateQuantity(productId, quantity - 1)}
+          onClick={(e) => {
+            e.stopPropagation();
+            updateQuantity(productId, quantity - 1);
+          }}
         >
           <span
             className={
@@ -26,7 +29,10 @@ export function QuantityButtons({ productId, quantity }) {
 
         <button
           className="icon-btn cursor-pointer "
-          onClick={() => updateQuantity(productId, quantity + 1)}
+          onClick={(e) => {
+            e.stopPropagation();
+            updateQuantity(productId, quantity + 1);
+          }}
         >
           <span
             className="material-icons-outlined 

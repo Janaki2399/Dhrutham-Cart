@@ -1,15 +1,27 @@
-import { ProductItem } from "../components/Products/ProductItem";
 import { Filter } from "../components/Filter/Filter";
 import { useState, useEffect, useReducer } from "react";
 import { useParams } from "react-router";
 import { getSortedData, getFilteredData } from "../util";
 import { FilterMobile } from "../components/Filter/FilterMobile";
-import axios from "axios";
-import { sortFilterReducer } from "../sortFilterReducer";
+import { sortFilterReducer } from "../reducers/sortFilterReducer";
+import { productListReducer } from "../reducers/productListReducer";
+import { ProductList } from "../components/Products/ProductList";
+import { API_STATUS } from "../constants";
+import { useGetData } from "../hooks/useGetData";
 
 export function Products() {
   const { categoryId } = useParams();
-  const [productList, setProductList] = useState([]);
+
+  const [productListState, productListDispatch] = useReducer(
+    productListReducer,
+    {
+      productList: [],
+      status: API_STATUS.IDLE,
+      errorMessage: "",
+    }
+  );
+
+  const { fetchProductList } = useGetData();
   const [sortFilterState, sortFilterDispatch] = useReducer(sortFilterReducer, {
     includeOutOfStock: true,
     fastDelivery: false,
@@ -24,23 +36,15 @@ export function Products() {
   });
 
   useEffect(() => {
-    (async function () {
-      try {
-        const { data, status } = await axios.get(
-          `https://dhrutham-cart-backend.herokuapp.com/categories/${categoryId}`
-        );
-
-        if (status === 200) {
-          setProductList(data.products);
-        }
-      } catch (error) {
-        alert(error.message);
-      }
-    })();
+    fetchProductList(categoryId, productListDispatch);
   }, [categoryId]);
+
   const [filterMobile, setFilterMobile] = useState(false);
 
-  const sortedData = getSortedData(productList, sortFilterState.sortBy);
+  const sortedData = getSortedData(
+    productListState.productList,
+    sortFilterState.sortBy
+  );
 
   const filteredData = getFilteredData(sortedData, {
     includeOutOfStock: sortFilterState.includeOutOfStock,
@@ -59,17 +63,13 @@ export function Products() {
         sortFilterState={sortFilterState}
         sortFilterDispatch={sortFilterDispatch}
       />
-      {!filterMobile && (
-        <div>
-          <div
-            id="products-div"
-            className="grid-col-3"
-            style={{ margin: "2rem" }}
-          >
-            {filteredData.map((item) => {
-              return <ProductItem key={item._id} productItem={item} />;
-            })}
-          </div>
+
+      <div>
+        <ProductList
+          filteredData={filteredData}
+          status={productListState.status}
+        />
+        {!filterMobile && (
           <div
             className="filter-mobile cursor-pointer border-top gray-border"
             onClick={() => {
@@ -78,8 +78,9 @@ export function Products() {
           >
             Filter
           </div>
-        </div>
-      )}
+        )}
+      </div>
+
       {filterMobile && (
         <FilterMobile
           setFilterMobile={setFilterMobile}

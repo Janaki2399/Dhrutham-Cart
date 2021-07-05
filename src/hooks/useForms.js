@@ -42,6 +42,7 @@ export const useForms = (setUserDetails) => {
     }
     return error;
   };
+
   const isBtnDisabled = (errors) => {
     if (Object.keys(errors).length === 0) {
       return false;

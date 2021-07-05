@@ -36,13 +36,12 @@ export function ProductDetails() {
     return <div className="loader center-page-align" />;
   }
   return (
-    <div className="details-grid center-page-align">
+    <div className="details-grid  margin-top-3">
       <div className="product-image gray-border relative-position">
         <img
           src={product.image}
           alt="product"
-          height="100%"
-          style={{ height: "26rem", width: "20rem" }}
+          className="product-detail-image-width "
         />
         <WishListButton productId={productId} />
       </div>
@@ -53,27 +52,36 @@ export function ProductDetails() {
         )}
         <div className="font-size-3 padding-top">
           Rs {product.price}{" "}
-          {product.offer && (
+          {product.offer && product.offer > 0 && (
             <span className="text-color-primary font-size-4">
               ({product.offer}% OFF)
             </span>
           )}
         </div>
-        <div className="font-size-4 flex-horizontal bg-primary text-center margin-top rating">
+        <div className="font-size-4 flex-horizontal bg-primary text-center margin-top-3 rating ">
           {product.rating}
-          <span class=" material-icons-outlined icon-size-18 ">star</span>
+          <span class=" material-icons-outlined rating-icon-size ">star</span>
         </div>
         {product.color && (
           <div className="padding-top">Color : {product.color} </div>
+        )}
+        {product.level && (
+          <div className="padding-top">Level : {product.level} </div>
+        )}
+        {product.language && (
+          <div className="padding-top">Level : {product.language} </div>
         )}
         {product.brand && (
           <div className="padding-top text-gray">
             Sold by <span className="font-bold-1">{product.brand}</span>{" "}
           </div>
         )}
+        {product.description && (
+          <div className="margin-top text-gray">{product.description}</div>
+        )}
         <div className="padding-top">
           {product.inStock ? (
-            <span className="text-green font-bold-1">In Stock</span>
+            <span className="green-color font-bold-1">In Stock</span>
           ) : (
             "OUT OF STOCK"
           )}
@@ -83,7 +91,9 @@ export function ProductDetails() {
           Pay on Delivery might be available
         </div>
       </div>
-      <AddToCartButton inStock={product.inStock} productId={productId} />
+      <div className="margin-top">
+        <AddToCartButton inStock={product.inStock} productId={productId} />
+      </div>
     </div>
     // <div className="center-align-ver-hor flex-column center-page-ver-hor">
     //   <div

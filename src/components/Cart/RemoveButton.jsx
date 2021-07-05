@@ -5,9 +5,8 @@ export function RemoveButton({ productId }) {
   return (
     <button
       className=" btn-text font-size-6 text-gray font-bold-1 gray-border align-center border-right
-                 cursor-pointer "
+                 cursor-pointer remove-button-size"
       onClick={() => removeFromCart(productId)}
-      style={{ width: "9rem", height: "100%" }}
     >
       REMOVE
     </button>

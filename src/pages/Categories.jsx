@@ -1,33 +1,18 @@
 import { useEffect, useState } from "react";
 import { CategoryItem } from "../components/Categories/CategoryItem";
-import axios from "axios";
 import { API_STATUS } from "../constants";
+import { useGetData } from "../hooks/useGetData";
+import { useCategoriesContext } from "../contexts/category-context";
 
 export function Categories() {
-  const [categories, setCategories] = useState([]);
-  const [status, setStatus] = useState(API_STATUS.IDLE);
-  const [error, setError] = useState("");
+  const { fetchCategories } = useGetData();
+  const { categoriesState } = useCategoriesContext();
 
   useEffect(() => {
-    (async function () {
-      try {
-        setStatus(API_STATUS.LOADING);
-        const { data, status } = await axios.get(
-          `https://dhrutham-cart-backend.herokuapp.com/categories`
-        );
-
-        if (status === 200) {
-          setStatus(API_STATUS.SUCCESS);
-          setCategories(data.categories);
-        }
-      } catch (error) {
-        setStatus(API_STATUS.ERROR);
-        alert(error);
-      }
-    })();
+    fetchCategories();
   }, []);
 
-  if (status === API_STATUS.LOADING) {
+  if (categoriesState.status === API_STATUS.LOADING) {
     return (
       <div className="center-page-align">
         <div className="loader " />
@@ -36,7 +21,7 @@ export function Categories() {
   }
   return (
     <div>
-      <div style={{ marginTop: "3rem" }}>
+      <div className="margin-top-3">
         <img
           className="full-width"
           src="https://images-static.nykaa.com/uploads/tr:w-2698,/7d27ee70-0b73-46dc-9ddd-86fc48ac6849.jpg"
@@ -47,8 +32,11 @@ export function Categories() {
       <div className="text-center margin-top font-size-2 text-color-primary font-bold-1">
         Curated collection for carnatic music
       </div>
-      <div className="grid-col-3" style={{ margin: "3rem" }}>
-        {categories.map(({ _id, name, image }) => {
+      <div
+        className="grid-col-3 grid-col-mobile margin-3"
+        style={{ marginBottom: "5rem" }}
+      >
+        {categoriesState.categories.map(({ _id, name, image }) => {
           return <CategoryItem key={_id} _id={_id} name={name} image={image} />;
         })}
       </div>

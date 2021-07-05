@@ -1,10 +1,12 @@
 import { useAuth } from "../../contexts/auth-context";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useWishlistContext } from "../../contexts/wishlist-context";
 
 export function WishListButton({ productId }) {
   const { token } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+
   const { wishlistState, addToWishlist, removeFromWishlist } =
     useWishlistContext();
 
@@ -15,20 +17,18 @@ export function WishListButton({ productId }) {
     );
   };
 
+  const handleWishlistAction = () => {
+    if (token) {
+      !isItemInWishlist()
+        ? addToWishlist(productId)
+        : removeFromWishlist(productId);
+    } else {
+      navigate("/login", { state: { from: location.pathname } });
+    }
+  };
   return (
     <div className="card-icon-topRight">
-      <button
-        className="icon-btn"
-        onClick={() => {
-          if (token) {
-            !isItemInWishlist()
-              ? addToWishlist(productId)
-              : removeFromWishlist(productId);
-          } else {
-            navigate("/login");
-          }
-        }}
-      >
+      <button className="icon-btn" onClick={handleWishlistAction}>
         <span
           className={
             isItemInWishlist()

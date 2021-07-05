@@ -1,43 +1,28 @@
 import { createContext, useContext, useReducer } from "react";
-import { cartReducer } from "../contexts/reducers/cartReducer";
+import { cartReducer } from "../reducers/cartReducer";
 import axios from "axios";
 import { useAuth } from "./auth-context";
 import { useLoaderToast } from "./loader-toast-context";
+import { API_STATUS } from "../constants";
+import { API_URL } from "../constants";
+
 export const CartContext = createContext();
 
-export const CartProvider = ({ children }) => {
-  const { showToast, hideToast } = useLoaderToast();
-  const { token } = useAuth();
-  const [cartState, cartDispatch] = useReducer(cartReducer, {
-    _id: "",
-    list: [],
-    userId: "",
-  });
-  const fetchFromCart = async () => {
-    try {
-      const {
-        data: { cart },
-        status,
-      } = await axios.get("https://dhrutham-cart-backend.herokuapp.com/cart", {
-        headers: {
-          authorization: token,
-        },
-      });
+export const initialState = {
+  _id: "",
+  list: [],
+  userId: "",
+  statuses: {
+    fetchStatus: API_STATUS.IDLE,
+    addToCartStatus: API_STATUS.IDLE,
+    removeFromCartStatus: API_STATUS.IDLE,
+  },
+};
 
-      if (status === 200) {
-        cartDispatch({
-          type: "SET_CART",
-          payload: {
-            _id: cart._id,
-            list: cart.list,
-            userId: cart.userId,
-          },
-        });
-      }
-    } catch (error) {
-      alert(error);
-    }
-  };
+export const CartProvider = ({ children }) => {
+  const { showToast } = useLoaderToast();
+  const { token } = useAuth();
+  const [cartState, cartDispatch] = useReducer(cartReducer, initialState);
 
   const addToCart = async (productId) => {
     try {
@@ -46,7 +31,7 @@ export const CartProvider = ({ children }) => {
         data: { cart },
         status,
       } = await axios.post(
-        "https://dhrutham-cart-backend.herokuapp.com/cart",
+        `${API_URL}/cart`,
         {
           product: { _id: productId },
           quantity: 1,
@@ -64,28 +49,22 @@ export const CartProvider = ({ children }) => {
           payload: { _id: cart._id, list: cart.list, userId: cart.userId },
         });
         showToast("Added to Cart");
-        hideToast();
       }
     } catch (error) {
-      hideToast();
-      // if (error.response.status !== 409) {
-      //   alert(error);
-      // }
-      alert(error);
+      if (error.response.status !== 409) {
+        showToast("Something went wrong");
+      }
     }
   };
 
   const removeFromCart = async (productId) => {
     try {
       showToast("Removing from cart");
-      const { data, status } = await axios.delete(
-        `https://dhrutham-cart-backend.herokuapp.com/cart/${productId}`,
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
+      const { status } = await axios.delete(`${API_URL}/cart/${productId}`, {
+        headers: {
+          authorization: token,
+        },
+      });
 
       if (status === 200) {
         cartDispatch({
@@ -93,20 +72,17 @@ export const CartProvider = ({ children }) => {
           payload: { _id: productId },
         });
         showToast("Removed from cart");
-        hideToast();
       }
     } catch (error) {
-      hideToast();
       if (error.response.status !== 409) {
-        alert(error);
+        showToast("Something went wrong");
       }
-      // alert(error);
     }
   };
   const updateQuantity = async (productId, quantity) => {
     try {
       const { status } = await axios.post(
-        `https://dhrutham-cart-backend.herokuapp.com/cart/${productId}`,
+        `${API_URL}/cart/${productId}`,
         {
           quantity,
         },
@@ -123,7 +99,7 @@ export const CartProvider = ({ children }) => {
         });
       }
     } catch (error) {
-      alert(error);
+      showToast("Something went wrong");
     }
   };
   return (
@@ -131,7 +107,6 @@ export const CartProvider = ({ children }) => {
       value={{
         cartDispatch,
         cartState,
-        fetchFromCart,
         addToCart,
         removeFromCart,
         updateQuantity,

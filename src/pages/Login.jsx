@@ -36,10 +36,7 @@ export function Login() {
       : "text-input generic-border-color";
   };
   return (
-    <div
-      className="center-page-align "
-      style={{ width: "90%", maxWidth: "20rem" }}
-    >
+    <div className="center-page-align form-size">
       <form
         onSubmit={handleSubmit}
         className=" border-all gray-border padding-all"

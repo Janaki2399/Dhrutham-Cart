@@ -13,6 +13,7 @@ export const LoaderToastProvider = ({ children }) => {
   };
   function showToast(message) {
     setToast(message);
+    hideToast();
   }
 
   return (

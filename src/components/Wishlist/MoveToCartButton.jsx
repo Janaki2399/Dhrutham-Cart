@@ -5,15 +5,15 @@ export function MoveToCartButton({ productId }) {
   const { removeFromWishlist } = useWishlistContext();
   const { addToCart } = useCartContext();
 
+  const moveItemFromCartToWishlist = async () => {
+    await removeFromWishlist(productId);
+    addToCart(productId);
+  };
   return (
     <div>
       <button
-        style={{ marginTop: "0.3rem" }}
         className="btn btn-primary-contained full-width"
-        onClick={() => {
-          removeFromWishlist(productId);
-          addToCart(productId);
-        }}
+        onClick={moveItemFromCartToWishlist}
       >
         Move to cart
       </button>

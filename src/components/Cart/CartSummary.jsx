@@ -1,12 +1,11 @@
 import { useCartContext } from "../../contexts/cart-context";
 import { getTotalPrice } from "../../util";
+
 export const CartSummary = () => {
   const { cartState } = useCartContext();
+
   return (
-    <div
-      className="flex flex-horizontal margin-auto space-between cart-item "
-      style={{ marginTop: "5rem" }}
-    >
+    <div className="flex flex-horizontal margin-auto space-between cart-item margin-top-large">
       <div className="font-size-4 font-bold-1 ">
         My cart({cartState.list.length} items)
       </div>

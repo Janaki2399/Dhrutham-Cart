@@ -4,12 +4,7 @@ export function CategoryItem({ _id, name, image }) {
     <Link to={`/categories/${_id}`} className="anchor-link">
       <div className="card card-vertical card-shadow ">
         <img
-          className="full-width"
-          style={{
-            objectFit: "cover",
-            height: "25rem",
-            objectPosition: "bottom",
-          }}
+          className="full-width img-transformation"
           src={image}
           alt="product-card"
           loading="lazy"

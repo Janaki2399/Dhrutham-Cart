@@ -1,8 +1,10 @@
 import { useAuth } from "../contexts/auth-context";
 import { Route } from "react-router";
 import { Navigate } from "react-router-dom";
+
 export function PrivateRoute({ path, element }) {
-  const { isUserLoggedIn, setUserLogin, token } = useAuth();
+  const { token } = useAuth();
+
   return token ? (
     <Route path={path} element={element} />
   ) : (

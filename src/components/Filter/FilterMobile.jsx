@@ -1,26 +1,21 @@
 export function FilterMobile({ setFilterMobile, sortFilterDispatch }) {
+  const clearFilter = () => {
+    setFilterMobile((previousState) => !previousState);
+    sortFilterDispatch({ type: "CLEAR_FILTER" });
+  };
+
+  const applyFilter = () => {
+    setFilterMobile((previousState) => !previousState);
+  };
   return (
-    <div
-      className="close-apply-filter cursor-pointer"
-      style={{ display: "flex" }}
-    >
+    <div className="close-apply-filter cursor-pointer flex-horizontal">
       <div
-        className="border-right gray-border full-height align-center"
-        style={{ width: "50%" }}
-        onClick={() => {
-          setFilterMobile((prev) => !prev);
-          sortFilterDispatch({ type: "CLEAR_FILTER" });
-        }}
+        className="border-right gray-border align-center half-width"
+        onClick={clearFilter}
       >
         Close
       </div>
-      <div
-        className="full-height align-center"
-        style={{ width: "50%" }}
-        onClick={() => {
-          setFilterMobile((prev) => !prev);
-        }}
-      >
+      <div className=" align-center half-width" onClick={applyFilter}>
         Apply
       </div>
     </div>

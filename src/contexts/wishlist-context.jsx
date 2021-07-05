@@ -1,47 +1,30 @@
 import { createContext, useContext, useReducer } from "react";
-import { wishlistReducer } from "../contexts/reducers/wishlistReducer";
+import { wishlistReducer } from "../reducers/wishlistReducer";
 import axios from "axios";
 import { useAuth } from "./auth-context";
 import { useLoaderToast } from "./loader-toast-context";
+import { API_STATUS } from "../constants";
+import { API_URL } from "../constants";
+
 export const WishlistContext = createContext();
 
+export const initialState = {
+  _id: "",
+  list: [],
+  userId: "",
+  statuses: {
+    fetchStatus: API_STATUS.IDLE,
+    addToWishlistStatus: API_STATUS.IDLE,
+    removeFromWishlistStatus: API_STATUS.IDLE,
+  },
+};
 export const WishlistProvider = ({ children }) => {
-  const { showToast, hideToast } = useLoaderToast();
+  const { showToast } = useLoaderToast();
   const { token } = useAuth();
-  const [wishlistState, wishlistDispatch] = useReducer(wishlistReducer, {
-    _id: "",
-    list: [],
-    userId: "",
-  });
-
-  const fetchFromWishlist = async () => {
-    try {
-      const {
-        data: { wishlist },
-        status,
-      } = await axios.get(
-        "https://dhrutham-cart-backend.herokuapp.com/wishlist",
-        {
-          headers: {
-            authorization: token,
-          },
-        }
-      );
-
-      if (status === 200) {
-        wishlistDispatch({
-          type: "SET_WISHLIST",
-          payload: {
-            _id: wishlist._id,
-            list: wishlist.list,
-            userId: wishlist.userId,
-          },
-        });
-      }
-    } catch (error) {
-      alert(error);
-    }
-  };
+  const [wishlistState, wishlistDispatch] = useReducer(
+    wishlistReducer,
+    initialState
+  );
 
   const addToWishlist = async (productId) => {
     try {
@@ -50,7 +33,7 @@ export const WishlistProvider = ({ children }) => {
         data: { wishlist },
         status,
       } = await axios.post(
-        "https://dhrutham-cart-backend.herokuapp.com/wishlist",
+        `${API_URL}/wishlist`,
         {
           product: { _id: productId },
         },
@@ -71,15 +54,11 @@ export const WishlistProvider = ({ children }) => {
           },
         });
         showToast("Added to Wishlist");
-        hideToast();
       }
     } catch (error) {
-      hideToast();
-      // if (error.response.status !== 409) {
-      //   alert(error);
-      // }
-      console.log(error);
-      alert(error);
+      if (error.response.status !== 409) {
+        showToast("Something went wrong");
+      }
     }
   };
 
@@ -87,28 +66,25 @@ export const WishlistProvider = ({ children }) => {
     try {
       showToast("Removing from Wishlist");
       const { data, status } = await axios.delete(
-        `https://dhrutham-cart-backend.herokuapp.com/wishlist/${productId}`,
+        `${API_URL}/wishlist/${productId}`,
         {
           headers: {
             authorization: token,
           },
         }
       );
-      //   console.log({ data });
+
       if (status === 200) {
         wishlistDispatch({
           type: "REMOVE_FROM_WISHLIST",
           payload: { _id: productId },
         });
         showToast("Removed from Wishlist");
-        hideToast();
       }
     } catch (error) {
-      hideToast();
       if (error.response.status !== 409) {
-        alert(error);
+        showToast("Something went wrong");
       }
-      // alert(error);
     }
   };
   return (
@@ -116,7 +92,6 @@ export const WishlistProvider = ({ children }) => {
       value={{
         wishlistState,
         wishlistDispatch,
-        fetchFromWishlist,
         addToWishlist,
         removeFromWishlist,
       }}

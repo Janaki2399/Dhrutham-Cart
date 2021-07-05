@@ -1,14 +1,20 @@
 import { QuantityButtons } from "./QuantityButtons";
 import { RemoveButton } from "./RemoveButton";
 import { AddToWishListButton } from "./AddToWishListButton";
+import { useNavigate } from "react-router";
 
 export function CartItem({ product, quantity }) {
+  const navigate = useNavigate();
+
   return (
-    <div className="card card-shadow cart-item" style={{ marginTop: "3rem" }}>
-      <div className="card-grid card-content-padding">
-        <div style={{ width: "9rem", height: "12rem" }}>
+    <div className=" card card-shadow cart-item ">
+      <div
+        className="card-grid card-content-padding "
+        onClick={() => navigate(`/products/${product._id}`)}
+      >
+        <div className="cart-item-image-size">
           <img
-            className="card-img img-transformation"
+            className="card-img img-transformation-bottom"
             src={product.image}
             alt="card-img"
             height="100%"

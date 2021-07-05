@@ -1,6 +1,10 @@
 export function Filter({ filterMobile, sortFilterState, sortFilterDispatch }) {
   return (
-    <div className={!filterMobile ? "sidebar full-height" : "filterMobile"}>
+    <div
+      className={
+        !filterMobile ? "sidebar full-height margin-top" : "filterMobile"
+      }
+    >
       <div className="text-end">
         <button
           className="btn btn-text text-color-primary"

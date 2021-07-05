@@ -57,6 +57,6 @@ export const sortFilterReducer = (state, action) => {
       };
 
     default:
-      return state;
+      throw new Error("Invalid action type");
   }
 };

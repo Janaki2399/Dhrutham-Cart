@@ -7,6 +7,8 @@ import { LoaderToastProvider } from "./contexts/loader-toast-context";
 import { AuthProvider } from "./contexts/auth-context";
 import { WishlistProvider } from "./contexts/wishlist-context";
 import { CartProvider } from "./contexts/cart-context";
+import { CategoryProvider } from "./contexts/category-context";
+
 ReactDOM.render(
   <React.StrictMode>
     <Router>
@@ -14,7 +16,9 @@ ReactDOM.render(
         <LoaderToastProvider>
           <CartProvider>
             <WishlistProvider>
-              <App />
+              <CategoryProvider>
+                <App />
+              </CategoryProvider>
             </WishlistProvider>
           </CartProvider>
         </LoaderToastProvider>

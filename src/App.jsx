@@ -13,19 +13,18 @@ import { useLoaderToast } from "./contexts/loader-toast-context";
 import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
 import { useAuth } from "./contexts/auth-context";
-import { useWishlistContext } from "./contexts/wishlist-context";
-import { useCartContext } from "./contexts/cart-context";
+import { useGetData } from "./hooks/useGetData";
 
 export default function App() {
-  const { fetchFromWishlist, wishlistState } = useWishlistContext();
-  const { fetchFromCart } = useCartContext();
+  const { fetchWishlist } = useGetData();
+  const { fetchCart } = useGetData();
   const { token } = useAuth();
   const { toast } = useLoaderToast();
 
   useEffect(() => {
     if (token) {
-      fetchFromWishlist();
-      fetchFromCart();
+      fetchWishlist();
+      fetchCart();
     }
   }, [token]);
 

@@ -1,13 +1,29 @@
 import { CartItem } from "../components/Cart/CartItem";
 import { CartSummary } from "../components/Cart/CartSummary";
 import { useCartContext } from "../contexts/cart-context";
+import { API_STATUS } from "../constants";
 
 export function Cart() {
   const { cartState } = useCartContext();
 
-  if (cartState.list.length === 0) {
+  const isCartEmpty = () => {
+    return (
+      cartState.list.length === 0 &&
+      cartState.statuses.fetchStatus === API_STATUS.SUCCESS
+    );
+  };
+
+  if (isCartEmpty()) {
     return (
       <div className="center-page-align text-color-primary">CART EMPTY</div>
+    );
+  }
+
+  if (cartState.statuses.fetchStatus === API_STATUS.LOADING) {
+    return (
+      <div className="center-page-align">
+        <div className="loader " />
+      </div>
     );
   }
   return (
