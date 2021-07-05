@@ -27,7 +27,7 @@ export function WishList() {
   }
 
   return (
-    <div className="grid-col-3 margin-5">
+    <div className="grid-col-3 wishlist-margin">
       {wishlistState.list?.map(({ _id, product }) => {
         return <WishListItem key={_id} product={product} />;
       })}

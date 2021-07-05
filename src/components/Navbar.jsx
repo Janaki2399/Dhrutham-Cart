@@ -33,7 +33,7 @@ export function Navbar() {
             Login
           </Link>
         ) : (
-          <span class=" material-icons-outlined icon-color-gray nav-item">
+          <span class=" material-icons-outlined icon-color-gray nav-item cursor-pointer">
             logout
           </span>
         )}

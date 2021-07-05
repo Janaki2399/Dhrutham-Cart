@@ -93,6 +93,11 @@
   .margin-3 {
     margin: 0.2rem;
   }
+
+  .wishlist-margin {
+    margin: 0.2rem;
+    margin-top: 4rem;
+  }
 }
 .show-sidebar {
   display: block;
@@ -125,7 +130,6 @@
   width: 95%;
   max-width: 35rem;
   margin: auto;
-  /* margin-top: 3rem; */
   margin-bottom: 3rem;
 }
 
@@ -210,9 +214,9 @@
   margin-top: 5rem;
 }
 
-.wishlist-item-size {
+/* .wishlist-item-size {
   max-width: 15rem;
-}
+} */
 
 .cart-item-image-size {
   width: 9rem;
