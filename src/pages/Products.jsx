@@ -7,7 +7,8 @@ import { sortFilterReducer } from "../reducers/sortFilterReducer";
 import { productListReducer } from "../reducers/productListReducer";
 import { ProductList } from "../components/Products/ProductList";
 import { API_STATUS } from "../constants";
-import { useGetData } from "../hooks/useGetData";
+import axios from "axios";
+import { API_URL } from "../constants";
 
 export function Products() {
   const { categoryId } = useParams();
@@ -21,7 +22,6 @@ export function Products() {
     }
   );
 
-  const { fetchProductList } = useGetData();
   const [sortFilterState, sortFilterDispatch] = useReducer(sortFilterReducer, {
     includeOutOfStock: true,
     fastDelivery: false,
@@ -36,7 +36,23 @@ export function Products() {
   });
 
   useEffect(() => {
-    fetchProductList(categoryId, productListDispatch);
+    (async function () {
+      try {
+        productListDispatch({ type: "PRODUCT_LIST_FETCH_INIT" });
+        const { data, status } = await axios.get(
+          `${API_URL}/categories/${categoryId}`
+        );
+
+        if (status === 200) {
+          productListDispatch({
+            type: "SET_PRODUCT_LIST",
+            payload: { productList: data.products },
+          });
+        }
+      } catch (error) {
+        productListDispatch({ type: "PRODUCT_LIST_FETCH_FAILED" });
+      }
+    })();
   }, [categoryId]);
 
   const [filterMobile, setFilterMobile] = useState(false);

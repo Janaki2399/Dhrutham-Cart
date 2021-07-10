@@ -3,6 +3,7 @@ import { WishListButton } from "../components/Products/WishListButton";
 import { AddToCartButton } from "../components/Products/AddToCartButton";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { API_URL } from "../constants";
 import { API_STATUS } from "../constants";
 
 export function ProductDetails() {
@@ -11,14 +12,13 @@ export function ProductDetails() {
   const [product, setProductItem] = useState({});
 
   const [status, setStatus] = useState(API_STATUS.IDLE);
-  const [error, setError] = useState("");
 
   useEffect(() => {
     (async function () {
       try {
         setStatus(API_STATUS.LOADING);
         const { data, status } = await axios.get(
-          `https://dhrutham-cart-backend.herokuapp.com/products/${productId}`
+          `${API_URL}/products/${productId}`
         );
 
         if (status === 200) {
@@ -69,7 +69,7 @@ export function ProductDetails() {
           <div className="padding-top">Level : {product.level} </div>
         )}
         {product.language && (
-          <div className="padding-top">Level : {product.language} </div>
+          <div className="padding-top">Language : {product.language} </div>
         )}
         {product.brand && (
           <div className="padding-top text-gray">
@@ -83,7 +83,7 @@ export function ProductDetails() {
           {product.inStock ? (
             <span className="green-color font-bold-1">In Stock</span>
           ) : (
-            "OUT OF STOCK"
+            <span className="red-color font-bold-1">Out of Stock</span>
           )}
         </div>
         <div className="margin-top text-gray">

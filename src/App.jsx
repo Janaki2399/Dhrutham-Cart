@@ -1,5 +1,4 @@
 import "./App.css";
-import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { PrivateRoute } from "./components/PrivateRoute";
 import { Categories } from "./pages/Categories";
@@ -12,21 +11,12 @@ import { Navbar } from "./components/Navbar";
 import { useLoaderToast } from "./contexts/loader-toast-context";
 import { Login } from "./pages/Login";
 import { SignUp } from "./pages/SignUp";
-import { useAuth } from "./contexts/auth-context";
-import { useGetData } from "./hooks/useGetData";
+import { useLoadData } from "./hooks/useLoadData";
 
 export default function App() {
-  const { fetchWishlist } = useGetData();
-  const { fetchCart } = useGetData();
-  const { token } = useAuth();
   const { toast } = useLoaderToast();
 
-  useEffect(() => {
-    if (token) {
-      fetchWishlist();
-      fetchCart();
-    }
-  }, [token]);
+  useLoadData();
 
   return (
     <div className="App">

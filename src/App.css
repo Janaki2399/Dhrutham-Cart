@@ -178,6 +178,13 @@
   margin-top: 5rem;
 }
 
+.mobile-view {
+  display: none;
+}
+
+.mobile-category-margin {
+  margin-top: 5rem;
+}
 @media (min-width: 540px) {
   .details-grid {
     display: grid;
@@ -192,6 +199,12 @@
   .product-detail-image-width {
     width: 20rem;
     height: 26rem;
+  }
+  .mobile-view {
+    display: block;
+  }
+  .mobile-category-margin {
+    margin-top: 1rem;
   }
 }
 
@@ -213,10 +226,6 @@
 .margin-top-large {
   margin-top: 5rem;
 }
-
-/* .wishlist-item-size {
-  max-width: 15rem;
-} */
 
 .cart-item-image-size {
   width: 9rem;
