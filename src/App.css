@@ -70,6 +70,13 @@
   margin-top: 5rem;
 }
 
+.product-list-margin {
+  /* margin-top: 5rem; */
+  /* margin-right: 5rem;
+  max-width: 60rem;
+  margin: auto; */
+}
+
 @media (max-width: 635px) {
   .sidebar {
     display: none;
@@ -130,6 +137,7 @@
     margin: 1rem;
   }
 }
+
 .form-size {
   width: 90%;
   max-width: 20rem;
@@ -194,6 +202,7 @@
 .mobile-category-margin {
   margin-top: 5rem;
 }
+
 @media (min-width: 540px) {
   .details-grid {
     display: grid;

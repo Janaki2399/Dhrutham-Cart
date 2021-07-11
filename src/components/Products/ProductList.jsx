@@ -9,7 +9,7 @@ export const ProductList = ({ filteredData, status }) => {
     );
   }
   return (
-    <div id="products-div" className="grid-col-3 margin-3">
+    <div id="products-div" className="grid-col-3 margin-3 product-list-margin">
       {filteredData.map((item) => {
         return <ProductItem key={item._id} productItem={item} />;
       })}
