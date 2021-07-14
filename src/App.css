@@ -70,13 +70,6 @@
   margin-top: 5rem;
 }
 
-.product-list-margin {
-  /* margin-top: 5rem; */
-  /* margin-right: 5rem;
-  max-width: 60rem;
-  margin: auto; */
-}
-
 @media (max-width: 635px) {
   .sidebar {
     display: none;
