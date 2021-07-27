@@ -9,13 +9,16 @@ export function wishlistReducer(state, action) {
         statuses: { ...state.statuses, fetchStatus: API_STATUS.LOADING },
       };
 
-    case "INITIALIZE_REMOVE_STATUS":
+    case "FETCH_SUCCESS":
       return {
         ...state,
-        statuses: {
-          ...state.statuses,
-          removeFromWishlistStatus: API_STATUS.LOADING,
-        },
+        statuses: { ...state.statuses, fetchStatus: API_STATUS.SUCCESS },
+      };
+
+    case "FETCH_FAILURE":
+      return {
+        ...state,
+        statuses: { ...state.statuses, fetchStatus: API_STATUS.ERROR },
       };
 
     case "SET_WISHLIST":
@@ -24,6 +27,15 @@ export function wishlistReducer(state, action) {
         list: action.payload.list,
         userId: action.payload.userId,
         statuses: { ...state.statuses, fetchStatus: API_STATUS.SUCCESS },
+      };
+
+    case "INITIALIZE_REMOVE_STATUS":
+      return {
+        ...state,
+        statuses: {
+          ...state.statuses,
+          removeFromWishlistStatus: API_STATUS.LOADING,
+        },
       };
 
     case "REMOVE_FROM_WISHLIST":

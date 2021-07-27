@@ -35,7 +35,13 @@ export const useLoadData = () => {
               },
             });
           }
+          if (status === 204) {
+            wishlistDispatch({
+              type: "FETCH_SUCCESS",
+            });
+          }
         } catch (error) {
+          wishlistDispatch({ type: "FETCH_FAILURE" });
           alert(error);
         }
       }
@@ -66,7 +72,13 @@ export const useLoadData = () => {
               },
             });
           }
+          if (status === 204) {
+            cartDispatch({
+              type: "FETCH_SUCCESS",
+            });
+          }
         } catch (error) {
+          cartDispatch({ type: "FETCH_FAILURE" });
           alert(error);
         }
       }

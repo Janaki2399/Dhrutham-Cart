@@ -9,6 +9,12 @@ export function cartReducer(state, action) {
         statuses: { ...state.statuses, fetchStatus: API_STATUS.LOADING },
       };
 
+    case "FETCH_SUCCESS":
+      return {
+        ...state,
+        statuses: { ...state.statuses, fetchStatus: API_STATUS.SUCCESS },
+      };
+
     case "SET_CART":
       return {
         _id: action.payload._id,
@@ -16,7 +22,11 @@ export function cartReducer(state, action) {
         userId: action.payload.userId,
         statuses: { ...state.statuses, fetchStatus: API_STATUS.SUCCESS },
       };
-
+    case "FETCH_FAILURE":
+      return {
+        ...state,
+        statuses: { ...state.statuses, fetchStatus: API_STATUS.ERROR },
+      };
     case "REMOVE_FROM_CART":
       return {
         ...state,
