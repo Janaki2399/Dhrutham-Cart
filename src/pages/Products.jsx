@@ -25,12 +25,7 @@ export function Products() {
   const [sortFilterState, sortFilterDispatch] = useReducer(sortFilterReducer, {
     includeOutOfStock: true,
     fastDelivery: false,
-    ratings: {
-      aboveFour: false,
-      aboveThree: false,
-      aboveTwo: false,
-      aboveOne: false,
-    },
+    ratings: [],
     offerOnly: false,
     sortBy: null,
   });
@@ -66,10 +61,7 @@ export function Products() {
     includeOutOfStock: sortFilterState.includeOutOfStock,
     fastDelivery: sortFilterState.fastDelivery,
     offerOnly: sortFilterState.offerOnly,
-    ratingsAboveFour: sortFilterState.ratings.aboveFour,
-    ratingsAboveThree: sortFilterState.ratings.aboveThree,
-    ratingsAboveTwo: sortFilterState.ratings.aboveTwo,
-    ratingsAboveOne: sortFilterState.ratings.aboveOne,
+    ratings: sortFilterState.ratings
   });
 
   return (

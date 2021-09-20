@@ -11,48 +11,33 @@ export const sortFilterReducer = (state, action) => {
         ...state,
         includeOutOfStock: !state.includeOutOfStock,
       };
+
     case "FAST_DELIVERY":
       return {
         ...state,
         fastDelivery: !state.fastDelivery,
       };
+
     case "OFFER_ONLY":
       return {
         ...state,
         offerOnly: !state.offerOnly,
       };
 
-    case "RATING_ABOVE_FOUR":
+    case "SORT_BY_RATING":
       return {
         ...state,
-        ratings: { ...state.ratings, aboveFour: !state.ratings.aboveFour },
-      };
-    case "RATING_ABOVE_THREE":
-      return {
-        ...state,
-        ratings: { ...state.ratings, aboveThree: !state.ratings.aboveThree },
-      };
-    case "RATING_ABOVE_TWO":
-      return {
-        ...state,
-        ratings: { ...state.ratings, aboveTwo: !state.ratings.aboveTwo },
-      };
-    case "RATING_ABOVE_ONE":
-      return {
-        ...state,
-        ratings: { ...state.ratings, aboveOne: !state.ratings.aboveOne },
-      };
+        ratings:state.ratings.includes(action.payload.rating)?
+                state.ratings.filter((rating)=>rating!==action.payload.rating):
+                state.ratings.concat(action.payload.rating)
+      }
+   
     case "CLEAR_FILTER":
       return {
         includeOutOfStock: false,
         fastDelivery: false,
         sortBy: null,
-        ratings: {
-          aboveFour: false,
-          aboveThree: false,
-          aboveTwo: false,
-          aboveOne: false,
-        },
+        ratings:[],
         offerOnly: false,
       };
 

@@ -14,7 +14,7 @@ export function getSortedData(productList, sortBy) {
 }
 
 export function getFilteredData(productList, filterType) {
-  const filteredData = productList
+  let filteredData = productList
     .filter(({ inStock }) => (filterType.includeOutOfStock ? true : inStock))
     .filter(({ isFastDelivery }) =>
       filterType.fastDelivery ? isFastDelivery : true
@@ -23,17 +23,9 @@ export function getFilteredData(productList, filterType) {
 
   let filteredDataWithRating = filteredData;
 
-  if (filterType.ratingsAboveFour) {
-    filteredDataWithRating = filteredData.filter(({ rating }) => rating >= 4);
-  }
-  if (filterType.ratingsAboveThree) {
-    filteredDataWithRating = filteredData.filter(({ rating }) => rating >= 3);
-  }
-  if (filterType.ratingsAboveTwo) {
-    filteredDataWithRating = filteredData.filter(({ rating }) => rating >= 2);
-  }
-  if (filterType.ratingsAboveOne) {
-    filteredDataWithRating = filteredData.filter(({ rating }) => rating >= 1);
-  }
-  return filteredDataWithRating;
+  filterType.ratings.sort().reverse().forEach(ratingSelected => {
+    filteredData= filteredDataWithRating.filter(({ rating }) => rating >= ratingSelected);
+  });
+  
+  return filteredData;
 }
